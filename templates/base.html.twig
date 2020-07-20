@@ -9,15 +9,15 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title> {% block title %} Clever - Education &amp; Courses Template | Home {% endblock %} </title>
+    <title> {% block title %} Clever - Education &amp; Cours | Accueil {% endblock %} </title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="../img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
     {% block stylesheet %}
     
-       <link rel="stylesheet" href="style.css">
+       <link rel="stylesheet" href="../style.css">
         
     {% endblock stylesheet %}
 
@@ -35,7 +35,7 @@
         <!-- Top Header Area -->
         <div class="top-header-area d-flex justify-content-between align-items-center">
             <!-- Contact Info -->
-            <div class="contact-info">
+           <!----> <div class="contact-info">
                 <a href="#"><span>Phone:</span> +44 300 303 0266</a>
                 <a href="#"><span>Email:</span> info@clever.com</a>
             </div>
@@ -73,22 +73,22 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li class="active"><a href="{{path('home')}}">Accueil</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="courses.html">Courses</a></li>
-                                        <li><a href="single-course.html">Single Courses</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>
+                                        <li><a href="{{path('home')}}">Accueil</a></li>
+                                        <li><a href="courses.html">Cours</a></li>
+                                        <li><a href="single-course.html">Professeurs</a></li>
+                                        <li><a href="instructors.html">Etudiants</a></li>
+                                        <li><a href="blog.html">Matière</a></li>
+                                       <!-- <li><a href="blog-details.html">Single Blog</a></li>
+                                        <li><a href="regular-page.html">Regular Page</a></li>-->
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="courses.html">Courses</a></li>
-                                <li><a href="instructors.html">Instructors</a></li>
-                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="courses.html">Cours</a></li>
+                                <li><a href="instructors.html">Enseignants</a></li>
+                                <li><a href="blog.html">Matière</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
 
@@ -111,13 +111,13 @@
     
 
     <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area bg-img bg-overlay-2by5" style="background-image: url(img/bg-img/bg1.jpg);">
+    <section class="hero-area bg-img bg-overlay-2by5" style="background-image:url('../img/children.jpg');" id="slideshow">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <!-- Hero Content -->
                     <div class="hero-content text-center">
-                        <h2>Etudions ensemble</h2>
+                        <h2>Etudions Ensemble</h2>
                         <!-- <a href="#" class="btn clever-btn">Get Started <span class="fa fa-user"></span> </a> -->
                         
                         <div class="search-area">
@@ -640,16 +640,35 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
 {% block Javascript %}
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="../js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="../js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="../js/active.js"></script>
 {% endblock Javascript %}
 </body>
 
+
+<style>
+    #slideshow{
+        animation:change 16s ease-in-out infinite; 
+        animation-delay:5s;
+        
+      
+      }
+      
+      @keyframes change{
+        0%,100%{background-image:url("../img/children.jpg");}
+        25%{background-image:url("../img/typewriter.jpg");}
+      
+        50%{background-image:url("../img/library.jpg");}
+      
+        75%{background-image:url("../img/business.jpg");}
+      
+      }
+</style>
 </html>
