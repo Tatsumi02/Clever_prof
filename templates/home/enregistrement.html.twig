@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejoigner la communauté !{% endblock %}
+
+{% block body %}
+    
+ <div class="col-md-10 container" style="margin:5%;">
+    <h4>venez trouver vos mentor</h4>
+    <form action="{{path('inscription')}}" method="post">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="nom" required class="form-control" id="text" placeholder=" Nom">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="prenom" required class="form-control" id="text" placeholder=" Prenom">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="email" name="email" required class="form-control"  id="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" required name="tel_fixe" class="form-control" id="phone" placeholder="Telephone fixe">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="tel_portable" required class="form-control" id="phone" placeholder="Telephone portable">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="ville" required class="form-control" id="site" placeholder="ville">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="adresse" required class="form-control" id="site" placeholder="Adesse">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="password" name="pass1" required class="form-control" id="site" placeholder="Mot de pass">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="password" name="pass2" required class="form-control" id="site" placeholder="Mot de pass(confirmation)">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    
+                    <select name="genre" class="form-control" required id="genre">
+                        <option value="" id="indef" value="indef">genre:</option>
+                        <option value="feminin">Feminin</option>
+                        <option value="masculin">Masculin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn clever-btn w-100">Envoyer <span class="fa fa-send"></span></button>
+            </div>
+        </div>
+    </form>
+ </div>
+ 
+{% endblock %}
