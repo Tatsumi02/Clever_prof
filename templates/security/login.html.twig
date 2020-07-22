@@ -8,27 +8,48 @@
     {% endblock stylesheet %}
 
 {% block body %}
-<form method="post">
+<div class="col-md-10 container" style="margin:auto;margin-block-end:10%;margin-block-start:5%;">
+<h1 class="text-center">Please sign in</h1>
+
+<form method="post" style="margin:auto;">
+    
+    
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            You are logged in as <b>{{ app.user.username }}</b> <a href="{{ path('app_logout') }}" style="color:blue;" class="pull-right">Logout</a>
         </div>
     {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
+    
+    <div class="row">
+    
+    <div class="col-12 col-lg-6">    
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
+    </div>
+    </div>
+    
+    <div class="col-12 col-lg-6">
+    <div class="form-group">
+        <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
-
+    </div>
+    </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-
+    <div class="col-md-4" style="margin: auto;">
+    <button class="btn clever-btn w-100" type="submit">
+        Sign in
+    </button>
+    </div>
+</div>
+</form>
+</div>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
@@ -40,10 +61,7 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    
 {% endblock %}
 
 {% block Javascript %}

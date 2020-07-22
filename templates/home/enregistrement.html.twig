@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rejoigner la communauté !{% endblock %}
+{% block title %}Rejoignez la communauté !{% endblock %}
 {% block stylesheet %}
     
        <link rel="stylesheet" href="../style.css">
@@ -9,18 +9,18 @@
 
 {% block body %}
     
- <div class="col-md-10 container" style="margin:5%;">
-    <h4>venez trouver vos mentor</h4>
-    <form action="{{path('inscription')}}" method="post">
+ <div class="col-md-10 container" style="margin:auto;background-image:url(../img/open-book.jpg);margin-block-end:10%;margin-block-start:5%;">
+    <h4 class="text-center">Venez trouver vos mentors</h4>
+    <form action="{{path('inscription')}}" method="post" style="background-color: #a19688b3;">
         <div class="row">
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="nom" required class="form-control" id="text" placeholder=" Nom">
+                    <input type="text" name="nom" required class="form-control"  placeholder=" Nom">
                 </div>
             </div>
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="prenom" required class="form-control" id="text" placeholder=" Prenom">
+                    <input type="text" name="prenom" required class="form-control"  placeholder=" Prenom">
                 </div>
             </div>
             <div class="col-12 col-lg-6">
@@ -35,27 +35,29 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="tel_portable" required class="form-control" id="phone" placeholder="Telephone portable">
+                    <input type="text" name="tel_portable" required class="form-control" id="tel" placeholder="Telephone portable">
                 </div>
             </div>
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="ville" required class="form-control" id="site" placeholder="ville">
+                    <select name="ville" class="form-control" required id="ville">
+                        <option value="" id="indef" value="indef">Ville:</option>
+                        <option value="Bafoussam">Bafoussam</option>
+                        <option value="Bamenda">Bamenda</option>
+                        <option value="Bertoua">Bertoua</option>
+                        <option value="Buea">Buea</option>
+                        <option value="Douala">Douala</option>
+                        <option value="Ebolowa">Ebolowa</option>
+                        <option value="Garoua">Garoua</option>
+                        <option value="Maroua">Maroua</option>
+                        <option value="Ngaoundere">Ngaoundere</option>
+                        <option value="Yaounde"></option> 
+                    </select>
                 </div>
             </div>
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="adresse" required class="form-control" id="site" placeholder="Adesse">
-                </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <input type="password" name="pass1" required class="form-control" id="site" placeholder="Mot de pass">
-                </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="form-group">
-                    <input type="password" name="pass2" required class="form-control" id="site" placeholder="Mot de pass(confirmation)">
+                    <input type="text" name="adresse" required class="form-control"  placeholder="Adresse">
                 </div>
             </div>
             <div class="col-12 col-lg-6">
@@ -68,14 +70,40 @@
                     </select>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="password" name="pass1" required class="form-control" id="mdp1" placeholder="Mot de passe">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="password" name="pass2" required class="form-control" id="mdp2" placeholder="Mot de passe(confirmation)">
+                </div>
+            </div>
+            
+            <div class="col-md-6" style="margin:auto;">
                 <button class="btn clever-btn w-100">Envoyer <span class="fa fa-send"></span></button>
             </div>
         </div>
     </form>
  </div>
  
+ <script>
+    $(document).ready(function(){
 
+        $pass1 = $("#mdp1").val();
+        $pass2 = $("#mdp2").val();
+        
+        if($pass1===$pass2){
+            alert("");
+        }
+        else{
+            alert("mot de passe incorrect");
+            $(':password').css('border','red');
+        }
+
+    });
+</script>
  {% block Javascript %}
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
