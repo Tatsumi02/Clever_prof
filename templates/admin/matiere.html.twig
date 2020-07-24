@@ -1,0 +1,24 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Ajoute une disipline !{% endblock %}
+
+{% block body %}
+ <div class="container">
+     <div class="col-md-5"></div>
+     <p>
+         Cree les specialités d'un cours maintenant
+         <br>
+         <div style="color:red;">
+            {{erreur}}
+         </div>
+         <form action="{{path('add_cours')}}" method="post">
+             <input type="text" name="cours" id="cours" class="form-control" placeholder="cours a enregistrer" /> <br>
+             <textarea name="specialite" id="specialite" cols="30" rows="10" class="form-control" placeholder="Entre les disciplines en fonction du cours en leur separent par des virgules "></textarea>
+            <br>
+         <button class="btn btn-primary btn-lg">Envoyer <span class="fa fa-send"></span></button>
+         </form>
+     </p>
+     </div>
+ </div>
+ <br><br>
+{% endblock %}

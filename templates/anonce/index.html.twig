@@ -1,0 +1,21 @@
+{% extends 'baseLogin.html.twig' %}
+
+{% block title %}Cree votre anonce en quelques mins!{% endblock %}
+
+{% block body %}
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<br><br>
+ <div class="container">
+     <center>
+        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+         <h3>{{ app.user.prenom }}, Commencer a cree votre anonce</h3>
+         <br>
+         <a href="{{path('a_cours')}}" class="btn btn-primary btn-lg" id="dec">Commencer mon anonce <span class="fa fa-file"></span></a>
+        </div>
+       
+     </center>
+    
+    <br><br><br><br>
+    <!-- <script src="js/scripts/anonce.js"></script> -->
+ </div>
+{% endblock %}

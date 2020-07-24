@@ -110,7 +110,7 @@ class HomeController extends AbstractController
      * @Route("/compte", name="acount")
      */
     public function acount(){
-        
+    //se controlleur permet de gerer laccueil d'un compte conecter
 
         return $this->render('home/index_login.html.twig',[
 

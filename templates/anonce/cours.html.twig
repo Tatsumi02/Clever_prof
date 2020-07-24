@@ -1,0 +1,31 @@
+{% extends 'baseLogin.html.twig' %}
+
+{% block title %}Cree votre anonce en quelques mins!{% endblock %}
+
+{% block body %}
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<br><br>
+ <div class="container">
+     <center>
+        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+          <h3>Etape 1: votre cours</h3> <br>
+            <form action="{{path('traitement_cours')}}" method="post" enctype="multipart/form-data" name="form">
+               <input type="text" name="cours" required class="form-control" id="cours" placeholder="Quel cours voulez vous offrir?">
+               <br>
+                 <div id="detail">
+
+                 </div>
+                 <div id="send" class="pull-right">
+
+                 </div>
+               <br>
+               <button class="btn btn-primary" type="button" id="plus">Plus de Detail</button>
+           </form>
+        </div>
+       
+     </center>
+    
+    <br><br><br><br>
+    <script src="js/scripts/anonce.js"></script>
+ </div>
+{% endblock %}
