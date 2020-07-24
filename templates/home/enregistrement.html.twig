@@ -90,18 +90,18 @@
  
  <script>
     $(document).ready(function(){
-
-        $pass1 = $("#mdp1").val();
-        $pass2 = $("#mdp2").val();
+        $pass1 = $('#mdp1').val();
+        $pass2 = $('#mdp2').val();
+        $('button').click(function(){
         
-        if($pass1===$pass2){
-            alert("");
+        if($pass1==$pass2){
+            alert("bon");
         }
         else{
             alert("mot de passe incorrect");
             $(':password').css('border','red');
         }
-
+        )};
     });
 </script>
  {% block Javascript %}
