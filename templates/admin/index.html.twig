@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Bienvenue en administration !{% endblock %}
+
+{% block body %}
+ <div class="container">
+     <a href="{{ path('ajout_matiere') }}" class="btn btn-primary">Ajoute les matieres <span class="fa fa-book"></span></a>
+
+ </div>
+ <br><br>
+{% endblock %}

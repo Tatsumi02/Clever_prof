@@ -17,7 +17,7 @@
     <!-- Stylesheet -->
     {% block stylesheet %}
     
-       <link rel="stylesheet" href="../style.css">
+       <link rel="stylesheet" href="style.css">
         
     {% endblock stylesheet %}
 
@@ -73,7 +73,7 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{path('home')}}" style="font-size: 3em;" ><span class="fa fa-home"></span></a></li>
+                                <li><a href="{{path('admin')}}" style="font-size: 3em;" ><span class="fa fa-home"></span></a></li>
                                 
                                 <li><a href="#" style="font-size: 3em;" ><span class="fa fa-envelope"></span></a></li>
                                 
@@ -95,9 +95,9 @@
                                     <div class="dropdown"> 
                                         <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user.nom }} {{ app.user.prenom }}</a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
-                                            <a class="dropdown-item" href="#">Profile</a>
-                                            <a class="dropdown-item" href="#">Tableau de bord</a>
-                                            <a class="dropdown-item" href="{{path('cree_anonce') }}" style="color:royalblue">cree une anonce</a>
+                                            <a class="dropdown-item" href="#">Gestion des anonceurs</a>
+                                            <a class="dropdown-item" href="#">Gestion des etudiants</a>
+                                            <a class="dropdown-item" href="" style="color:royalblue">cree un evenement</a>
                                             
                                             <hr>
                                             <!-- <a class="dropdown-item" href="#"></a> -->
@@ -651,15 +651,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
 {% block Javascript %}
-    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="../js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="../js/plugins/plugins.js"></script>
+    <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="../js/active.js"></script>
+    <script src="js/active.js"></script>
 {% endblock Javascript %}
 </body>
 
