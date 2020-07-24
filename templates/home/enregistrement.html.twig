@@ -88,22 +88,6 @@
     </form>
  </div>
  
- <script>
-    $(document).ready(function(){
-        $pass1 = $('#mdp1').val();
-        $pass2 = $('#mdp2').val();
-        $('button').click(function(){
-        
-        if($pass1==$pass2){
-            alert("bon");
-        }
-        else{
-            alert("mot de passe incorrect");
-            $(':password').css('border','red');
-        }
-        )};
-    });
-</script>
  {% block Javascript %}
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
