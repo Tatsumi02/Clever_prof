@@ -8,10 +8,11 @@
     {% endblock stylesheet %}
 
 {% block body %}
-<div class="col-md-10 container" style="margin:auto;margin-block-end:10%;margin-block-start:5%;">
-<h1 class="text-center">Please sign in</h1>
-
-<form method="post" style="margin:auto;">
+<section style="background-image:url(../img/library.jpg);padding-top:5%;" class="hero-area bg-img bg-overlay-2by5">
+    <!--<h2 class="text-center text-warning">Connectez vous</h2>-->
+<div class="col-md-8 container"  id="form" style="margin:auto;margin-block-end:10%;background-color:#444444b3;">
+    
+<form method="post" style="margin:auto;padding:10%;">
     
     
     {% if error %}
@@ -20,7 +21,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as <b>{{ app.user.username }}</b> <a href="{{ path('app_logout') }}" style="color:blue;" class="pull-right">Logout</a>
+           <span style="color:white;"> You are logged in as</span> <b class="text-warning">{{ app.user.username }}</b> <a href="{{ path('app_logout') }}" style="color:blue;" class="pull-right">Logout</a>
         </div>
     {% endif %}
     
@@ -44,12 +45,13 @@
     >
     <div class="col-md-4" style="margin: auto;">
     <button class="btn clever-btn w-100" type="submit">
-        Sign in
+        Se connecter &nbsp&#8680;
     </button>
     </div>
 </div>
 </form>
 </div>
+</section>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
@@ -60,9 +62,26 @@
             </label>
         </div>
     #}
+<style>
 
-    
-{% endblock %}
+    .form-group label{
+        color:white;
+    }
+    #form{
+        animation:side 10s ease-in-out infinite;
+    }
+
+     /*#form:hover{
+        background-color: #908232b3;
+    }*/
+    @keyframes side{
+        0%,100%{background-color:#334444b3;}
+        25%{background-color: #333333b3;}
+        50%{background-color: #444444b3;}
+        75%{background-color: #696969b3;}
+    }
+</style>
+
 
 {% block Javascript %}
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
@@ -75,3 +94,4 @@
     <!-- Active js -->
     <script src="../js/active.js"></script>
 {% endblock Javascript %}
+{% endblock %}

@@ -4,28 +4,30 @@
 {% block stylesheet %}
     
        <link rel="stylesheet" href="../style.css">
+       
         
     {% endblock stylesheet %}
 
 {% block body %}
-    
- <div class="col-md-10 container" style="margin:auto;background-image:url(../img/open-book.jpg);margin-block-end:10%;margin-block-start:5%;">
+
+<section style="background-image:url(../img/open-book.jpg);" class=" bg-img bg-overlay-2by5">
+ <div class="col-md-10 container" style="margin:auto;margin-block-end:10%;" >
     <h4 class="text-center">Venez trouver vos mentors</h4>
-    <form action="{{path('inscription')}}" method="post" style="background-color: #a19688b3;">
+    <form action="{{path('inscription')}}" method="post">
         <div class="row">
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="nom" required class="form-control"  placeholder=" Nom">
+                    <input type="text" name="nom" required class="form-control"  placeholder=" Nom" >
                 </div>
             </div>
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="text" name="prenom" required class="form-control"  placeholder=" Prenom">
+                    <input type="text" name="prenom" required class="form-control"  placeholder=" Prenom" >
                 </div>
             </div>
             <div class="col-12 col-lg-6">
                 <div class="form-group">
-                    <input type="email" name="email" required class="form-control"  id="email" placeholder="Email">
+                    <input type="email" name="email" required class="form-control"  id="email" placeholder="Email" >
                 </div>
             </div>
             <div class="col-12 col-lg-6">
@@ -87,7 +89,8 @@
         </div>
     </form>
  </div>
- 
+</section>
+
  {% block Javascript %}
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
@@ -99,4 +102,11 @@
     <!-- Active js -->
     <script src="../js/active.js"></script>
 {% endblock Javascript %}
+<style type="text/css">
+    .form-group input,.form-group select{
+        background-color: transparent;
+        color:white;
+    }
+    
+</style>
 {% endblock %}

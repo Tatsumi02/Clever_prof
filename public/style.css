@@ -1963,19 +1963,3 @@ textarea:focus {
 
 /*# sourceMappingURL=style.css.map */
 
-#slideshow{
-  animation:change 16s ease-in-out infinite; 
-  animation-delay:5s;
-  
-
-}
-
-@keyframes change{
-  0%,100%{background-image:url("../img/children.jpg");}
-  25%{background-image:url("../img/typewriter.jpg");}
-
-  50%{background-image:url("../img/library.jpg");}
-
-  75%{background-image:url("../img/business.jpg");}
-
-}
