@@ -1,0 +1,30 @@
+{% extends 'baseLogin.html.twig' %}
+
+{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+
+{% block body %}
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<br><br>
+ <div class="container">
+     <center class="col-md-10">
+        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+          <h3>Etape 5: Votre methodologie d'enseignement</h3> <br>
+            <form action="{{path('methodologie_traitement')}}" method="get">
+               
+                <textarea name="methodologie" id="methodologie" class="form-control" cols="30" rows="10"></textarea>
+                <br>
+                 <div>
+                    Vous devez dire a l'edudiant votre methode d'enseigner 
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+               
+            </form>
+        </div>
+       
+     </center>
+    
+    <br><br><br><br>
+    <script src="js/scripts/anonce.js"></script>
+ </div>
+{% endblock %}

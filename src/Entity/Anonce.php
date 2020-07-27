@@ -72,6 +72,11 @@ class Anonce
      */
     private $date_anonce;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $certifier;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -205,6 +210,18 @@ class Anonce
     public function setDateAnonce(\DateTimeInterface $date_anonce): self
     {
         $this->date_anonce = $date_anonce;
+
+        return $this;
+    }
+
+    public function getCertifier(): ?string
+    {
+        return $this->certifier;
+    }
+
+    public function setCertifier(string $certifier): self
+    {
+        $this->certifier = $certifier;
 
         return $this;
     }

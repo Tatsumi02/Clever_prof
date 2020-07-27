@@ -1,0 +1,30 @@
+{% extends 'baseLogin.html.twig' %}
+
+{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+
+{% block body %}
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<br><br>
+ <div class="container">
+     <center class="col-md-10">
+        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+          <h3>Etape 3: Titre de l'annonce</h3> <br>
+            <form action="{{path('titre_traitement')}}" method="get">
+               
+                <input type="text" required name="titre" class="form-control" placeholder="Entre le titre de l'annonce ici" />
+                <br>
+                 <div>
+                     <b>Exemple:</b> <i>Je suis {{app.user.nom}} {{app.user.prenom}}, Jeune ingenieur en informatique et passionner qui offre des cours dans ce dommaine a des prix abordable</i>
+                 </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+               
+            </form>
+        </div>
+       
+     </center>
+    
+    <br><br><br><br>
+    <script src="js/scripts/anonce.js"></script>
+ </div>
+{% endblock %}
