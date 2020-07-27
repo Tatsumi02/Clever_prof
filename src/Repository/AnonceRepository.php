@@ -32,9 +32,124 @@ class AnonceRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+        ; 
     }
     */
+    public function updateTypeCours($typeC,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.type_cours =?
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$typeC, $id, $b]);
+
+        // 
+    
+    }
+
+    public function  updateTypeTitre($typeC,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.titre =?
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$typeC, $id, $b]);
+
+        // updateParcours($request->get('parcours'),$this->getUser()->getId(),$b)
+    
+    }
+
+    public function  updateParcours($parcours,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.parcours =?
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$parcours, $id, $b]);
+
+        // 
+    
+    }
+
+    public function  updateMethodologie($parcours,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.methodologie =?
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$parcours, $id, $b]);
+
+        // 
+    
+    }
+
+    public function  updateLieuCours($parcours,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.lieu_cours =?
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$parcours, $id, $b]);
+
+        //updateTarifHeure
+    
+    }
+
+    public function  updateTarifHeure($parcours,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.tarif_heure =?
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$parcours, $id, $b]);
+
+        //updatePdp($newFilename,$id,$b)
+    
+    }
+
+    public function  updatePdp($newFilename,$id,$b): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.photo_profil =?,
+            a.actif = "true"
+        
+        WHERE a.anonceur_id =? AND a.matiere =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute([$newFilename, $id, $b]);
+
+        //
+    
+    }
+
+    
+
 
     /*
     public function findOneBySomeField($value): ?Anonce

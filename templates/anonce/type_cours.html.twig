@@ -1,0 +1,29 @@
+{% extends 'baseLogin.html.twig' %}
+
+{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+
+{% block body %}
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<br><br>
+ <div class="container">
+     <center class="col-md-10">
+        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+          <h3>Etape 2: Type de  cours</h3> <br>
+            <form action="{{path('type_cours_traitement')}}" method="get">
+                <h3>Comment voulez vous donner vos cours?</h3>
+                <select name="full" id="tc" class="form-control">
+                    <option value="Individuel">Individuel</option>
+                    <option value="En groupe">En groupe</option>
+                    <option value="Individuel ou en groupe">Individuel ou en groupe</option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+            </form>
+        </div>
+       
+     </center>
+    
+    <br><br><br><br>
+    <script src="js/scripts/anonce.js"></script>
+ </div>
+{% endblock %}
