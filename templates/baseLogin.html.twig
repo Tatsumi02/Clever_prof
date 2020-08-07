@@ -9,15 +9,20 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title> {% block title %} Clever - Education &amp; Courses Template | Home {% endblock %} </title>
+    <title> {% block title %} Clever - Education &amp; Cours | Accueil {% endblock %} </title>
 
     <!-- Favicon -->
+<<<<<<< HEAD
     <link rel="icon" href="img/core-img/favicon.ico">
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
+=======
+    <link rel="icon" href="../img/core-img/favicon.ico">
+
+>>>>>>> 6c0e19432e86c6b1dd7e5de40e0278d416d75acc
     <!-- Stylesheet -->
     {% block stylesheet %}
     
-       <link rel="stylesheet" href="style.css">
+       <link rel="stylesheet" href="../style.css">
         
     {% endblock stylesheet %}
 
@@ -55,7 +60,11 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
+<<<<<<< HEAD
                     <a class="nav-brand" href="{{path('acount')}}"><img src="img/core-img/logo.png" alt=""></a>
+=======
+                    <a class="nav-brand" href="index.html"><img src="../img/core-img/logo.png" alt=""></a>
+>>>>>>> 6c0e19432e86c6b1dd7e5de40e0278d416d75acc
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -73,11 +82,11 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{path('home')}}" style="font-size: 3em;" ><span class="fa fa-home"></span></a></li>
+                                <li><a href="{{path('home')}}"><span class="fa fa-home"></span></a></li>
                                 
-                                <li><a href="#" style="font-size: 3em;" ><span class="fa fa-envelope"></span></a></li>
+                                <li><a href="#" id="msg" data-toggle="tooltip" title="Vous avez 3 nouveaux messages" data-placement="left"><span class="fa fa-envelope"></span>&nbsp;<span class="badge badge-pill badge-info">1</span></a></li>
                                 
-                                <li><a href="#" style="font-size: 3em;" ><span class="fa fa-bell"></span></a></li>
+                                <li><a href="#"><span class="fa fa-bell"></span>&nbsp;<span class="badge badge-pill badge-warning">3</span></a></li>
                                 
                             </ul>
 
@@ -97,7 +106,7 @@
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
                                             <a class="dropdown-item" href="#">Profile</a>
                                             <a class="dropdown-item" href="#">Tableau de bord</a>
-                                            <a class="dropdown-item" href="{{path('cree_anonce') }}" style="color:royalblue">cree une anonce</a>
+                                            <a class="dropdown-item" href="{{path('cree_anonce') }}" style="color:royalblue">créer une anonce</a>
                                             
                                             <hr>
                                             <!-- <a class="dropdown-item" href="#"></a> -->
@@ -106,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="userthumb">
-                                    <img src="img/bg-img/t1.png" alt="">
+                                    <img src="../img/bg-img/t1.png" alt="">
                                 </div>
                             </div>
 
@@ -122,23 +131,28 @@
     
 
     <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area bg-img bg-overlay-2by5" style="background-image: url(img/bg-img/bg1.jpg);">
+    <section class="hero-area bg-img bg-overlay-2by5" style="background-image: url(../img/open-book.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <!-- Hero Content -->
-                    <div class="hero-content text-center">
-                        <h2>Etudions ensemble</h2>
+                    <!--<div class="hero-content text-center">
+                        <h2>Etudions Ensemble</h2>-->
                         <!-- <a href="#" class="btn clever-btn">Get Started <span class="fa fa-user"></span> </a> -->
                         
-                        <div class="search-area">
+                       <!-- <div class="search-area">
                             <form action="#" method="post">
                                 <input type="text" class="form-control col-md-5" style="height:65px; display: inline;" name="search" id="search" placeholder="Maths,Anglais,Physique,Musique.... et plus">
                                 <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </form>
                         </div>
+<<<<<<< HEAD
                       
                     </div>
+=======
+
+                    </div>-->
+>>>>>>> 6c0e19432e86c6b1dd7e5de40e0278d416d75acc
                     
                 </div>
             </div>
@@ -154,7 +168,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="250ms">
                         <div class="icon">
-                            <img src="img/core-img/docs.png" alt="">
+                            <img src="../img/core-img/docs.png" alt="">
                         </div>
                         <h2><span class="counter">1912</span></h2>
                         <h5>Success Stories</h5>
@@ -165,7 +179,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="500ms">
                         <div class="icon">
-                            <img src="img/core-img/star.png" alt="">
+                            <img src="../img/core-img/star.png" alt="">
                         </div>
                         <h2><span class="counter">123</span></h2>
                         <h5>Dedicated Tutors</h5>
@@ -176,7 +190,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="750ms">
                         <div class="icon">
-                            <img src="img/core-img/events.png" alt="">
+                            <img src="../img/core-img/events.png" alt="">
                         </div>
                         <h2><span class="counter">89</span></h2>
                         <h5>Scheduled Events</h5>
@@ -187,7 +201,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="1000ms">
                         <div class="icon">
-                            <img src="img/core-img/earth.png" alt="">
+                            <img src="../img/core-img/earth.png" alt="">
                         </div>
                         <h2><span class="counter">56</span></h2>
                         <h5>Available Courses</h5>
@@ -199,7 +213,7 @@
     <!-- ##### Cool Facts Area End ##### -->
 
     <!-- ##### Popular Courses Start ##### -->
-    <section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
+    <section class="popular-courses-area section-padding-100-0" style="background-image: url(../img/core-img/texture.png);">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -213,7 +227,7 @@
                 <!-- Single Popular Course -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
-                        <img src="img/bg-img/c1.jpg" alt="">
+                        <img src="../img/bg-img/c1.jpg" alt="">
                         <!-- Course Content -->
                         <div class="course-content">
                             <h4>English Grammar</h4>
@@ -244,7 +258,7 @@
                 <!-- Single Popular Course -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <img src="img/bg-img/c2.jpg" alt="">
+                        <img src="../img/bg-img/c2.jpg" alt="">
                         <!-- Course Content -->
                         <div class="course-content">
                             <h4>Vocabulary</h4>
@@ -275,7 +289,7 @@
                 <!-- Single Popular Course -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="750ms">
-                        <img src="img/bg-img/c3.jpg" alt="">
+                        <img src="../img/bg-img/c3.jpg" alt="">
                         <!-- Course Content -->
                         <div class="course-content">
                             <h4>Expository writing</h4>
@@ -326,7 +340,7 @@
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t1.png" alt="">
+                                <img src="../img/bg-img/t1.png" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
@@ -345,7 +359,7 @@
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t2.png" alt="">
+                                <img src="../img/bg-img/t2.png" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
@@ -364,7 +378,7 @@
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t3.png" alt="">
+                                <img src="../img/bg-img/t3.png" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
@@ -383,7 +397,7 @@
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t4.png" alt="">
+                                <img src="../img/bg-img/t4.png" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
@@ -402,7 +416,7 @@
                         <div class="single-tutors-slides">
                             <!-- Tutor Thumbnail -->
                             <div class="tutor-thumbnail">
-                                <img src="img/bg-img/t5.png" alt="">
+                                <img src="../img/bg-img/t5.png" alt="">
                             </div>
                             <!-- Tutor Information -->
                             <div class="tutor-information text-center">
@@ -494,7 +508,7 @@
                     <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="250ms">
                         <!-- Events Thumb -->
                         <div class="events-thumb">
-                            <img src="img/bg-img/e1.jpg" alt="">
+                            <img src="../img/bg-img/e1.jpg" alt="">
                             <h6 class="event-date">August 26</h6>
                             <h4 class="event-title">Networking Day</h4>
                         </div>
@@ -515,7 +529,7 @@
                     <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="500ms">
                         <!-- Events Thumb -->
                         <div class="events-thumb">
-                            <img src="img/bg-img/e2.jpg" alt="">
+                            <img src="../img/bg-img/e2.jpg" alt="">
                             <h6 class="event-date">August 7</h6>
                             <h4 class="event-title">Open Doors Day</h4>
                         </div>
@@ -536,7 +550,7 @@
                     <div class="single-upcoming-events mb-50 wow fadeInUp" data-wow-delay="750ms">
                         <!-- Events Thumb -->
                         <div class="events-thumb">
-                            <img src="img/bg-img/e3.jpg" alt="">
+                            <img src="../img/bg-img/e3.jpg" alt="">
                             <h6 class="event-date">August 3</h6>
                             <h4 class="event-title">Creative Leadership</h4>
                         </div>
@@ -571,7 +585,7 @@
                 <!-- Single Blog Area -->
                 <div class="col-12 col-md-6">
                     <div class="single-blog-area mb-100 wow fadeInUp" data-wow-delay="250ms">
-                        <img src="img/blog-img/1.jpg" alt="">
+                        <img src="../img/blog-img/1.jpg" alt="">
                         <!-- Blog Content -->
                         <div class="blog-content">
                             <a href="#" class="blog-headline">
@@ -590,7 +604,7 @@
                 <!-- Single Blog Area -->
                 <div class="col-12 col-md-6">
                     <div class="single-blog-area mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <img src="img/blog-img/2.jpg" alt="">
+                        <img src="../img/blog-img/2.jpg" alt="">
                         <!-- Blog Content -->
                         <div class="blog-content">
                             <a href="#" class="blog-headline">
@@ -619,7 +633,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="../img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -651,16 +665,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
 {% block Javascript %}
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="../js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="../js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="../js/active.js"></script>
 {% endblock Javascript %}
+<script>
+    $(document).ready(function(){
+        var a = $("#msg");
+        a.tooltip();
+
+    });
+</script>
 </body>
 
 </html>

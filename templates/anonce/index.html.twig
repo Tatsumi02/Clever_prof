@@ -1,5 +1,21 @@
 {% extends 'baseLogin.html.twig' %}
 
+<<<<<<< HEAD
+{% block title %}Créez votre annonce en quelques minutes!{% endblock %}
+
+{% block body %}
+<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+
+
+<section style="background-image:url(../img/typewriter.jpg);" class="hero-area bg-img bg-overlay-2by5">
+ <div class="container col-md-12" style="margin:auto;padding-top:10%;">
+   <h3 class="text-center"><span class="text-warning">{{ app.user.prenom }}</span>, Commencez à créer votre annonce<br> <span id="bas">&nbsp&#8681;</span></h3>
+
+   <div class="col-md-4" style="margin:auto; padding-top:10%;" id="zone">
+      <button class="btn clever-btn w-100"><a href="{{path('a_cours')}}" id="dec">Faire une annonce <span class="fa fa-file"></span></a></button>
+  </div>
+        
+=======
 {% block title %}Cree votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
@@ -16,6 +32,27 @@
      </center>
     
     <br><br><br><br>
+>>>>>>> b2298c4772a923f014988fbcf7cfcb90f78bf36b
     <!-- <script src="js/scripts/anonce.js"></script> -->
  </div>
+</section>
+
+<script>
+$(document).ready(function(){
+
+function dis(){
+   setTimeout(function(){ 
+               $("#bas").slideUp().slideDown();        
+       
+     dis();
+
+      },1000); 
+  }
+     dis();
+});
+
+
+</script>
+
+
 {% endblock %}
