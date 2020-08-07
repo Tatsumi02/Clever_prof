@@ -147,6 +147,28 @@ class AnonceRepository extends ServiceEntityRepository
         //
     
     }
+    
+    public function  annon(): array
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM anonce a ORDER BY id DESC LIMIT 0,6 ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    
+    }
+
+    public function  profi(): array
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM anonce a  LIMIT 0,15 ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    
+    }
 
     
 

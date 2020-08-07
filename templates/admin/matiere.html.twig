@@ -2,6 +2,13 @@
 
 {% block title %}Ajoute une disipline !{% endblock %}
 
+{% block stylesheet %}
+    
+       <link rel="stylesheet" href="../style.css">
+        
+{% endblock stylesheet %}
+
+
 {% block body %}
  <div class="container">
      <div class="col-md-5"></div>
@@ -10,10 +17,13 @@
          <br>
          <div style="color:red;">
             {{erreur}}
+            {% if code == 1 and erreur %}
+            <a href="{{path('modifier_matiere')}}">ICI</a>
+            {% endif %}
          </div>
          <form action="{{path('add_cours')}}" method="post">
-             <input type="text" name="cours" id="cours" class="form-control" placeholder="cours a enregistrer" /> <br>
-             <textarea name="specialite" id="specialite" cols="30" rows="10" class="form-control" placeholder="Entre les disciplines en fonction du cours en leur separent par des virgules "></textarea>
+             <input type="text" required name="cours" id="cours" class="form-control" placeholder="cours a enregistrer" /> <br>
+             <textarea name="specialite" required id="specialite" cols="30" rows="10" class="form-control" placeholder="Entre les disciplines en fonction du cours en leur separent par des virgules "></textarea>
             <br>
          <button class="btn btn-primary btn-lg">Envoyer <span class="fa fa-send"></span></button>
          </form>
@@ -21,4 +31,15 @@
      </div>
  </div>
  <br><br>
+ {% block Javascript %}
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../js/active.js"></script>
+{% endblock Javascript %}
 {% endblock %}

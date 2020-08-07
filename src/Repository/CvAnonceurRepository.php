@@ -35,6 +35,21 @@ class CvAnonceurRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function  update($id): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE cv_anonceur a SET
+            a.actif = "true"
+        
+        WHERE a.anonce_id =:id
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['id'=>$id]);
+
+        //
+    
+    }
 
     /*
     public function findOneBySomeField($value): ?CvAnonceur

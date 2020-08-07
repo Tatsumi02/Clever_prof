@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
+use App\Entity\Anonce;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,9 +28,23 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+    
+      if($this->getUser()!=null){
+        return $this->redirectToRoute('acount');
+      }else{
+
+        //on recupere la liste des annonces disponibles
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $anonce = $repository -> annon();
+        $profil = $repository -> profi();
+         
+      
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'anonces' => $anonce,
+            'profil' => $profil,
         ]);
+
+      }
     }
 
     /**
@@ -107,15 +122,34 @@ class HomeController extends AbstractController
     * * Require ROLE_USER for only this controller method.
     *
     * @IsGranted("ROLE_USER")
-     * @Route("/compte", name="acount")
+     * @Route("/Accuiel.html", name="acount")
      */
     public function acount(){
     //se controlleur permet de gerer laccueil d'un compte conecter
-
+        //on recupere la liste des annonces disponibles
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $anonce = $repository -> annon();
+        $profil = $repository -> profi();
+         
         return $this->render('home/index_login.html.twig',[
-
           'user' => $this->getUser()->getPrenom(),
+          'anonces' => $anonce,
+          'profil' => $profil,
         ]);
+    }
+
+     /**
+    * * Require ROLE_USER for only this controller method.
+    *
+    * @IsGranted("ROLE_USER")
+     * @Route("/search", name="find_anonce")
+     */
+    public function search(Request $request){
+        
+        $cours = $request->request->get('search');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $anonce = $repository -> findAll();
+
     }
 
 

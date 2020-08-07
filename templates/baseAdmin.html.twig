@@ -12,18 +12,19 @@
     <title> {% block title %} Clever - Education &amp; Courses Template | Home {% endblock %} </title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="../img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
     {% block stylesheet %}
     
-       <link rel="stylesheet" href="style.css">
+       <link rel="stylesheet" href="../style.css">
         
     {% endblock stylesheet %}
 
 </head>
 
 <body>
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Preloader -->
     <div id="preloader">
         <div class="spinner"></div>
@@ -55,7 +56,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="index.html"><img src="../img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -73,14 +74,48 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{path('admin')}}" style="font-size: 3em;" ><span class="fa fa-home"></span></a></li>
+                                <li><a href="{{path('admin')}}" style="font-size: 1.9em;" ><span class="fa fa-home"></span></a></li>
                                 
-                                <li><a href="#" style="font-size: 3em;" ><span class="fa fa-envelope"></span></a></li>
-                                
-                                <li><a href="#" style="font-size: 3em;" ><span class="fa fa-bell"></span></a></li>
+                                <li><a href="#" style="font-size: 1.6em;" ><span class="fa fa-envelope"></span></a> </li>
+                               
+                                <li><a href="{{path('notification')}}" style="font-size: 1.6em;" ><span class="fa fa-bell"></span>(
+                                  <div id="notif" style="display: inline;"></div>
+                                )</a></li>
                                 
                             </ul>
-
+                            <script>
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                url: '{{ path("nbCom") }}',
+                                timeout: 30000,
+                             success: function(data) {
+                                                    var e = '<div></div>';
+                                                    $('#notif').html('');
+                                                   
+                                                   for(i=0; i<=data.length; i++){
+                                                     notif = data[i];
+                  
+                                                    
+                                                     $('#notif').html(
+                  
+                                                          
+                                                            notif['nb']
+                                                          
+                                                          
+                                                          );
+       
+                                                   }
+                                                   
+                                
+                            },
+                             error: function() {
+                             
+                                                  $('#notif').html('0');
+                             }
+                               });
+                    </script>
                             <!-- Search Button -->
                             <div class="search-area">
                                 <form action="#" method="post">
@@ -106,7 +141,7 @@
                                     </div>
                                 </div>
                                 <div class="userthumb">
-                                    <img src="img/bg-img/t1.png" alt="">
+                                    <img src="../img/bg-img/t1.png" alt="">
                                 </div>
                             </div>
 
@@ -651,16 +686,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
 {% block Javascript %}
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="../js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="../js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="../js/active.js"></script>
 {% endblock Javascript %}
 </body>
 
 </html>
+

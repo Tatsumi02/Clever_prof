@@ -3,6 +3,140 @@
 {% block title %}Bienvenue sur Clever-Prof !{% endblock %}
 
 {% block body %}
-  {{ parent() }}
+<script src="js/jquery/jquery-2.2.4.min.js"></script>
+
+<section class="hero-area bg-img bg-overlay-2by5" style="background-image: url(img/bg-img/bg1.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <!-- Hero Content -->
+                <div class="hero-content text-center">
+                    <h2>Etudions ensemble</h2>
+                    <!-- <a href="#" class="btn clever-btn">Get Started <span class="fa fa-user"></span> </a> -->
+                    
+                    <div class="search-area">
+                        <form action="#" method="post">
+                            <input type="search" class="form-control col-md-5" style="height:65px; display: inline;" name="search" id="search" placeholder="Maths,Anglais,Physique,Musique.... et plus">
+                            <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Les annonces populaire </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Single Popular Course -->
+            {% for anonce in anonces %}
+            <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
+            <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
+                <img src="img/pdp_annonce/{{anonce.photo_profil}}" alt="" style="height: 200px;">
+                <!-- Course Content -->
+                <div class="course-content">
+                    <h4><div id="titre{{anonce.id}}"></div></h4>
+                    <div class="meta d-flex align-items-center">
+                        
+                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                        <div id="op{{anonce.id}}" style="color: tomato;"></div>
+                    </div>
+                    <p>{{anonce.titre}}</p>
+                </div>
+                <!-- Seat Rating Fee -->
+                <div class="seat-rating-fee d-flex justify-content-between">
+                    <div class="seat-rating h-100 d-flex align-items-center">
+                        <div class="seat">
+                            <i class="fa fa-users" aria-hidden="true"></i> 10
+                        </div>
+                        <div class="rating">
+                            <i class="fa fa-star" aria-hidden="true"></i> 4.5
+                        </div>
+                    </div>
+  
+                    <div class="course-fee h-100">
+                      <a href="#" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
+                  </div>
+  
+                    <div class="course-fee h-100">
+                        <a href="#" title="Par Heure" class="free">{{anonce.tarif_heure}}F/H</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <script>
+              //{{anonce.matiere}}
+              $(function(){
+                var option = '{{anonce.matiere}}'.split('-'); //recuperons le titre brut donner par le serveur
+                var titre = option[0]; //on prend le titre seul
+                var branche = option[1]; //on prend les options de ce titre(tout en sachant sa sera aussi un tableau)
+                $('#titre{{anonce.id}}').html(option[0]);
+                $('#op{{anonce.id}}').text(option[1]);
+                
+          
+              });
+            </script>
+           {% endfor %}
+</section>
+
+
+
+
+
+
+<section class="best-tutors-area section-padding-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>Les annonces classiques</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="tutors-slide owl-carousel wow fadeInUp" data-wow-delay="250ms">
+                  {% for prof in profil %}
+                    <!-- Single Tutors Slide -->
+                    <div class="single-tutors-slides">
+                        <!-- Tutor Thumbnail -->
+                        <div class="tutor-thumbnail">
+                            <img src="img/pdp_annonce/{{prof.photo_profil}}" style="height: 200px;" alt="">
+                        </div>
+                        <!-- Tutor Information -->
+                        <div class="tutor-information text-center">
+                            <h5>{{prof.matiere}}</h5>
+                            <span>Teacher</span>
+                            <p>{{prof.titre}}</p>
+                            <div class="social-info">
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
   
 {% endblock %}

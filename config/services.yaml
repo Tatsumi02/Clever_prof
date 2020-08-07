@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     pdp_annonce: '%kernel.project_dir%/public/img/pdp_annonce/'
+    cv_annonce: '%kernel.project_dir%/public/img/cv_annonce/'
 
 services:
     # default configuration for services in *this* file

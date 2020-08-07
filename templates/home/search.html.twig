@@ -5,31 +5,6 @@
 {% block body %}
 <script src="js/jquery/jquery-2.2.4.min.js"></script>
 
-<section class="hero-area bg-img bg-overlay-2by5" style="background-image: url(img/bg-img/bg1.jpg);">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center">
-            <div class="col-12">
-                <!-- Hero Content -->
-                <div class="hero-content text-center">
-                    <h2> {{app.user.prenom}} Trouve un mentor</h2>
-                    <!-- <a href="#" class="btn clever-btn">Get Started <span class="fa fa-user"></span> </a> -->
-                    
-                    <div class="search-area">
-                        <form action="{{path('find_anonce')}}" method="post">
-                            <input type="search" class="form-control col-md-5" style="height:65px; display: inline;" name="search" id="search" placeholder="Maths,Anglais,Physique,Musique.... et plus">
-                            <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
 
 <section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
     <div class="container">
@@ -95,48 +70,5 @@
 
 
 
-
-
-
-<section class="best-tutors-area section-padding-100">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-heading">
-                    <h3>Les annonces classiques</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="tutors-slide owl-carousel wow fadeInUp" data-wow-delay="250ms">
-                  {% for prof in profil %}
-                    <!-- Single Tutors Slide -->
-                    <div class="single-tutors-slides">
-                        <!-- Tutor Thumbnail -->
-                        <div class="tutor-thumbnail">
-                            <img src="img/pdp_annonce/{{prof.photo_profil}}" style="height: 200px;" alt="">
-                        </div>
-                        <!-- Tutor Information -->
-                        <div class="tutor-information text-center">
-                            <h5>{{prof.matiere}}</h5>
-                            <span>Teacher</span>
-                            <p>{{prof.titre}}</p>
-                            <div class="social-info">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    {% endfor %}
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
   
 {% endblock %}

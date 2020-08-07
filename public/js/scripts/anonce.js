@@ -58,8 +58,11 @@ if(!cours.value){
       $('#hop').click(function(){
         location.href='/traitement-cours/'+ choixx +'/'+ $('#cours').val();
       });
+
+     
      
     }
+    
     
  },
  error:function(){

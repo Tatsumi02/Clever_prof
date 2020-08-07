@@ -1,0 +1,73 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Ajoute une disipline !{% endblock %}
+
+{% block stylesheet %}
+    
+       <link rel="stylesheet" href="../style.css">
+        
+{% endblock stylesheet %}
+
+
+{% block body %}
+<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+
+ <div class="container">
+     
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="blog-details-text">
+                      <form action="{{path('search_matiere')}}" method="post">
+                          <input type="search" name="matiere" id="matiere" class="form-control" placeholder="cherche une matiere" style="display: inline; width:300px;" />
+                          <button type="submit" id="but_f" class="btn btn-primary"><span class="fa fa-search"></span></button>
+                      </form>
+                      {% if matieresF and coursF %}
+                      <a href="{{path('mod_matiere',{'id':matieresF})}}" class="btn btn-primary" title="Modifier"><span class="fa fa-pencil"></span></a>      
+                      <a href="{{path('del_matiere',{'id':matieresF})}}" id="del{{matieresF}}" class="btn btn-warning" title="suprimer"><span class="fa fa-ban"></span></a>     
+                      &nbsp;&nbsp;&nbsp;
+                      {{coursF}}
+                      {% endif %}
+                     </div>
+                     <br><br>
+                     <div class="blog-details-text">
+                         <b style="color:rgb(10, 202, 10);">{{message}}</b>
+                         <br><br>
+                         {% for matiere in matieres %}
+                             <h4> 
+                              <a href="{{path('mod_matiere',{'id':matiere.id})}}" class="btn btn-primary" title="Modifier"><span class="fa fa-pencil"></span></a>      
+                              <a href="{{path('del_matiere',{'id':matiere.id})}}" id="del{{matiere.id}}" class="btn btn-warning" title="suprimer"><span class="fa fa-ban"></span></a>     
+                              &nbsp;&nbsp;&nbsp;
+                              {{matiere.cours}}
+                            </h4>
+                            <script>
+                                $(function(){
+                                  $('#del{{matiere.id}}').click(function(){
+                                    var x = confirm('les etudiants ne pouront pas trouver ce cours lors de leur recherche. Vous pouvez toujours le modifier car la suppression est definitive\n\nvoulez-vous vraiment supprimer ce cours ({{matiere.cours}})?');
+                                    if(x != true) return false;
+                                    else return true;
+                                  });
+                                });
+                            </script>
+                         {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+ </div>
+ <br><br>
+ {% block Javascript %}
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../js/active.js"></script>
+{% endblock Javascript %}
+{% endblock %}

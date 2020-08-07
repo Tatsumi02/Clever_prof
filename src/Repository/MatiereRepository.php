@@ -32,10 +32,40 @@ class MatiereRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+        ; 
     }
     */
+    public function  upToDate($id,$cours,$branche): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE matiere a SET
+            a.cours =:cours,
+            a.branche =:branche
+        
+        WHERE a.id =:id
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['cours'=>$cours,'branche'=>$branche,'id'=>$id]);
+
+        //
     
+    }
+    public function deler($id): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        DELETE FROM matiere
+        WHERE id =:id
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['id'=>$id]);
+
+        //
+    
+    }
+
+
     /*
     public function findOneBySomeField($value): ?Matiere
     {
