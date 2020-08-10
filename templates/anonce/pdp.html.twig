@@ -1,13 +1,12 @@
 {% extends 'baseLogin.html.twig' %}
 
-{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<br><br>
- <div class="container">
-     <center class="col-md-10">
-        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+
+<section class="hero-area">
+   <div class="col-md-12 container" style="margin:auto;" >
+          <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
           <h3>Etape Final: Votre photo de profil</h3> <br>
           {{form_start(form)}}
 
@@ -15,10 +14,10 @@
 
          {{form_end(form)}}
         </div>
-       
-     </center>
-    
-    <br><br><br><br>
-    <script src="js/scripts/anonce.js"></script>
- </div>
+      </div>
+    </section>   
+     
+    <script src="../js/scripts/anonce.js"></script>
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+ 
 {% endblock %}

@@ -1,23 +1,17 @@
 {% extends 'baseLogin.html.twig' %}
 
-<<<<<<< HEAD
 {% block title %}Créez votre annonce en quelques mins!{% endblock %}
-=======
-{% block title %}Cree votre annonce en quelques mins!{% endblock %}
->>>>>>> b2298c4772a923f014988fbcf7cfcb90f78bf36b
+
 
 {% block body %}
 <script src="../js/jquery/jquery-2.2.4.min.js"></script>
-<section class="hero-area">
+<section class="hero-area" style="background-image:url(../img/bg1.jpg);">
  <div class="col-md-12 container" style="margin:auto;" >
-        <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+        <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;" id="zone">
           <h3>Etape 1: votre cours</h3> <br>
-<<<<<<< HEAD
+
             <form action="" method="post" enctype="multipart/form-data" name="form" style="margin:auto;padding:10%;">
-=======
-            <form action="#" method="post" enctype="multipart/form-data" name="form">
->>>>>>> b2298c4772a923f014988fbcf7cfcb90f78bf36b
-               <input type="text" name="cours" required class="form-control" id="cours" placeholder="Quel cours voulez vous offrir?">
+      <input type="text" name="cours"  class="form-control" id="cours" placeholder="Quel cours voulez vous offrir?">
                <br>
                
                  <div id="detail" class="">
@@ -27,24 +21,91 @@
 
                <!-- </div> -->
                <br>
-<<<<<<< HEAD
                <button class="btn btn-primary" type="button" id="plus">Plus de Details</button>
-           </form>
-</div>
-</section>      
-    <script src="../js/scripts/anonce.js"></script>
-=======
-               <button class="btn btn-primary pull-right" type="button" id="plus">Plus de Detail</button>
+
                <div id="send" class="left">
 
-               </div>        
-            </form>
-        </div>
+              </div>
+           </form>
+</div>
+</div>
+</section>      
+    <script>
+      
+var cours = document.getElementById('cours');
+var plus = document.getElementById('plus');
+var detail = document.getElementById('detail');
+var choixx = '';
+$('#plus').click(function(){ 
+if(!cours.value){
+  $('#detail').html('<span style="color:red;">Vous devez entrer un cours </span>');
+  return false;
+}else{
+  $('#detail').html('<center> <img src="../img/fancybox_loading.Gif"> </center>');
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    async: true,
+    url: 'prendre-branche?cours='+cours.value,
+    timeout: 100000,
+ success: function(data) {
+   var branche;
+   var option ;
+    $('#detail').html('');
+    for(i=0; i<=data.length; i++){
+      branche = data[i];
+        var option = branche['branche'].split(',');
+        
+      $('#detail').append(
+       'choisissez le(s) domaines que vous vouliez travailler en <b>'+branche['cours']+'</b> <hr />'
+      );
+      for(j=0; j<option.length;j++){
+        $('#detail').append(
+         '<br /><input type="checkbox" name="op" id="i'+j+'" value="'+option[j]+'" /> <label for="i'+j+'">'+ option[j]+ '</label><br />'+
+         '<input type="hidden" name="nombre" value="mnmn" />'
+         );
+      
+        
+      }
+
+      $('#send').html('<button class="btn btn-primary" type="button" id="hop">Suivant <span class="fa fa-send"></span></button>');
+      $('#hop').click(function(){
+      var choix = document.getElementsByName('op');
+      for(x=0;x<choix.length;x++){
+        if(choix[x].checked === true){
+          //alert('vous avez choisir: '+choix[x].value);
+          choixx += choix[x].value +',';
+          
+        }
+        
+      }
+    });
+      
+     // plus.type='submit';
+      plus.textContent='nouveau choix ';
+      $('#plus').click(function(){
+       // location.href='/traitement-cours/'+ option.length +'/';
        
-     </center>
+     
+      });
+
+      $('#hop').click(function(){
+        location.href='/traitement-cours/'+ choixx +'/'+ $('#cours').val();
+      });
+     
+    }
     
-    <br><br><br><br>
-    <script src="js/scripts/anonce.js"></script>
->>>>>>> b2298c4772a923f014988fbcf7cfcb90f78bf36b
- </div>
+ },
+ error:function(){
+   $('#detail').html('<span style="color:red">Erreur survenue.<br /> La requette n\'a pas abouti</span>');
+ }
+});
+
+}
+
+});
+
+    </script>
+    
+               
 {% endblock %}

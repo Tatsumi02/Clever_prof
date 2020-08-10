@@ -1,29 +1,36 @@
 {% extends 'baseLogin.html.twig' %}
 
-{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<br><br>
- <div class="container">
-     <center class="col-md-10">
-        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
-          <h3>Etape 2: Type de  cours</h3> <br>
-            <form action="{{path('type_cours_traitement')}}" method="get">
+<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+<script src="../js/scripts/anonce.js"></script>
+<section class="hero-area">
+    <div class="col-md-12 container" style="margin:auto;" >
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+            <h3>Etape 2: Type de  cours</h3> <br>
+   
+               <form action="{{path('type_cours_traitement')}}" method="get" enctype="multipart/form-data" name="form" style="margin:auto;padding:10%;">
                 <h3>Comment voulez vous donner vos cours?</h3>
+
                 <select name="full" id="tc" class="form-control">
                     <option value="Individuel">Individuel</option>
                     <option value="En groupe">En groupe</option>
                     <option value="Individuel ou en groupe">Individuel ou en groupe</option>
                 </select>
-                <br>
+                 
+                    <div id="detail" class="">
+   
+                    </div>
                 <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
-            </form>
-        </div>
-       
-     </center>
+                 
+              </form>
+   </div>
+   </div>
+   </section>    
     
-    <br><br><br><br>
-    <script src="js/scripts/anonce.js"></script>
+
+   
+    
  </div>
 {% endblock %}

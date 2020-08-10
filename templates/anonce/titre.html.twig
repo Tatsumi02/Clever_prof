@@ -1,20 +1,20 @@
 {% extends 'baseLogin.html.twig' %}
 
-{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<br><br>
- <div class="container">
-     <center class="col-md-10">
-        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+
+
+<section class="hero-area">
+    <div class="col-md-12 container" style="margin:auto;" >
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
           <h3>Etape 3: Titre de l'annonce</h3> <br>
-            <form action="{{path('titre_traitement')}}" method="get">
+            <form action="{{path('titre_traitement')}}" method="get" style="margin:auto;padding:10%;">
                
-                <input type="text" required name="titre" class="form-control" placeholder="Entre le titre de l'annonce ici" />
+                <input type="text" required name="titre" class="form-control" placeholder="Entrez le titre de l'annonce ici" />
                 <br>
                  <div>
-                     <b>Exemple:</b> <i>Je suis {{app.user.nom}} {{app.user.prenom}}, Jeune ingenieur en informatique et passionner qui offre des cours dans ce dommaine a des prix abordable</i>
+                     <b>Exemple:</b> <i>Je suis {{app.user.nom}} {{app.user.prenom}}, Jeune ingenieur en informatique et passionné(e) qui offre des cours dans ce dommaine</i>
                  </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
@@ -22,9 +22,8 @@
             </form>
         </div>
        
-     </center>
-    
-    <br><br><br><br>
-    <script src="js/scripts/anonce.js"></script>
+     
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/scripts/anonce.js"></script>
  </div>
 {% endblock %}

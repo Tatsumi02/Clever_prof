@@ -73,7 +73,10 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
+                                <li><a style="color:red;" href="{{path('app_logout')}}">Déconnexion</a></li>
                                 <li><a href="{{path('home')}}"><span class="fa fa-home"></span></a></li>
+                                <li><a href="#" id="tableau" data-toggle="tooltip" title="Tableau de bord" data-placement="top"><span class="fa fa-dashboard"></span></a></li>
+                                <li><a href="{{path('cree_anonce') }}" id="annonce" data-toggle="tooltip" title="Créer une annonce" data-placement="top"><span class="fa fa-edit"></span></a></li>
                                 
                                 <li><a href="#" id="msg" data-toggle="tooltip" title="Vous avez 3 nouveaux messages" data-placement="left"><span class="fa fa-envelope"></span>&nbsp;<span class="badge badge-pill badge-info">1</span></a></li>
                                 
@@ -97,7 +100,7 @@
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
                                             <a class="dropdown-item" href="#">Profile</a>
                                             <a class="dropdown-item" href="#">Tableau de bord</a>
-                                            <a class="dropdown-item" href="{{path('cree_anonce') }}" style="color:royalblue">créer une anonce</a>
+                                            <a class="dropdown-item" href="{{path('cree_anonce') }}" >créer une anonce</a>
                                             
                                             <hr>
                                             <!-- <a class="dropdown-item" href="#"></a> -->
@@ -665,6 +668,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     $(document).ready(function(){
         var a = $("#msg");
         a.tooltip();
+        var t = $("#tableau");
+        t.tooltip();
+        var an = $("#annonce");
+        an.tooltip();
 
     });
 </script>

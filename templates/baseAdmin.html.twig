@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title> {% block title %} Clever - Education &amp; Courses Template | Home {% endblock %} </title>
+    <title> {% block title %} Clever - Education &amp; Cours | Home {% endblock %} </title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -55,7 +55,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="{{path('home')}}"><img src="../img/core-img/logo.png" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -73,11 +73,12 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="{{path('admin')}}" style="font-size: 3em;" ><span class="fa fa-home"></span></a></li>
+                                <li><a href="{{path('app_logout')}}"  ><span class="text-danger">Déconnexion</span></a></li>
+                                <li><a href="{{path('admin')}}"  ><span class="fa fa-home"></span></a></li>
+                                <li><a href="#"  ><span class="fa fa-dashboard "></span></a></li>
+                                <li><a href="#" ><span class="fa fa-envelope"></span>&nbsp;<span class="badge badge-pill badge-info">3</span></a></li>
                                 
-                                <li><a href="#" style="font-size: 3em;" ><span class="fa fa-envelope"></span></a></li>
-                                
-                                <li><a href="#" style="font-size: 3em;" ><span class="fa fa-bell"></span></a></li>
+                                <li ><a href="#" id="notif" data-placement="right" data-toggle="popover" data-content="Vous avez de nouvelles notifications"><span class="fa fa-bell"></span>&nbsp;<span class="badge badge-pill badge-warning">3</span></a></li>
                                 
                             </ul>
 
@@ -95,9 +96,9 @@
                                     <div class="dropdown"> 
                                         <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user.nom }} {{ app.user.prenom }}</a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
-                                            <a class="dropdown-item" href="#">Gestion des anonceurs</a>
-                                            <a class="dropdown-item" href="#">Gestion des etudiants</a>
-                                            <a class="dropdown-item" href="" style="color:royalblue">cree un evenement</a>
+                                            <a class="dropdown-item" href="#">Gestion des annonceurs</a>
+                                            <a class="dropdown-item" href="#">Gestion des étudiants</a>
+                                            <a class="dropdown-item" href="">créer un évènement</a>
                                             
                                             <hr>
                                             <!-- <a class="dropdown-item" href="#"></a> -->
@@ -106,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="userthumb">
-                                    <img src="img/bg-img/t1.png" alt="">
+                                    <img src="../img/bg-img/t1.png" alt="">
                                 </div>
                             </div>
 
@@ -154,7 +155,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-cool-facts-area text-center mb-100 wow fadeInUp" data-wow-delay="250ms">
                         <div class="icon">
-                            <img src="img/core-img/docs.png" alt="">
+                            <img src="../img/core-img/docs.png" alt="">
                         </div>
                         <h2><span class="counter">1912</span></h2>
                         <h5>Success Stories</h5>
@@ -650,6 +651,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
+   
 {% block Javascript %}
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
@@ -660,6 +662,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="../js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="../js/active.js"></script>
+    <script>
+        $(document).ready(function(){
+            var x = $("#notif");
+            $("#notif").click(function(){
+                x.popover();
+            });
+            
+
+        });
+    </script>
 {% endblock Javascript %}
 </body>
 

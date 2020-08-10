@@ -3,9 +3,24 @@
 {% block title %}Bienvenue en administration !{% endblock %}
 
 {% block body %}
- <div class="container">
-     <a href="{{ path('ajout_matiere') }}" class="btn btn-primary">Ajoute les matieres <span class="fa fa-book"></span></a>
 
- </div>
- <br><br>
+<section class="hero-area bg-img bg-overlay-2by5" style="background-image:url('../img/business.jpg');" >
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12" style="margin:auto;">
+                <!-- Hero Content -->
+                <div class="hero-content text-center">
+                    <h2>Oui! Vous etes Administrateur</h2>
+                    <!-- <a href="#" class="btn clever-btn">Get Started <span class="fa fa-user"></span> </a> -->
+                    
+                        <a href="{{ path('ajout_matiere') }}" class="btn btn-primary btn-lg">Ajouter des matières <span class="fa fa-book"></span></a>
+                   
+                  </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+ 
+ 
 {% endblock %}

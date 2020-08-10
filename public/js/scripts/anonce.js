@@ -1,3 +1,4 @@
+
 var cours = document.getElementById('cours');
 var plus = document.getElementById('plus');
 var detail = document.getElementById('detail');
@@ -7,7 +8,7 @@ if(!cours.value){
   $('#detail').html('<span style="color:red;">Vous devez entrer un cours </span>');
   return false;
 }else{
-  $('#detail').html('<center> <img src="img/fancybox_loading.Gif"> </center>');
+  $('#detail').html('<center> <img src="../img/fancybox_loading.Gif"> </center>');
   $.ajax({
     type: 'POST',
     dataType: 'json',
@@ -63,7 +64,7 @@ if(!cours.value){
     
  },
  error:function(){
-   $('#detail').html('<span style="color:red">Erreur survenue.<br /> La requettete n\'a pas aboutir</span>');
+   $('#detail').html('<span style="color:red">Erreur survenue.<br /> La requette n\'a pas abouti</span>');
  }
 });
 
