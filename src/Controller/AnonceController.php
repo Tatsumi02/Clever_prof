@@ -411,22 +411,45 @@ class AnonceController extends AbstractController
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
        
         $branche = $repository -> findBy(['anonceur_id' => $this->getUser()->getId()]);
-             
+            
             foreach($branche as $br){
                 $b = $br->getMatiere();
+                
             }
 
             $data = $repository -> findOneBy(['anonceur_id'=>$this->getUser()->getId(),'matiere'=>$b,'actif'=>'true']);
-         
+            $currentAnnonce = $repository->findBy(['anonceur_id'=>$this->getUser()->getId(),'matiere'=>$b,'actif'=>'true']);
+            $cours = explode('-',$b);
+
         return $this->render('anonce/visualisation.html.twig', [
             'pdp' => $data->getPhotoProfil(),
             'cours' => $data->getMatiere(),
             'titre' => $data->getTitre(),
+            'allData' => $currentAnnonce,
+            'autreAnonce' => $branche,
+            'cours' => $cours[0],
             'controller_name' => 'hum',
         ]);
     }
 
+   /**
+     * 
+     * * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
+     * @Route("/update-anonce.html",name="update")
+     */
+    public function update(Request $request){
+        $id = $request->get('id_anonce');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+       
+        $branche = $repository -> findBy(['id' => $id]);
 
+        return $this->render('anonce/update.html.twig', [
+            'anonce' => $branche,
+        ]);
+           
+    }
 
 
 

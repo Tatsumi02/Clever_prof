@@ -1,0 +1,47 @@
+{% extends 'baseLogin.html.twig' %}
+
+{% block title %}Certifier votre annonce !{% endblock %}
+
+{% block stylesheet %}
+    
+       <link rel="stylesheet" href="../../style.css">
+        
+{% endblock stylesheet %}
+
+
+{% block body %}
+<div class="blog-details-content section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Blog Details Text -->
+                
+                <div class="blog-details-text">
+                   Certifier votre annonce permet a cette annonce d'être fondé et cela prouve a l'étudiant que votre cv est correct. <br> 
+                   pour certifier, vous devez soit venir dans nos bureaux avec vos diplomes ou vos certification ou si vous n'êtes pas dans Douala, vous pouvez filmer ces dossiers et nous le soumetre en passant par le formulaire ci-dessous 
+                   après vérification, nous allons décider ou non de certifier votre anonce
+                   <br>
+    <br><br>
+    {{form_start(form)}}
+
+       {{form_row(form.brochure)}}
+    {{form_end(form)}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <br><br>
+ {% block Javascript %}
+    <script src="../../js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../../js/active.js"></script>
+{% endblock Javascript %}
+{% endblock %}

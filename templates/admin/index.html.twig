@@ -2,8 +2,16 @@
 
 {% block title %}Bienvenue en administration !{% endblock %}
 
+{% block stylesheet %}
+    
+       <link rel="stylesheet" href="../style.css">
+        
+{% endblock stylesheet %}
+
+
 {% block body %}
 
+<<<<<<< HEAD
 <section class="hero-area bg-img bg-overlay-2by5" style="background-image:url('../img/business.jpg');" >
     <div class="container h-100">
         <div class="row h-100 align-items-center">
@@ -23,4 +31,23 @@
 </section>
  
  
+=======
+ <div class="container">
+    
+     <a href="{{ path('ajout_matiere') }}" class="btn btn-primary">Ajoute les matieres <span class="fa fa-book"></span></a>
+     <a href="{{ path('modifier_matiere') }}" class="btn btn-primary">Modifer les matieres</a>
+ </div>
+ <br><br>
+ {% block Javascript %}
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../js/active.js"></script>
+{% endblock Javascript %}
+>>>>>>> f760b7ac76276da264043d62a9afaefc84d285a6
 {% endblock %}

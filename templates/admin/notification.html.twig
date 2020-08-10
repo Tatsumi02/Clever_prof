@@ -1,0 +1,51 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Demande de certification !{% endblock %}
+
+{% block stylesheet %}
+    
+       <link rel="stylesheet" href="../style.css">
+        
+{% endblock stylesheet %}
+
+
+{% block body %}
+<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+
+ <div class="container">
+     
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="blog-details-text">
+                      <h3>Les Demandes de certification</h3>
+                      {% for notif in notification %}
+                          <img src="../img/cv_annonce/{{notif.diplome}}" alt="" style="height: 400px;">
+                          <br><br>
+                           <a href="{{path('anonce_a_certifier',{'id':notif.anonceId})}}" class="btn btn-primary">voir l'annonce <span class="fa fa-eye"></span></a>
+                           &nbsp;&nbsp;&nbsp;
+                           <a href="#" class="btn btn-success">confirme la certification <span class="fa fa-check"></span></a>
+                          <br>
+                          <br>
+                      {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+ </div>
+ <br><br>
+ {% block Javascript %}
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../js/active.js"></script>
+{% endblock Javascript %}
+{% endblock %}

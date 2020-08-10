@@ -1,0 +1,58 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Ajoute une disipline !{% endblock %}
+
+{% block stylesheet %}
+    
+       <link rel="stylesheet" href="../style.css">
+        
+{% endblock stylesheet %}
+
+
+{% block body %}
+<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+
+ <div class="container">
+     
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="blog-details-text">
+                      {% for anon in anonce %}
+                          <h4>{{anon.matiere}}</h4>
+                          {{anon.titre}} <br>
+                          <h4>Parcours</h4>
+                          {{anon.parcours}}
+                          <h4>Methodologie</h4>
+                          {{anon.methodologie}}
+                          <h4>Type de cours</h4>
+                          {{anon.typeCours}}
+                          <h4>Lieux cours</h4>
+                          {{anon.lieuCours}}
+                          <h4>Tarif par heure</h4>
+                          {{anon.tarifHeure}}Fcfa
+                          <img src="../img/pdp_annonce/{{anon.photoProfil}}" alt="">
+                          <br><br><br>
+                          <a href="{{path('been_certified',{'id':anon.id})}}" class="btn btn-success btn-lg">Certifier l'annonce <span class="fa fa-check"></span></a>
+                      {% endfor %}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+ </div>
+ <br><br>
+ {% block Javascript %}
+    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="../js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="../js/active.js"></script>
+{% endblock Javascript %}
+{% endblock %}
