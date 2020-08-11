@@ -6,6 +6,7 @@
 parameters:
     pdp_annonce: '%kernel.project_dir%/public/img/pdp_annonce/'
     cv_annonce: '%kernel.project_dir%/public/img/cv_annonce/'
+    pdp: '%kernel.project_dir%/public/img/pdp/'
 
 services:
     # default configuration for services in *this* file

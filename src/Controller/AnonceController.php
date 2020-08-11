@@ -92,6 +92,7 @@ class AnonceController extends AbstractController
         $matiere = $cours.'-'.$branche;
 
         $anonce->setMatiere($matiere);
+        $anonce->setCours($cours);
         $anonce->setTypeCours('indef');
         $anonce->setTitre('indef');
         $anonce->setParcours('indef');
@@ -101,6 +102,7 @@ class AnonceController extends AbstractController
         $anonce->setPhotoProfil('indef');
         $anonce->setActif('indef');
         $anonce->setCertifier('false');
+        
         $anonce->setDateAnonce(new \DateTime());
         $anonce->setAnonceurId($this->getUser()->getId());
         $em->persist($anonce);

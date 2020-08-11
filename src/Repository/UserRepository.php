@@ -68,6 +68,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     
     }
 
+    public function  updatePdp($newFilename,$id): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE user a SET
+            a.pdp = :name
+        
+        WHERE a.id =:id
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['id'=>$id,'name'=>$newFilename]);
+
+        //
+    
+    }
+
     /*
     public function findOneBySomeField($value): ?User
     {

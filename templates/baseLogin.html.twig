@@ -12,17 +12,12 @@
     <title> {% block title %} Clever - Education &amp; Cours | Accueil {% endblock %} </title>
 
     <!-- Favicon -->
-<<<<<<< HEAD
     <link rel="icon" href="img/core-img/favicon.ico">
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-=======
-    <link rel="icon" href="../img/core-img/favicon.ico">
-
->>>>>>> 6c0e19432e86c6b1dd7e5de40e0278d416d75acc
+    <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- Stylesheet -->
     {% block stylesheet %}
     
-       <link rel="stylesheet" href="../style.css">
+       <link rel="stylesheet" href="{{asset('style.css')}}">
         
     {% endblock stylesheet %}
 
@@ -60,11 +55,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-<<<<<<< HEAD
-                    <a class="nav-brand" href="{{path('acount')}}"><img src="img/core-img/logo.png" alt=""></a>
-=======
-                    <a class="nav-brand" href="index.html"><img src="../img/core-img/logo.png" alt=""></a>
->>>>>>> 6c0e19432e86c6b1dd7e5de40e0278d416d75acc
+                    <a class="nav-brand" href="{{path('acount')}}"><img src="{{asset('img/core-img/logo.png')}}" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -103,8 +94,8 @@
                                 <div class="user-name mr-30">
                                     <div class="dropdown"> 
                                         <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user.nom }} {{ app.user.prenom }}</a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
-                                            <a class="dropdown-item" href="#">Profile</a>
+                                        <div class="dropdown-menu dropdown-enu-right" aria-labelledby="userName">
+                                            <a class="dropdown-item" href="{{path('profil')}}">Profile</a>
                                             <a class="dropdown-item" href="#">Tableau de bord</a>
                                             <a class="dropdown-item" href="{{path('cree_anonce') }}" style="color:royalblue">créer une anonce</a>
                                             
@@ -115,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="userthumb">
-                                    <img src="../img/bg-img/t1.png" alt="">
+                                    <img src="{{asset('img/pdp/' ~ app.user.pdp)}}" alt="">
                                 </div>
                             </div>
 
@@ -146,13 +137,12 @@
                                 <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </form>
                         </div>
-<<<<<<< HEAD
+
                       
                     </div>
-=======
+
 
                     </div>-->
->>>>>>> 6c0e19432e86c6b1dd7e5de40e0278d416d75acc
                     
                 </div>
             </div>
@@ -633,7 +623,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="../img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="{{asset('img/core-img/logo2.png')}}" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -665,15 +655,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
 {% block Javascript %}
-    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- Popper js -->
-    <script src="../js/bootstrap/popper.min.js"></script>
+    <script src="{{asset('js/bootstrap/popper.min.js')}}"></script>
     <!-- Bootstrap js -->
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
     <!-- All Plugins js -->
-    <script src="../js/plugins/plugins.js"></script>
+    <script src="{{asset('js/plugins/plugins.js')}}"></script>
     <!-- Active js -->
-    <script src="../js/active.js"></script>
+    <script src="{{asset('js/active.js')}}"></script>
 {% endblock Javascript %}
 <script>
     $(document).ready(function(){

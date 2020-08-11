@@ -170,7 +170,33 @@ class AnonceRepository extends ServiceEntityRepository
     
     }
 
+    public function  search($matiere): array
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM anonce m ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     
+    }
+
+    public function  update2($id): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.certifier = "true"
+        
+        WHERE a.id =:id
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['id'=>$id]);
+
+        //
+    
+    }
+
 
 
     /*

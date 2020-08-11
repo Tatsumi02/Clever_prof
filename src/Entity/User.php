@@ -84,6 +84,11 @@ class User implements UserInterface
      */
     private $date_inscrit;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pdp;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -278,6 +283,18 @@ class User implements UserInterface
     public function setDateInscrit(\DateTimeInterface $date_inscrit): self
     {
         $this->date_inscrit = $date_inscrit;
+
+        return $this;
+    }
+
+    public function getPdp(): ?string
+    {
+        return $this->pdp;
+    }
+
+    public function setPdp(string $pdp): self
+    {
+        $this->pdp = $pdp;
 
         return $this;
     }

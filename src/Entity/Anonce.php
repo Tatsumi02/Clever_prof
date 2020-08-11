@@ -77,6 +77,13 @@ class Anonce
      */
     private $certifier;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cours;
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -225,4 +232,21 @@ class Anonce
 
         return $this;
     }
+
+    public function getCours(): ?string
+    {
+        return $this->cours;
+    }
+
+    public function setCours(string $cours): self
+    {
+        $this->cours = $cours;
+
+        return $this;
+    }
+
+    
+
+    
+   
 }

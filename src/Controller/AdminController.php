@@ -436,6 +436,9 @@ class AdminController extends AbstractController
         $repository = $this -> getDoctrine() -> getRepository(CvAnonceur::class);
         $mod = $repository -> update($id);
 
+        $repository2 = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $mod2 = $repository2 -> update2($id);
+
        return $this->redirectToRoute('admin');
     }
 

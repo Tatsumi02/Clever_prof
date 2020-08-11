@@ -1,6 +1,6 @@
 {% extends 'baseLogin.html.twig' %}
 
-{% block title %}{{user}} !{% endblock %}
+{% block title %} search !{% endblock %}
 
 {% block body %}
 <script src="js/jquery/jquery-2.2.4.min.js"></script>
@@ -8,20 +8,21 @@
 
 <section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
     <div class="container">
+    
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Les annonces populaire </h3>
+                    <h3>Les meilleurs formateurs en {{cours}} </h3>
                 </div>
             </div>
         </div>
-
+    
         <div class="row">
             <!-- Single Popular Course -->
             {% for anonce in anonces %}
             <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
             <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
-                <img src="img/pdp_annonce/{{anonce.photo_profil}}" alt="" style="height: 200px;">
+                <img src="img/pdp_annonce/{{anonce.photoProfil}}" alt="" style="height: 200px;">
                 <!-- Course Content -->
                 <div class="course-content">
                     <h4><div id="titre{{anonce.id}}"></div></h4>
@@ -30,7 +31,13 @@
                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                         <div id="op{{anonce.id}}" style="color: tomato;"></div>
                     </div>
-                    <p>{{anonce.titre}}</p>
+                    <p>
+                        {% if certifier == 1 %}
+                          <span class="badge" style="border-radius: 100%; background:green; color:white;">
+                               <span class="fa fa-check"></span>
+                        </span>
+                        {% endif %}
+                        {{anonce.titre}}</p>
                 </div>
                 <!-- Seat Rating Fee -->
                 <div class="seat-rating-fee d-flex justify-content-between">
@@ -44,11 +51,11 @@
                     </div>
   
                     <div class="course-fee h-100">
-                      <a href="#" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
+                      <a href="{{path('view_anonce',{'id':anonce.id})}}" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
                   </div>
   
                     <div class="course-fee h-100">
-                        <a href="#" title="Par Heure" class="free">{{anonce.tarif_heure}}F/H</a>
+                        <a href="#" title="Par Heure" class="free">{{anonce.tarifHeure}}F/H</a>
                     </div>
                 </div>
             </div>
