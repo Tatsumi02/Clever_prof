@@ -3,7 +3,7 @@
 {% block title %}Rejoignez la communauté !{% endblock %}
 {% block stylesheet %}
     
-       <link rel="stylesheet" href="../style.css">
+       <link rel="stylesheet" href="{{asset('style.css')}}">
        
         
     {% endblock stylesheet %}
@@ -91,16 +91,16 @@
  </div>
 </section>
 
- {% block Javascript %}
-    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="../js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="../js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="../js/active.js"></script>
+{% block Javascript %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+<!-- Popper js -->
+<script src="{{asset('js/bootstrap/popper.min.js')}}"></script>
+<!-- Bootstrap js -->
+<script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
+<!-- All Plugins js -->
+<script src="{{asset('js/plugins/plugins.js')}}"></script>
+<!-- Active js -->
+<script src="{{asset('js/active.js')}}"></script>
 {% endblock Javascript %}
 <style type="text/css">
     .form-group input,.form-group select{

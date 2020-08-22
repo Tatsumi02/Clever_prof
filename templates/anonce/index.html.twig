@@ -1,10 +1,10 @@
-{% extends 'baseLogin.html.twig' %}
+{% extends 'baseProf.html.twig' %}
 
 
 {% block title %}Créez votre annonce en quelques minutes!{% endblock %}
 
 {% block body %}
-<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 
 
 <section style="background-image:url(../img/typewriter.jpg);" class="hero-area bg-img bg-overlay-2by5">
@@ -20,21 +20,21 @@
 </section>
 
 <script>
-$(document).ready(function(){
-
-function dis(){
-   setTimeout(function(){ 
-               $("#bas").slideUp().slideDown();        
-       
-     dis();
-
-      },1000); 
-  }
-     dis();
-});
-
-
-</script>
-
-
+   $(document).ready(function(){
+   
+   function dis(){
+      setTimeout(function(){ 
+                  $("#bas").slideUp().slideDown();        
+          
+        dis();
+   
+         },1000); 
+     }
+        dis();
+   });
+   
+   
+   </script>
+   
+   
 {% endblock %}

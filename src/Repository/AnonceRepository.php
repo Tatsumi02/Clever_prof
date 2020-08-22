@@ -193,11 +193,123 @@ class AnonceRepository extends ServiceEntityRepository
         $stmt = $conn ->prepare($sql);
         $stmt->execute(['id'=>$id]);
 
-        //
+        //update_type_cours($id,$typeCours)
     
     }
 
+   
+//------------------------------------ UPDATE DES CHAMPS ANNONCES ------------------------------------------ 
 
+public function  update_cours($id,$matiere): void
+{
+    $conn = $this -> getEntityManager()->getConnection();
+    $sql = '
+    UPDATE anonce a SET
+        a.matiere = :mat
+    
+    WHERE a.id =:id
+    ';
+    $stmt = $conn ->prepare($sql);
+    $stmt->execute(['id'=>$id,'mat'=>$matiere]);
+
+    //
+
+ }
+
+ public function  update_type_cours($id,$typeCours): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE anonce a SET
+         a.type_cours = :typ
+     
+     WHERE a.id =:id
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['id'=>$id,'typ'=>$typeCours]);
+ 
+    //update_titre($id,$titre)
+ }
+  
+ public function  update_titre($id,$titre): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE anonce a SET
+         a.titre = :typ
+     
+     WHERE a.id =:id
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['id'=>$id,'typ'=>$titre]);
+ 
+    //update_parcours($id,$parcours)
+ }
+
+ public function  update_parcours($id,$parcours): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE anonce a SET
+         a.parcours = :typ
+     
+     WHERE a.id =:id
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['id'=>$id,'typ'=>$parcours]);
+ 
+    //update_methodologie($id,$methodologie)
+ }
+
+ public function  update_methodologie($id,$methodologie): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE anonce a SET
+         a.methodologie = :typ
+     
+     WHERE a.id =:id
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['id'=>$id,'typ'=>$methodologie]);
+ 
+    //update_lieux_cours($id,$lieux_cours)
+ }
+
+ public function  update_lieux_cours($id,$lieux_cours): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE anonce a SET
+         a.lieu_cours = :typ
+     
+     WHERE a.id =:id
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['id'=>$id,'typ'=>$lieux_cours]);
+ 
+    //update_tarif_heure($id,$tarif_heure);
+ }
+
+ public function  update_tarif_heure($id,$tarif_heure): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE anonce a SET
+         a.tarif_heure = :typ
+     
+     WHERE a.id =:id
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['id'=>$id,'typ'=>$tarif_heure]);
+ 
+    //
+ }
+
+
+
+
+ //----------------------------------------FIN UPDATE---------------------------------------
 
     /*
     public function findOneBySomeField($value): ?Anonce

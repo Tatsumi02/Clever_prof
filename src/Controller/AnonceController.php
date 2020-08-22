@@ -93,14 +93,14 @@ class AnonceController extends AbstractController
 
         $anonce->setMatiere($matiere);
         $anonce->setCours($cours);
-        $anonce->setTypeCours('indef');
-        $anonce->setTitre('indef');
-        $anonce->setParcours('indef');
-        $anonce->setMethodologie('indef');
-        $anonce->setLieuCours('indef');
+        $anonce->setTypeCours('undefined');
+        $anonce->setTitre('undefined');
+        $anonce->setParcours('undefined');
+        $anonce->setMethodologie('undefined');
+        $anonce->setLieuCours('undefined');
         $anonce->setTarifHeure(500);
-        $anonce->setPhotoProfil('indef');
-        $anonce->setActif('indef');
+        $anonce->setPhotoProfil('school.PNG');
+        $anonce->setActif('false');
         $anonce->setCertifier('false');
         
         $anonce->setDateAnonce(new \DateTime());
@@ -110,6 +110,252 @@ class AnonceController extends AbstractController
  
        return $this->redirectToRoute('type_cours');
     }
+
+//---------------------------------------------- CONTROLLERS POURS LES UPDATES DES CHAMPS ANNONCES -------------------
+    /**
+    * * Require ROLE_USER for only this controller method.
+    *
+    * @IsGranted("ROLE_USER")
+    * @Route("/update-cours/{id}/{branche}/{cours}",name="update_cours")
+    */
+    public function update_cours($id,$branche,$cours,Request $request){
+        $matiere = $cours.'-'.$branche;
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_cours($id,$matiere);
+
+         return $this->redirectToRoute('update_type_cours',['id'=>$id]);
+         
+    }
+
+    //methode pour update le type de cours
+    //formulaire de choix
+    /**
+    * * Require ROLE_USER for only this controller method.
+    *
+    * @IsGranted("ROLE_USER")
+    * @Route("/update-type-cours/{id}/",name="update_type_cours")
+    */
+    public function update_type_cours(Request $request,$id){
+        $id = $request->get('id');
+
+
+        return $this->render('anonce/update/update_type_cours.html.twig', [
+            'id' => $id,
+        ]);
+    }
+
+    //methode pour update l type de cours
+    //traitement du formulaire 
+    /**
+    * * Require ROLE_USER for only this controller method.
+    *
+    * @IsGranted("ROLE_USER")
+    * @Route("/update-type-cours-traitement/{id}/",name="update_type_cours_traitement")
+    */
+    public function type_cours(Request $request,$id){
+
+        $typeCours = $request->get('full');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_type_cours($id,$typeCours);
+        
+        
+        return $this->redirectToRoute('update_titre',['id'=>$id]);
+         
+    }
+
+    /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update_titre-de-votre-annonce.html",name="update_titre")
+     */
+    public function update_titre(Request $request,$id){
+
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$id]);
+
+        return $this->render('anonce/update/update_titre.html.twig', [
+            'id' => $id,
+            'infos' => $branches,
+        ]);
+
+    }
+
+    /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update_traitement_titre-de-votre-annonce.html",name="update_titre_traitement")
+     */
+    public function update_titre_traitement(Request $request,$id){
+        $titre = $request->get('titre');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_titre($id,$titre);
+        
+        
+        return $this->redirectToRoute('update_parcours',['id'=>$id]);
+         
+        
+    }
+
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-parcours-annonce.html",name="update_parcours")
+     */
+    public function update_parcours(Request $request,$id){
+
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$id]);
+
+        return $this->render('anonce/update/update_parcours.html.twig', [
+            'id' => $id,
+            'infos' => $branches,
+        ]);
+
+    }
+
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-parcours-traitement.html",name="update_parcours_traitement")
+     */
+    public function update_parcours_traitement(Request $request,$id){
+        $parcours = $request->get('parcours');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_parcours($id,$parcours);
+        
+        
+        return $this->redirectToRoute('update_methodologie',['id'=>$id]);
+         
+        
+    }
+
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-methodologie-annonce.html",name="update_methodologie")
+     */
+    public function update_methodologie(Request $request,$id){
+
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$id]);
+
+        return $this->render('anonce/update/update_methodologie.html.twig', [
+            'id' => $id,
+            'infos' => $branches,
+        ]);
+
+    }
+    
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-methodologie-traitement.html",name="update_methodologie_traitement")
+     */
+    public function update_methodologie_traitement(Request $request,$id){
+        $methodologie = $request->get('methodologie');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_methodologie($id,$methodologie);
+        
+        
+        return $this->redirectToRoute('update_lieux_cours',['id'=>$id]);
+        
+    }
+
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-lieux_cours-annonce.html",name="update_lieux_cours")
+     */
+    public function update_lieux_cours(Request $request,$id){
+
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$id]);
+
+        return $this->render('anonce/update/update_lieux_cours.html.twig', [
+            'id' => $id,
+            'infos' => $branches,
+        ]);
+
+    }
+
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-lieux_cours-traitement.html",name="update_lieu_cours_traitement")
+     */
+    public function update_lieu_cours_traitement(Request $request,$id){
+        $lieux_cours = $request->get('lieu');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_lieux_cours($id,$lieux_cours);
+        
+        
+        return $this->redirectToRoute('update_tarif_heure',['id'=>$id]);
+
+    }
+
+    /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-tarif_heure-annonce.html",name="update_tarif_heure")
+     */
+    public function update_tarif_heure(Request $request,$id){
+
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$id]);
+
+        return $this->render('anonce/update/update_tarif_heure.html.twig', [
+            'id' => $id,
+            'infos' => $branches,
+        ]);
+
+    }
+
+    
+     /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/{id}/update-tarif_heure-traitement.html",name="update_tarif_heure_traitement")
+     */
+    public function update_tarif_heure_traitement(Request $request,$id){
+        $tarif_heure = $request->get('tarif');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> update_tarif_heure($id,$tarif_heure);
+        
+        
+        return $this->redirectToRoute('end_update');
+
+    }
+
+    /**
+    * * Require ROLE_USER for only this controller method.
+    * 
+    * @IsGranted("ROLE_USER")
+     * @Route("/fin-mise-a-jour.html",name="end_update")
+     */
+    public function end_update(Request $request){
+
+        return $this->render('anonce/update/end_update.html.twig', [
+            ''=>''
+        ]);
+
+    }
+
+
+
+
+
+
+//--------------------------------------------- FIN DES CONTROLLERS POUR L'UPDATE DES CHAMPS ANNONCES----------------------
 
     /**
     * * Require ROLE_USER for only this controller method.
@@ -439,9 +685,9 @@ class AnonceController extends AbstractController
      * * Require ROLE_USER for only this controller method.
      *
      * @IsGranted("ROLE_USER")
-     * @Route("/update-anonce.html",name="update")
+     * @Route("/{id_anonce}/update-anonce.html",name="update")
      */
-    public function update(Request $request){
+    public function update(Request $request,$id_anonce){
         $id = $request->get('id_anonce');
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
        

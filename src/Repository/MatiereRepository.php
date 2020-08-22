@@ -55,7 +55,7 @@ class MatiereRepository extends ServiceEntityRepository
     {
         $conn = $this -> getEntityManager()->getConnection();
         $sql = '
-        DELETE FROM matiere
+        DELETEup FROM matiere
         WHERE id =:id
         ';
         $stmt = $conn ->prepare($sql);

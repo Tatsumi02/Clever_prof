@@ -5,10 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+ /**
+  * @Route("/etudiants")
+  */
 class EtudiantsController extends AbstractController
 {
     /**
-     * @Route("/etudiants", name="etudiants")
+     * @Route("/", name="etudiants")
      */
     public function index()
     {

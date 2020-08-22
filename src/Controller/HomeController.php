@@ -7,7 +7,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Entity\Anonce;
+use App\Entity\Commande;
 use App\Repository\UserRepository;
+use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -31,13 +33,19 @@ class HomeController extends AbstractController
     {
     
       if($this->getUser()!=null){
+        
+        if($this->getUser()->getRoles() == 'ROLE_PROF'){
+          return new Response('vous etes prof ici');
+        }
+
         return $this->redirectToRoute('acount');
       }else{
 
         //on recupere la liste des annonces disponibles
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $repository2 = $this -> getDoctrine() -> getRepository(User::class);
         $anonce = $repository -> annon();
-        $profil = $repository -> profi();
+        $profil = $repository2 -> findAll() /*profi()*/;
          
       
         return $this->render('home/index.html.twig', [
@@ -141,9 +149,6 @@ class HomeController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
-    *
-    * @IsGranted("ROLE_USER")
      * @Route("/search", name="find_anonce")
      */
     public function search(Request $request){
@@ -167,17 +172,26 @@ class HomeController extends AbstractController
           if($cour == $cours){
              $matiere = $all->getCours();
              $anonce = $repository -> findBy(['cours'=>$matiere]);
+
+               $nombre_resultat = 0;
+              //comptons le  nombre de resultat optenue sur chaque recherches trouver
+              foreach($anonce as $anon){
+                 $nombre_resultat++;
+               }
           }
         }
 
+        
+
         if($anonce == false){
-          return $this->redirectToRoute('acount');
+          return $this->redirectToRoute('home');
         }
       
         return $this->render('home/search.html.twig',[
           'anonces' => $anonce,
           'cours' => $cours,
           'certifier' => $certifier,
+          'nombre_resultat' => $nombre_resultat,
         ]);
     }
 
@@ -206,9 +220,6 @@ class HomeController extends AbstractController
     }
 
     /**
-    * * Require ROLE_USER for only this controller method.
-    *
-    * @IsGranted("ROLE_USER")
      * @Route("/data_prof", name="data_prof")
      */
     public function dataProf(Request $request){
@@ -228,6 +239,7 @@ class HomeController extends AbstractController
                 'phone_portable' => $anon->getPhonePortable(),
                 'genre' => $anon->getGenre(),
                 'ville' => $anon->getVille(),
+                'pdp' => $anon->getPdp(),
               );
 
               $jsonData[$idx++] = $temp;
@@ -240,7 +252,88 @@ class HomeController extends AbstractController
 
     }
 
+    /**
+     * * @Route("/{id}/annonce", name="choix")
+     *
+     */
+    public function choix(Request $request,$id){
+      $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+      $info = $repository -> findBy(['id'=>$id]);
+      $certifier = false;
+      $ida = 3 ;
+      foreach($info as $cert){
+        if($cert->getCertifier() == 'true'){
+          $certifier = true;
+         
+        }
+        $ida = $cert->getAnonceurId();
+      }
 
+      $repository2 = $this -> getDoctrine() -> getRepository(User::class);
+      $pdpp = $repository2 -> findOneBy(['id'=>$ida]);
+
+      return $this->render('home/choix_annonce.html.twig',[
+        'infos' => $info,
+        'certifier' => $certifier,
+        'pdp' => $pdpp->getPdp(),
+      ]);
+    }
+
+    /**
+     * * @Route("/{id}/prendre-contact", name="ma_formation")
+     *
+     */
+    public function ma_formation(Request $request,$id){
+      
+      //prenon les infos sur l'annonce en cours
+      $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+      $anonce = $repository -> findOneBy(['id'=>$id]);
+
+      
+      return $this->render('home/ma_formation.html.twig',[
+       'cours' => $anonce->getCours(),
+       'id_a' => $anonce->getAnonceurId(),
+       'annonce_id' => $anonce->getAnonceurId(),
+      ]);
+    }
+
+    /**
+     * * @Route("/{annonce_id}/save-commande", name="commande")
+     *
+     */
+    public function commande(Request $request,$annonce_id){
+      $nom = $request->get('nom');
+      $prenom = $request->get('prenom');
+      $email = $request->get('email');
+      $phone = $request->get('phone');
+      $message = $request->get('message');
+
+      $em = $this -> getDoctrine() -> getManager();
+  
+      $commande = new Commande();
+      $commande->setNom($nom);
+      $commande->setPrenom($prenom);
+      $commande->setPhone($phone);
+      $commande->setEmail($email);
+      $commande->setAnnonceId($annonce_id);
+      $commande->setDateCommande(new \DateTime());
+      $commande->setStatus('true');
+      $commande->setMessage($message);
+
+      $em->persist($commande);
+      $em->flush();
+
+      return $this->redirectToRoute('commande_faait',['annonce_id'=>$annonce_id]);
+    }
+
+     /**
+     * * @Route("/{annonce_id}/commande-fait", name="commande_faait")
+     *
+     */
+      public function commandeFait($annonce_id){
+        
+        return $this->render('home/commande_fait.html.twig');
+      }
 
 
 }

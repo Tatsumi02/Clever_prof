@@ -12,12 +12,12 @@
     <title> {% block title %} Clever - Education &amp; Cours | Accueil {% endblock %} </title>
 
     <!-- Favicon -->
-    <link rel="icon" href="../img/core-img/favicon.ico">
+    <link rel="icon" href="{{asset('img/core-img/favicon.ico')}}">
 
     <!-- Stylesheet -->
     {% block stylesheet %}
     
-       <link rel="stylesheet" href="style.css">
+       <link rel="stylesheet" href="{{asset('style.css')}}">
         
     {% endblock stylesheet %}
 
@@ -55,7 +55,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="{{path('home')}}"><img src="img/core-img/logo.png" alt=""></a>
+                    <a class="nav-brand" href="{{path('home')}}"><img src="{{asset('img/core-img/logo.png')}}" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -72,17 +72,17 @@
 
                         <!-- Nav Start -->
                         <div class="classynav">
-                            <ul>
-                                <li class="active"><a href="{{path('home')}}">Accueil</a></li>
+                            <!-- <ul>
+                                <li ><a href="{{path('home')}}"class="text-primary" >Accueil</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
-                                        <li><a href="{{path('home')}}">Accueil</a></li>
+                                        <li class="text-primary"><a href="{{path('home')}}">Accueil</a></li>
                                         <li><a href="courses.html">Cours</a></li>
                                         <li><a href="single-course.html">Professeurs</a></li>
                                         <li><a href="instructors.html">Etudiants</a></li>
                                         <li><a href="blog.html">Matière</a></li>
-                                       <!-- <li><a href="blog-details.html">Single Blog</a></li>
-                                        <li><a href="regular-page.html">Regular Page</a></li>-->
+                                        <li><a href="blog-details.html">Single Blog</a></li>
+                                        <li><a href="regular-page.html">Regular Page</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </li>
@@ -90,13 +90,13 @@
                                 <li><a href="instructors.html">Enseignants</a></li>
                                 <li><a href="blog.html">Matière</a></li>
                                 <li><a href="contact.html">Contact</a></li>
-                            </ul>
+                            </ul>-->
 
                             
                             <!-- Register / Login -->
                             <div class="register-login-area">
-                                <a href="{{ path('enregistrement') }}" class="btn">Enregistrement <span class="fa fa-users"></span></a>
-                                <a href="{{ path('acount') }}" class="btn active">Connexion <span class="fa fa-sign-in"></span></a>
+                                <a href="{{ path('professeurs') }}" class="btn">Espaces professeurs <span class="fa fa-graduation-cap"></span></a>
+                                <a href="{{ path('etudiants') }}" class="btn active">Espaces etudiants <span class="fa fa-group"></span></a>
                             </div>
 
                         </div>
@@ -111,7 +111,7 @@
     
 
     <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area bg-img bg-overlay-2by5" style="background-image:url('img/children.jpg');" id="slideshow">
+    <section class="hero-area bg-img bg-overlay-2by5" style="background-image:url('../img/children.jpg');" id="slideshow">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12" style="margin:auto;">
@@ -124,7 +124,7 @@
                             <form action="#" method="post">
                                 <div class="input-group" style="justify-content:center;">
                                 <input type="search" class="form-control col-md-5" name="search" id="search" placeholder="Maths,Anglais,Physique,Musique.... et plus">
-                                <button type="submit" class="btn clever-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button type="submit" class="btn-primary btn-lg"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                             </form>
                         </div>
@@ -610,7 +610,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="index.html"><img src="{{asset('img/core-img/logo2.png')}}" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -642,15 +642,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
 {% block Javascript %}
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="{{asset('js/bootstrap/popper.min.js')}}"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="{{asset('js/plugins/plugins.js')}}"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="{{asset('js/active.js')}}"></script>
 {% endblock Javascript %}
 </body>
 
@@ -664,12 +664,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       }
       
       @keyframes change{
-        0%,100%{background-image:url("img/children.jpg");}
-        25%{background-image:url("img/typewriter.jpg");}
+        0%,100%{background-image:url("{{asset('img/children.jpg')}}");}
+        25%{background-image:url("{{asset('img/typewriter.jpg')}}");}
       
-        50%{background-image:url("img/library.jpg");}
+        50%{background-image:url("{{asset('img/library.jpg')}}");}
       
-        75%{background-image:url("img/business.jpg");}
+        75%{background-image:url("{{asset('img/business.jpg')}}");}
       
       }
 </style>

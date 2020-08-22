@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}formulaire de contact{% endblock %}
+
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+    <!-- ##### Catagory Area End ##### -->
+
+    <!-- ##### Blog Details Content ##### -->
+   
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <!-- Blog Details Text -->
+                    <center>
+                        <div class="pdp">
+
+                            <img src="{{asset('img/fancybox_loading.Gif')}}" />
+                        </div>
+                    </center>
+                    <div class="blog-details-text">
+                      <h5>Contacter "<div style="display: inline;" class="nom"> <img src="{{asset('img/fancybox_loading.Gif')}}" /> </div>" pour votre formation en {{cours}} <span class="fa fa-vcard"></span> </h5>
+                      <p>
+                          Il est conseillé d'avoir un compte étudiant. De cette manière,<span style="display:inline;" class="nom"> <img src="{{asset('img/fancybox_loading.Gif')}}" /> </span> poura mieu vous suivre et au cas contraire vous devez compléter ce formulaire et nous soumètre !
+                        <br>
+                          <form action="{{ path('commande',{'annonce_id':annonce_id}) }}">
+                              <input type="text" required name="nom" id="nom" class="form-control" placeholder="Nom" />
+                              <br>
+                              <input type="prenom" required name="prenom" id="prenom" class="form-control" placeholder="Prenom" />
+                              <br>
+                              <input type="number" required name="phone" id="phone" class="form-control" placeholder="Phone number" />
+                              <br>
+                              <input type="email" required name="email" id="email" class="form-control" placeholder="Email" />
+                              <br>
+                              <textarea name="message" required id="message" cols="30" rows="10" class="form-control" placeholder="Ecrivez un petit message pour accompagner votre contact" ></textarea>
+                              <br>
+                              <br>
+                              <button type="submit" class="btn btn-primary btn-sm">Envoyer <span class="fa fa-send"></span></button>
+                              &nbsp; &nbsp; &nbsp;&nbsp;
+
+                              <a href="#" class="btn btn-success btn-sm">Espace Etudiants <span class="fa fa-users"></span></a>
+
+                            </form>
+                      </p>
+                    </div>
+                    <br />
+                    <br />
+                    <script>
+                        $(function(){
+                        
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                url: '/data_prof?id={{id_a}}',
+                                timeout: 30000,
+                             success: function(data) {
+                                for(i=0; i<=data.length; i++){
+                                    user = data[i];
+                                    
+                                    $('.nom').html(user['nom']);
+                                    $('#prenom').html(user['prenom']);
+                                    $('.pdp').html('<img src="../img/pdp/'+ user['pdp'] +'"  style="border-radius:100%; height:80px; width:80px;" />')
+                                   
+                                }
+ 
+                             },
+                             error: function() {
+                      
+                                $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                              }
+                           }); 
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        
+       
+    
+    </div>
+    
+    <!-- ##### Blog Details Content ##### -->
+    
+{% endblock %}

@@ -1,20 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EtudiantsController!{% endblock %}
+{% block title %} Etudiants - clever-prof{% endblock %}
 
 {% block body %}
+
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .n{
+        font-size: 1.3em;
+        margin: 2%;
+        padding: 2%;
+    
+    }
+    .n:hover{
+      font-size: 1.3em;
+      margin: 2%;
+    
+    }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/dashboard/projets/symfony/Clever_prof/src/Controller/EtudiantsController.php'|file_link(0) }}">src/Controller/EtudiantsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/dashboard/projets/symfony/Clever_prof/templates/etudiants/index.html.twig'|file_link(0) }}">templates/etudiants/index.html.twig</a></code></li>
-    </ul>
+<div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url({{asset('/img/children.JPG')}});">
+    <div class="blog-details-headline">
+      <!-- <center>  <img src="{{asset('/img/pdp/default_pdp.JPG')}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center> -->
+       <center>
+        <a href="#" class="n col-md-10 btn btn-success btn-lg"> Creer un compte etudiant <span class="fa fa-user-plus"></span> </a>
+        <a href="#" class="n col-md-10 btn btn-primary btn-lg"> votre espace etudiant </a>
+       
+       </center>
+        
+        <div class="meta d-flex align-items-center justify-content-center">
+            
+        </div>
+    </div>
 </div>
+
+
 {% endblock %}

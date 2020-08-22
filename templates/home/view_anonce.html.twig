@@ -2,12 +2,6 @@
 
 {% block title %}votre anonce!{% endblock %}
 
-{% block stylesheet %}
-    
-       <link rel="stylesheet" href="{{asset('style.css')}}">
-        
-{% endblock stylesheet %}
-
 
 {% block body %}
 <script src="asset('js/jquery/jquery-2.2.4.min.js')"></script>
@@ -47,10 +41,10 @@
                             {{info.titre}}</h3>
                         
                         <h5 class="text-center py-4">Nom</h5>
-                        <p id="nom{{info.id}}"><img src="../../img/fancybox_loading.Gif"></p>
+                        <p id="nom{{info.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
 
                         <h5 class="text-center py-4">Prenom</h5>
-                        <p id="prenom{{info.id}}"><img src="../../img/fancybox_loading.Gif"></p>
+                        <p id="prenom{{info.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
 
                         <h5 class="text-center py-4">Parcours</h5>
                         <p>{{info.parcours}}</p>
@@ -125,15 +119,5 @@
     </div>
     
     <!-- ##### Blog Details Content ##### -->
-    {% block Javascript %}
-    <script src="../../js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="../../js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="../../js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="../../js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="../../js/active.js"></script>
-   {% endblock Javascript %}
+    
 {% endblock %}

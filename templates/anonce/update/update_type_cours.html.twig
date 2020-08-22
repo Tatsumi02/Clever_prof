@@ -1,0 +1,40 @@
+{% extends 'baseProf.html.twig' %}
+
+
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
+
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+
+<section>
+  
+ <div class="col-md-10 container">
+   <center>
+        <div class="col-md-8" id="zone" style="text-align: left;">
+            <h3>Etape 2: Type de  cours</h3> <br>
+   
+            <form action="{{path('update_type_cours_traitement',{'id':id})}}" method="get" enctype="multipart/form-data" name="form" style="margin:auto;padding:10%;">
+             <h3>Comment voulez vous donner vos cours?</h3>
+
+             <select name="full" id="tc" class="form-control">
+                 <option value="Individuel">Individuel</option>
+                 <option value="En groupe">En groupe</option>
+                 <option value="Individuel ou en groupe">Individuel ou en groupe</option>
+             </select>
+              
+                 <div id="detail" class="">
+
+                 </div>
+                 <br>
+             <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+              
+           </form>
+</div>
+</center>
+</div>
+  </section> 
+  <!-- <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script> -->
+    <script src="{{asset('js/scripts/anonce.js')}}"></script>
+
+{% endblock %}

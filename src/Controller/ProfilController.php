@@ -7,9 +7,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use App\Entity\Anonce;
+use App\Entity\Commande;
 use App\Form\PdppType;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\UserRepository;
+use App\Repository\CommandeRepository;
+use App\Repository\AnonceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
@@ -99,4 +103,8 @@ class ProfilController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
+
+
 }

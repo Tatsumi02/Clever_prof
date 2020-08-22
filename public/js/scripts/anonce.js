@@ -1,13 +1,15 @@
+
 var cours = document.getElementById('cours');
 var plus = document.getElementById('plus');
 var detail = document.getElementById('detail');
 var choixx = '';
+var check = false; //cette variable nous dira si l'user a fait un choix ou non
 $('#plus').click(function(){ 
 if(!cours.value){
   $('#detail').html('<span style="color:red;">Vous devez entrer un cours </span>');
   return false;
 }else{
-  $('#detail').html('<center> <img src="img/fancybox_loading.Gif"> </center>');
+  $('#detail').html('<center> <img src="../img/fancybox_loading.Gif"> </center>');
   $.ajax({
     type: 'POST',
     dataType: 'json',
@@ -28,7 +30,7 @@ if(!cours.value){
       for(j=0; j<option.length;j++){
         $('#detail').append(
          '<br /><input type="checkbox" name="op" id="i'+j+'" value="'+option[j]+'" /> <label for="i'+j+'">'+ option[j]+ '</label><br />'+
-         '<input type="hidden" name="nombre" value="mnmn" />'
+         ''
          );
       
         
@@ -41,14 +43,15 @@ if(!cours.value){
         if(choix[x].checked === true){
           //alert('vous avez choisir: '+choix[x].value);
           choixx += choix[x].value +',';
-          
+          check = true;
         }
         
       }
     });
       
      // plus.type='submit';
-      plus.textContent='nouveau choix ';
+      // plus.textContent='nouveau choix ';
+      plus.style.display='none';
       $('#plus').click(function(){
        // location.href='/traitement-cours/'+ option.length +'/';
        
@@ -56,7 +59,9 @@ if(!cours.value){
       });
 
       $('#hop').click(function(){
-        location.href='/traitement-cours/'+ choixx +'/'+ $('#cours').val();
+        if(check == true){
+           location.href='/traitement-cours/'+ choixx +'/'+ $('#cours').val();
+        }else{ alert('faites un choix '); }
       });
 
      
@@ -66,7 +71,7 @@ if(!cours.value){
     
  },
  error:function(){
-   $('#detail').html('<span style="color:red">Erreur survenue.<br /> La requettete n\'a pas aboutir</span>');
+   $('#detail').html('<span style="color:red">Erreur survenue.<br /> La requette n\'a pas abouti</span>');
  }
 });
 

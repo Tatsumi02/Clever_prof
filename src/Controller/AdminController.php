@@ -442,7 +442,32 @@ class AdminController extends AbstractController
        return $this->redirectToRoute('admin');
     }
 
+ //methode pour consulter la liste des etudiants 
 
+     /**
+    * * Require ROLE_ADMIN for only this controller method.
+    *
+    * @IsGranted("ROLE_ADMIN")
+     * @Route("/Etudiants", name="tout_etudiants")
+     */
+    public function tous_etudiants(Request $request){
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $users = $repository -> findAll();
+       /* $v = false;
+        foreach($users as $user){
+            if(in_array('ROLE_PROF',$user->getRoles())){
+              $v = true;
+              $etudiants = $repository -> findAll();
+            }
+        }*/
+
+
+        return $this -> render('admin/tout_etudiants.html.twig',[
+            'users'=>$users,
+            
+        ]);
+
+    }
 
 
 

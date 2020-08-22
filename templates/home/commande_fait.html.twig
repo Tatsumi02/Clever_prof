@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}votre contact est enregistrer{% endblock %}
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+<style>
+    h5{
+        text-align: left;
+        display: inline;
+    }
+
+    .n{
+        font-size: 1.3em;
+        margin: 2%;
+        padding: 2%;
+    
+    }
+    .n:hover{
+      font-size: 1.3em;
+      margin: 2%;
+    
+    }
+</style>
+   
+    <!-- ##### Blog Details Content ##### -->
+   
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <!-- Blog Details Text -->
+                    <div class="blog-details-text">
+                          <h5>Votre Contact est enregistrer </h5>
+                          <p>
+                              nous avons enregistrer votre contact et nous allons vous appeller bientôt pour vous mettre en relation avec ce professeur
+                              . Nous vous recommandons une fois de plus de créer votre compte étudiant pour être mieux suivi par votre professeur et nous. <br><br>
+                              si vous crée un compte étudiant, veuillez utiliser le même numero de téléphone et la même adresse email que vous avez utilisé dans le formulaire de contact
+                              <br><br>
+                              <a href="{{path('home')}}" class="n btn btn-primary ">Accueil <span class="fa fa-home"></span></a>
+                              &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+                              <a href="{{path('etudiants')}}" class="n btn btn-success" >Creer un compte etudiant <span class="fa fa-users"></span></a>
+                          </p>
+                         <script>
+                         $(function(){
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                url: '/data_prof?id=4',
+                                timeout: 30000,
+                             success: function(data) {
+                                for(i=0; i<=data.length; i++){
+                                    user = data[i];
+                                    
+                                    $('#nom').html(user['nom']);
+                                    $('#prenom').html(user['prenom']);
+                                    $('#pdp').html('<img  src="../img/pdp/'+ user['pdp'] +'" alt="" style="height:80px; width:80px; border-radius: 100%;" />');
+                                    
+                                }
+ 
+                             },
+                             error: function() {
+                      
+                                $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                              }
+                           }); 
+                        });
+                         </script>
+                        
+                    </div>
+                    <br />
+                    <br />
+                    
+                </div>
+            </div>
+        </div>
+        
+       
+    
+    </div>
+    
+    <!-- ##### Blog Details Content ##### -->
+    
+{% endblock %}

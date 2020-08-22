@@ -1,13 +1,13 @@
-{% extends 'baseLogin.html.twig' %}
+{% extends 'baseProf.html.twig' %}
 
-{% block title %}votre anonce!{% endblock %}
+{% block title %}Votre annonce!{% endblock %}
 
 {% block body %}
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- ##### Catagory Area Start ##### -->
-    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url(img/pdp_annonce/{{pdp}});">
+    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url(../img/pdp_annonce/{{pdp}});">
         <div class="blog-details-headline">
-          <center>  <img src="img/pdp_annonce/{{pdp}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
+          <center>  <img src="{{asset('img/pdp_annonce/' ~ pdp)}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
             <h3>{{titre}}</h3>
             <div class="meta d-flex align-items-center justify-content-center">
                 <a href="#">{{cours}}</a>
@@ -79,7 +79,7 @@
                     
                     <div class="col-12 col-lg-6">
                         <div class="single-blog-area mb-100">
-                            <img src="img/pdp_annonce/{{annonce.photoProfil}}" style="height:300px;" alt="">
+                            <img src="{{asset('img/pdp_annonce/' ~ annonce.photoProfil)}}" style="height:300px;" alt="">
                             <!-- Blog Content -->
                             <div class="blog-content">
                                 <a href="#" class="blog-headline">

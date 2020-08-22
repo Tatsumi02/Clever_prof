@@ -1,29 +1,29 @@
-{% extends 'baseLogin.html.twig' %}
+{% extends 'baseProf.html.twig' %}
 
-{% block title %}Cree votre annonce en quelques mins!{% endblock %}
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
-<br><br>
- <div class="container">
-     <center class="col-md-10">
-        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
-          <h3>Etape 6: Lieux de cours</h3> <br>
-            <form action="{{path('lieu_cours_traitement')}}" method="get">
+
+<section class="hero-area">
+    <div class="col-md-12 container" style="margin:auto;" >
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+          <h3>Etape 6: Lieux du cours</h3> <br>
+            <form action="{{path('lieu_cours_traitement')}}" method="get" style="margin:auto;padding:10%;">
                 <h3>ou seront dispo vos cours?</h3>
                 <select name="lieu" id="tc" class="form-control">
-                    <option value="a domicile">a domicile</option>
-                    <option value="chez l'etudiant">chez l'etudiant</option>
+                    <option value="a domicile">A domicile</option>
+                    <option value="chez l'etudiant">Chez l'étudiant</option>
                     <option value="Cours en ligne">Cours en ligne</option>
                 </select>
                 <br>
                 <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
             </form>
         </div>
-       
-     </center>
+    </div>
+    </section>
+     
     
-    <br><br><br><br>
-    <script src="js/scripts/anonce.js"></script>
- </div>
+     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/scripts/anonce.js"></script>
+ 
 {% endblock %}

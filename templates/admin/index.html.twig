@@ -2,30 +2,81 @@
 
 {% block title %}Bienvenue en administration !{% endblock %}
 
-{% block stylesheet %}
-    
-       <link rel="stylesheet" href="../style.css">
-        
-{% endblock stylesheet %}
-
 
 {% block body %}
 
+
+<section class="hero-area bg-img bg-overlay-2by5" >
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12" style="margin:auto;">
+                <!-- Hero Content -->
+                <div class="hero-content text-center">
+                    
+
+                    <section class="col-sm-12 table-responsive">
+                        <table style="background-color: white;" class="table table-bordered table-striped table-condensed">
+                            <caption>
+                             
+                            </caption>
+                                <thead>
+                                  <tr>
+                                    <th>Les fonctionnalites</th>
+                                    <th>Les annonces <span class="fa fa-edit"></span> <span class="fa fa-badge badge-pill badge-success">0</span></th>
+                                    <th>Les étudiants <span class="fa fa-group"></span> <span class="fa fa-badge badge-pill badge-warning">0</span></th>
+                                    <th>Les Professeurs</th>
+                                    <th>Discipline</th>
+                                    <th>Suivie des cours <span class="fa fa-book"></span> <span class="fa fa-badge badge-pill badge-primary">0</span></th>
+                                    <th>Légal</th>
+    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                   <tr>
+                                       <td> <a href="{{ path('ajout_matiere') }}">Ajoute les matieres <span class="fa fa-book"></span></a></td>
+                                       <td> <a href="#"> Tous les annonces </a> </td>
+                                       <td> <a href="{{path('tout_etudiants')}}"> Tous les etudiants </a> </td>
+                                       <td> <a href="#"> Tous les professeurs </a> </td>
+                                       <td> <a href=""> Reglements pour prof </a> </td>
+                                       <td> <a href="#"> Evolution des cours  </a> </td>
+                                       <td> <a href="#"> Les demande de certification <span class="fa fa-badge badge-pill badge-warning">0</span> </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="{{ path('modifier_matiere') }}">Modifer les matieres</a></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td> <a href="#">Reglements pour etudiants</a> </td>
+                                        <td> <a href="#">  </a> </td>
+                                        <td> <a href="#"> Prof signaler <span class="fa fa-badge badge-pill badge-warning">0</span> </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td> <a href="#"> Etudiants signaler <span class="fa fa-badge badge-pill badge-warning">0</span> </a> </td>
+                                    </tr>
+                                </tbody>
+                        </table>
+
+
+                  </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+ 
+ 
+
  <div class="container">
     
-     <a href="{{ path('ajout_matiere') }}" class="btn btn-primary">Ajoute les matieres <span class="fa fa-book"></span></a>
-     <a href="{{ path('modifier_matiere') }}" class="btn btn-primary">Modifer les matieres</a>
+    
+     
  </div>
  <br><br>
- {% block Javascript %}
-    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="../js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="../js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="../js/active.js"></script>
-{% endblock Javascript %}
+ 
 {% endblock %}

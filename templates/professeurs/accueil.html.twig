@@ -1,0 +1,76 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %} dashboad {% endblock %}
+
+{% block body %}
+
+    
+                <!-- Blog Details Text -->
+                
+                <div class="blog-details-text">
+                    <section class="col-sm-12 table-responsive">
+                    <table class="table table-bordered table-striped table-condensed">
+                        <caption>
+                         
+                        </caption>
+                            <thead>
+                              <tr>
+                                <th>Vos annonces <span class="fa fa-edit"></span> <span class="fa fa-badge badge-pill badge-success">0</span></th>
+                                <th>Vos étudiants <span class="fa fa-group"></span> <span class="fa fa-badge badge-pill badge-warning">0</span></th>
+                                <th>Suivie des cours <span class="fa fa-book"></span> <span class="fa fa-badge badge-pill badge-primary">0</span></th>
+                                <th>Légal</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+                               <tr>
+                                   <td>
+                                       <a href="{{path('cree_anonce')}}">Cree une annonce <span class="fa fa-plus"></span></a>
+                                   </td>
+                                   <td>
+                                       <a href="#">Nouveau etudiants <span class="fa fa-user-plus"></span></a>
+                                   </td>
+                                   <td>
+                                       <a href="#">notions enseigner <span class="fa fa-book"></span></a>
+                                   </td>
+                                   <td>
+                                       <a href="{{path('certifier_annonce')}}">certifier une annonce</a>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td>
+                                       <a href="{{path('modification')}}">Modifier une annonce <span class="fa fa-edit"></span></a>
+                                   </td>
+                                   <td>
+                                       <a href="#">vos etudiants <span class="fa fa-users"></span></a>
+                                   </td>
+                        
+                                   <td>
+                                       <a href="{{path('nouveaux_etudiant')}}">Contact <span class="fa fa-badge badge-pill badge-primary">{{commande}}</span></th></a>
+                                   </td>
+                                   <td> 
+                                       <a href="{{path('annonce_certifie')}}">Vos annonces certifier</a>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td>
+                                       <a href="{{path('annonce_suppression')}}">Supprimer une annonce <span class="fa fa-delet"></span></a>
+                                   </td>
+                                   <td>
+                                       <a href="#">Signaler un etudiant</a>
+                                   </td>
+                                   <td>
+
+                                   </td>
+                                   <td>
+
+                                   </td>
+                               </tr>
+        
+                            </tbody>
+                        </table>
+                        </section>
+                    
+                </div>
+
+{% endblock %}

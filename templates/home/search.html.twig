@@ -1,4 +1,4 @@
-{% extends 'baseLogin.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %} search !{% endblock %}
 
@@ -8,18 +8,21 @@
 
 <section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
     <div class="container">
-    
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Les meilleurs formateurs en {{cours}} </h3>
+                    <h3>Les annonces pour '{{cours}}' ({{nombre_resultat}}) </h3>
+                    Ici sont lister tout les {{nombre_resultat}} annonces en {{cours}} vous devez bien choisir votre formateur avant de commander ses services <br>
+                    Par contre, nous pouvons vous montrer les annonces fiables. <a href="#" class="btn btn-primary btn-sm">Cliquez ici</a> 
                 </div>
             </div>
         </div>
-    
+
         <div class="row">
             <!-- Single Popular Course -->
+            
             {% for anonce in anonces %}
+            <a href="{{path('choix',{'id':anonce.id})}}">
             <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
             <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
                 <img src="img/pdp_annonce/{{anonce.photoProfil}}" alt="" style="height: 200px;">
@@ -31,14 +34,9 @@
                         <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                         <div id="op{{anonce.id}}" style="color: tomato;"></div>
                     </div>
-                    <p>
-                        {% if certifier == 1 %}
-                          <span class="badge" style="border-radius: 100%; background:green; color:white;">
-                               <span class="fa fa-check"></span>
-                        </span>
-                        {% endif %}
-                        {{anonce.titre}}</p>
+                    <p>{{anonce.titre}}</p>
                 </div>
+                </a>
                 <!-- Seat Rating Fee -->
                 <div class="seat-rating-fee d-flex justify-content-between">
                     <div class="seat-rating h-100 d-flex align-items-center">
@@ -55,11 +53,12 @@
                   </div>
   
                     <div class="course-fee h-100">
-                        <a href="#" title="Par Heure" class="free">{{anonce.tarifHeure}}F/H</a>
+                        <a href="#" title="Par Mois" class="free">{{anonce.tarifHeure}}F/Mois</a>
                     </div>
                 </div>
             </div>
             </div>
+
             <script>
               //{{anonce.matiere}}
               $(function(){

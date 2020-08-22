@@ -1,0 +1,31 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
+
+{% block body %}
+
+<section>
+    <div class="col-md-12 container" style="margin:auto;" >
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+          {% for inf in infos %}
+            <h3>Etape 5: Votre méthodologie d'enseignement</h3> <br>
+            <form action="{{path('update_methodologie_traitement',{'id':id})}}" method="get" style="margin:auto;padding:10%;">
+               
+                <textarea name="methodologie" id="methodologie" class="form-control" cols="30" rows="10">{{inf.methodologie}}</textarea>
+                <br>
+                 <div>
+                    Vous devez dire à l'étudiant votre méthode d'enseigner 
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+               
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+        </section>
+    
+     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/scripts/anonce.js"></script>
+ 
+{% endblock %}

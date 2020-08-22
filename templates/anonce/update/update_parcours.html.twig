@@ -1,0 +1,32 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
+
+{% block body %}
+
+<section>
+    <div class="col-md-12 container" style="margin:auto;" >
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+     {% for inf in infos %}
+          <h3>Etape 4: Votre parcours autour de cette compétence </h3> <br>
+            <form action="{{path('update_parcours_traitement',{'id':id})}}" method="get" style="margin:auto;padding:10%;">
+               
+                <textarea name="parcours" id="parcours" class="form-control" cols="30" rows="10">{{inf.parcours}}</textarea>
+                <br>
+                 <div>
+                    Décrivez brièvement votre parcours (Exemple: Après mes études primaires, j'ai fais le collège en 2010 ou j'ai eu mon baccalaureat scientifique, ensuite j'ai continué une formation de 7 ans en ingénieur agroalimentaire. )
+
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+               
+            </form>
+        {% endfor %}
+   </div>
+   </div>
+   </section>
+        
+    <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+    <script src="{{asset('js/scripts/anonce.js')}}"></script>
+
+{% endblock %}

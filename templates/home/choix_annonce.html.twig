@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce!{% endblock %}
+
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+<style>
+    h5{
+        text-align: left;
+        display: inline;
+    }
+
+    .n{
+        font-size: 1.3em;
+        margin: 2%;
+        padding: 2%;
+    
+    }
+    .n:hover{
+      font-size: 1.3em;
+      margin: 2%;
+    
+    }
+</style>
+    <!-- ##### Catagory Area Start ##### -->
+    {% for un in infos %}
+    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url({{asset('img/pdp_annonce/' ~ un.photoProfil)}});">
+        <div class="blog-details-headline">
+          <center> <div id="pdp{{un.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></div> </center>
+            <h3>{{un.titre}}</h3>
+            <div class="meta d-flex align-items-center justify-content-center">
+                <a href="#">{{un.cours}}</a>
+                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                <!-- <a href="#">Art &amp; Design</a> -->
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- ##### Catagory Area End ##### -->
+
+    <!-- ##### Blog Details Content ##### -->
+   
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <!-- Blog Details Text -->
+                    <div class="blog-details-text">
+                        {% for info in infos %}
+                        <h3>
+                            {% if certifier == 1 %}
+                                
+                            <span class="badge" style="border-radius: 100%; background:green; color:white;">
+                               <span class="fa fa-check"></span>
+                            </span>
+                            {% endif %} 
+
+                            {{info.titre}}</h3>
+                        <hr>
+                        <h5 class="text-center py-4">Mon nom</h5>
+                        <p id="nom{{info.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
+
+                        <h5 class="text-center py-4">Mon Prenom</h5>
+                        <p id="prenom{{info.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
+
+                        <h5 class="text-center py-4">Mon Parcours</h5>
+                        <p>{{info.parcours}}</p>
+
+                        <h5 class="text-center py-4">Ma Methodologie</h5>
+                        <p>{{info.methodologie}}</p>
+
+                        <h5 class="text-center py-4">Mon Lieux des cours</h5>
+                        <p>{{info.lieuCours}}</p>
+
+                        <h5 class="text-center py-4">Mon Tarif par mois</h5>
+                        <p>{{info.tarifHeure}}Fcfa</p>
+                        <hr>
+                        <a href="{{path('ma_formation',{'id':info.id})}}" class="n btn btn-primary btn-sm"> <span class="fa fa-feed"></span> Me contacter pour votre formation</a>
+                        <a href="#" class="n btn btn-primary btn-sm"> <span class="fa fa-rss-square"></span> Formation pour  votre enfant</a>
+                       
+                        <h5 class="text-center py-4"></h5>
+                        <!-- Tags -->
+
+                         <script>
+                         $(function(){
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                url: '/data_prof?id={{info.anonceurId}}',
+                                timeout: 30000,
+                             success: function(data) {
+                                for(i=0; i<=data.length; i++){
+                                    user = data[i];
+                                    
+                                    $('#nom{{info.id}}').html(user['nom']);
+                                    $('#prenom{{info.id}}').html(user['prenom']);
+                                    $('#pdp{{info.id}}').html('<img  src="../img/pdp/'+ user['pdp'] +'" alt="" style="height:80px; width:80px; border-radius: 100%;" />');
+                                    
+                                }
+ 
+                             },
+                             error: function() {
+                      
+                                $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                              }
+                           }); 
+                        });
+                         </script>
+                        {% endfor %}
+                    </div>
+                    <br />
+                    <br />
+                    
+                </div>
+            </div>
+        </div>
+        
+       
+    
+    </div>
+    
+    <!-- ##### Blog Details Content ##### -->
+    
+{% endblock %}

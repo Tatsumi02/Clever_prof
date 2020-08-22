@@ -1,0 +1,32 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %}Créez votre annonce en quelques mins!{% endblock %}
+
+{% block body %}
+
+<section class="hero-area">
+  <div class="col-md-12 container" style="margin:auto;" >
+         <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+          <h3>Etape 7: Votre tarif</h3> <br>
+          {% for inf in infos %}
+            <form action="{{path('update_tarif_heure_traitement',{'id':id})}}" method="get" style="margin:auto;padding:10%;">
+               
+                <input type="number" size="7" value="{{inf.tarifHeure}}" required name="tarif" class="form-control" placeholder="" />/H
+                <br>
+                 <div class="">
+                    
+                  </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+               
+            </form>
+           {% endfor %}
+        </div>
+      </div>
+  </section>
+     
+    
+     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="../js/scripts/anonce.js"></script>
+ 
+{% endblock %}

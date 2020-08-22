@@ -1,18 +1,45 @@
-{% extends 'baseLogin.html.twig' %}
+{% extends 'baseProf.html.twig' %}
 
 {% block title %}Cree votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
-<script src="js/jquery/jquery-2.2.4.min.js"></script>
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 <br><br>
  <div class="container">
      <center class="col-md-10">
         <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
           {% for anon in anonce %}
-           <form method="post" action="{{path('type_cours')}}">
-              <input type="text" name="cours" value="{{anon.matiere}}" class="form-control" />
-              <button type="submit" class="btn btn-primary">suivant</button>
+           <form method="post" action="">
+             <h3>Modifier votre anonce maintenant</h3><br>
+
+             <label for="mat">votre cours</label>
+              <input type="text" name="cours" id="mat" value="{{anon.matiere}}" class="form-control" />
+             <!-- </label> -->
+
+              <br>
+              <label for="op">les spécialités de ce cours (séparez chaque options par des virgules)</label>
+                <input type="text" name="op" id="op" class="form-control" >
+              <!-- </label> -->
+              <br>
+              <button type="button" id="se" class="btn btn-primary">suivant <span class="fa fa-send"></span></button>
             </form>
+            <script>
+              $(function(){
+                var mat = document.getElementById('mat');
+                var matiere = '{{anon.matiere}}';
+                var cours = matiere.split('-');
+                mat.value = cours[0];
+                var op = document.getElementById('op');
+                op.value = cours[1];
+                var id = '{{anon.id}}';
+                $('#se').click(function(){
+
+                  location.href='/update-cours/'+ id +'/'+ $('#op').val() +'/'+ $('#mat').val();
+                  //mat.value = $('#mat').val()+'-'+$('#op').val()+',';
+          
+                });
+              });
+            </script>
           {% endfor %}
         </div>
        
