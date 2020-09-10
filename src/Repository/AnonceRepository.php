@@ -136,24 +136,39 @@ class AnonceRepository extends ServiceEntityRepository
         $conn = $this -> getEntityManager()->getConnection();
         $sql = '
         UPDATE anonce a SET
-            a.photo_profil =?,
-            a.actif = "true"
+            a.photo_profil =?
         
         WHERE a.anonceur_id =? AND a.matiere =?
         ';
         $stmt = $conn ->prepare($sql);
         $stmt->execute([$newFilename, $id, $b]);
 
-        //
+        // 
+    
+    }
+
+    public function  updatActif($id): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE anonce a SET
+            a.actif =?
+        
+        WHERE  a.id =?
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['true',$id]);
+
+        
     
     }
     
     public function  annon(): array
     {
         $conn = $this -> getEntityManager()->getConnection();
-        $sql = 'SELECT * FROM anonce a ORDER BY id DESC LIMIT 0,6 ';
+        $sql = 'SELECT * FROM anonce a WHERE actif=:act ORDER BY id DESC LIMIT 0,6 ';
         $stmt = $conn ->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(['act'=>'true']);
 
         return $stmt->fetchAll();
     
@@ -212,9 +227,24 @@ public function  update_cours($id,$matiere): void
     $stmt = $conn ->prepare($sql);
     $stmt->execute(['id'=>$id,'mat'=>$matiere]);
 
+    //delAnonce($id)
+
+ }
+
+ public function  delAnonce($id): void
+{
+    $conn = $this -> getEntityManager()->getConnection();
+    $sql = '
+    DELETE FROM anonce
+    WHERE id =:id
+    ';
+    $stmt = $conn ->prepare($sql);
+    $stmt->execute(['id'=>$id]);
+
     //
 
  }
+
 
  public function  update_type_cours($id,$typeCours): void
  {

@@ -4,12 +4,12 @@
 
 
 {% block body %}
-<script src="asset('js/jquery/jquery-2.2.4.min.js')"></script>
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- ##### Catagory Area Start ##### -->
     {% for un in infos %}
-    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url(../../img/pdp_annonce/{{un.photoProfil}});">
+    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url({{asset('img/pdp_annonce/' ~ un.photoProfil)}});">
         <div class="blog-details-headline">
-          <center>  <img src="../../img/pdp_annonce/{{un.photoProfil}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
+          <center>  <img src="{{asset('img/pdp_annonce/' ~ un.photoProfil)}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
             <h3>{{un.titre}}</h3>
             <div class="meta d-flex align-items-center justify-content-center">
                 <a href="#">{{un.cours}}</a>

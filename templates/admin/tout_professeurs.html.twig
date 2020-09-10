@@ -1,0 +1,79 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} Tout les professeurs !{% endblock %}
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+
+<section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
+    <div class="container">
+
+        <div class="row">
+            <center>
+                
+                <h3>Liste de tout les professeurs <span class="fa fa-vcard"></span></h3>
+            </center>
+
+            <div class="pull-right col-md-7">
+                <form action="#">
+                    <input type="search" class="form-control col-md-8" style="display: inline;" placeholder="search">
+                    <button type="submit" class="btn btn-primary">Seach</button>
+                </form>
+             </div> 
+    
+
+<table style="background-color: white;" class="table table-bordered table-striped table-condensed">
+    <caption>
+     
+    </caption>
+        <thead>
+          <tr>
+            <th>Photo profil</th>
+            <th>Nom </th>
+            <th> Prenom </th>
+            <th>ville</th>
+            <th>adresse</th>
+            <th>Options</th>
+            
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for anonce in professeurs %}
+
+            {% if anonce.roles[0] == 'ROLE_PROF' %}
+                
+             <tr>
+               <td><img src="{{asset('img/pdp/' ~ anonce.pdp )}}" style="width: 200px; height:100px" alt=""></td>
+               <td>{{anonce.nom}}</td>
+               <td>{{anonce.prenom}}</a></td>
+               <td>{{anonce.ville}}</td>
+               <td>
+                {{anonce.adresse}}
+                </td>
+                <td>
+                    <a href="#" class="btn btn-primary btn-sm">Message <span class="fa fa-bell"></span></a>
+                    <a href="#" class="btn btn-warning btn-sm">supprimer <span class="fa fa-warning"></span></a>
+                </td>
+             </tr>
+             <script>
+               $(function(){
+                 $('#sup{{anonce.id}}').click(function(){
+                   let x = confirm('apres cette action, le retour est impossible \n\n voulez-vous vraiment supprimer cette annonce?');
+                   if(x!=false) return true;
+                   else return false;
+                 });
+               });
+             </script>
+             {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+    
+  </section>
+
+
+  
+{% endblock %}

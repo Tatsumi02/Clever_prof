@@ -57,6 +57,16 @@ class Commande
      */
     private $message;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $annonceur_id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $statut;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +164,30 @@ class Commande
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getAnnonceurId(): ?int
+    {
+        return $this->annonceur_id;
+    }
+
+    public function setAnnonceurId(int $annonceur_id): self
+    {
+        $this->annonceur_id = $annonceur_id;
+
+        return $this;
+    }
+
+    public function getStatut(): ?int
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(int $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

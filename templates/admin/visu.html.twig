@@ -10,14 +10,14 @@
 
 
 {% block body %}
-<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 
  <div class="container">
      
     <div class="blog-details-content section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-12">
                     <div class="blog-details-text">
                       {% for anon in anonce %}
                           <h4>{{anon.matiere}}</h4>
@@ -32,7 +32,7 @@
                           {{anon.lieuCours}}
                           <h4>Tarif par heure</h4>
                           {{anon.tarifHeure}}Fcfa
-                          <img src="../img/pdp_annonce/{{anon.photoProfil}}" alt="">
+                          <img src="{{asset('img/pdp_annonce/' ~ anon.photoProfil)}}" alt="">
                           <br><br><br>
                           <a href="{{path('been_certified',{'id':anon.id})}}" class="btn btn-success btn-lg">Certifier l'annonce <span class="fa fa-check"></span></a>
                       {% endfor %}

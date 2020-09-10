@@ -1,0 +1,25 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %}Parcours fait!{% endblock %}
+
+{% block body %}
+
+<section class="">
+    <div class="col-md-12 container" style="margin:auto;" >
+           <div class="col-md-10 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;" id="zone">
+          
+            <form action="#" method="post" style="margin:auto;padding:10%;">
+               <h3>Bien jouer {{app.user.prenom}} les etudiants veront ce parcours</h3>
+               <p>
+                   penssez a accomplir ce parcours exactement comme vous l'avez ecrit. cela va permetre de fideliser les etudiants
+                   <br><br>
+                   <a href="{{path('dashboad')}}" class="btn btn-primary">Accueil <span class="fa fa-home fa-2x"></span></a> 
+               </p>
+            </form>
+        </div>
+    </div>
+    </section>
+     
+    
+    
+{% endblock %}

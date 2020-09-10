@@ -1,0 +1,102 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %}annonce a lier!{% endblock %}
+
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+    <!-- ##### Catagory Area Start ##### -->
+    {% for un in infos %}
+    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url(../../img/pdp_annonce/{{un.photoProfil}});">
+        <div class="blog-details-headline">
+          <center>  <img src="{{asset('img/pdp_annonce/' ~ un.photoProfil)}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
+            <h3>{{un.titre}}</h3>
+            <div class="meta d-flex align-items-center justify-content-center">
+                <a href="#">{{un.cours}}</a>
+                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                <!-- <a href="#">Art &amp; Design</a> -->
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- ##### Catagory Area End ##### -->
+
+    <!-- ##### Blog Details Content ##### -->
+   
+    <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <!-- Blog Details Text -->
+                    <div class="blog-details-text">
+                        {% for info in infos %}
+                        <h3>
+                           
+                            {{info.titre}}</h3>
+                        
+                        <h5 class="text-center py-4">Nom   </h5>
+                        <p id="nom{{info.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
+
+                        <h5 class="text-center py-4">Prenom </h5>
+                        <p id="prenom{{info.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
+
+                        <h5 class="text-center py-4">Parcours  </h5>
+                        <p>{{info.parcours}}</p>
+                        
+                        <h5 class="text-center py-4">Methodologie   </h5>
+                        <p>{{info.methodologie}}</p>
+
+                        <h5 class="text-center py-4">Lieux des cours </h5>
+                        <p>{{info.lieuCours}}</p>
+
+                        <h5 class="text-center py-4">Tarif par heure  </h5>
+                        <p>{{info.tarifHeure}}Fcfa</p>
+                        <br><br>
+
+                        <a href="#" class="btn btn-primary btn-sm">Booster <span class="fa fa-euro"></span></a>
+
+                        
+                        <h5 class="text-center py-4"></h5>
+                        <!-- Tags -->
+
+                         <script>
+                         $(function(){
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                async: true,
+                                url: '/data_prof?id={{info.anonceurId}}',
+                                timeout: 30000,
+                             success: function(data) {
+                                for(i=0; i<=data.length; i++){
+                                    user = data[i];
+                                    
+                                    $('#nom{{info.id}}').html(user['nom']);
+                                    $('#prenom{{info.id}}').html(user['prenom']);
+                                   
+                                }
+ 
+                             },
+                             error: function() {
+                      
+                                $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                              }
+                           }); 
+                        });
+                         </script>
+                        {% endfor %}
+                    </div>
+                    <br />
+                    <br />
+                    
+                </div>
+            </div>
+        </div>
+        
+       
+    
+    </div>
+    
+    <!-- ##### Blog Details Content ##### -->
+    
+{% endblock %}

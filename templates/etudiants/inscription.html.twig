@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prof-inscription | Clever-prof !{% endblock %}
+
+{% block body %}
+
+<style>
+    .n{
+        background-image:url("{{asset('img/open-book.jpg')}}");
+    }
+  </style>
+
+<section style=" padding:3%;" class="n bg-img bg-overlay-2by5">
+ <div class="col-md-10 container" style="margin:auto;margin-block-end:10%;" >
+    <h4 class="text-center">Rejoignez la communauté des etudiants <span class="fa fa-group"></span></h4>
+    <form action="{{path('inscription_etudiant_traitement')}}" style="background: rgba(48, 43, 43, 0.3); padding:4%;" method="post">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="nom" required class="form-control"  placeholder=" Nom" >
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="prenom" required class="form-control"  placeholder=" Prenom" >
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="email" name="email" required class="form-control"  id="email" placeholder="Email" >
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" required name="tel_fixe" class="form-control" id="phone" placeholder="Telephone fixe">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="tel_portable" required class="form-control" id="tel" placeholder="Telephone portable">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <select name="ville" class="form-control" required id="ville">
+                        <option id="indef" value="indef">Ville:</option>
+                        <option value="Bafoussam">Bafoussam</option>
+                        <option value="Bamenda">Bamenda</option>
+                        <option value="Bertoua">Bertoua</option>
+                        <option value="Buea">Buea</option>
+                        <option value="Douala">Douala</option>
+                        <option value="Ebolowa">Ebolowa</option>
+                        <option value="Garoua">Garoua</option>
+                        <option value="Maroua">Maroua</option>
+                        <option value="Ngaoundere">Ngaoundere</option>
+                        <option value="Yaounde"></option> 
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="text" name="adresse" required class="form-control"  placeholder="Adresse">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    
+                    <select name="genre" class="form-control" required id="genre">
+                        <option value="" id="indef" value="indef">genre:</option>
+                        <option value="feminin">Feminin</option>
+                        <option value="masculin">Masculin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="password" name="pass1" required class="form-control" id="mdp1" placeholder="Mot de passe">
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="form-group">
+                    <input type="password" name="pass2" required class="form-control" id="mdp2" placeholder="Mot de passe(confirmation)">
+                </div>
+            </div>
+            
+            <div class="col-md-6" style="margin:auto;">
+                <button class="btn clever-btn w-100">Envoyer <span class="fa fa-send"></span></button>
+            </div>
+        </div>
+    </form>
+ </div>
+</section>
+
+
+
+{% endblock %}

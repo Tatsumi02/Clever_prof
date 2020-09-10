@@ -14,11 +14,15 @@
         <div class="col-md-8" id="zone" style="text-align: left;">
           <h3>Etape 1: votre cours</h3>
             <form action="" method="post" enctype="multipart/form-data" name="form" style="margin:auto;padding:10%;">
-               <input type="text" name="cours" required class="form-control" id="cours" placeholder="Quel cours voulez vous offrir?">
-
+               <h5>Selectionner le cours que vous voulez offrir</h5>
+              <select name="cours" class="form-control" id="cours">
+                 {% for cour in cours %}
+                  <option value="{{cour.cours}}">{{cour.cours}}</option>
+                 {% endfor %}
+              </select>
             <!-- <form action="" method="post" enctype="multipart/form-data" name="form"> -->
                <!-- <input type="text" name="cours"  class="form-control" id="cours" placeholder="Quel cours voulez vous offrir?"> -->
-
+               
                <br>
                
                  <div id="detail" class="col-md-9">

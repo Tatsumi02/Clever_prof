@@ -75,11 +75,32 @@
 
                         <h5 class="text-center py-4">Mon Tarif par mois</h5>
                         <p>{{info.tarifHeure}}Fcfa</p>
+                        <br>
+                        <center>
+                            {% if notion == true %}
+                                    <div id="zone">             
+                                        <a href="#" id="b">voir plus de detaille <span class="fa fa-pencil"></span> </a>
+                                    </div>
+
+                                   <script>
+                                       $('#b').click(function(){
+                                           let link = "{{asset('img/fancybox_loading.Gif')}}";
+                                          $('#zone').html('<img src="'+ link +'">'); 
+                                          return false;
+                                          
+                                       });
+                                   </script>
+
+
+
+                            {% endif %}
+                            
+                        </center>
                         <hr>
                         <a href="{{path('ma_formation',{'id':info.id})}}" class="n btn btn-primary btn-sm"> <span class="fa fa-feed"></span> Me contacter pour votre formation</a>
-                        <a href="#" class="n btn btn-primary btn-sm"> <span class="fa fa-rss-square"></span> Formation pour  votre enfant</a>
+                        <!-- <a href="#" class="n btn btn-primary btn-sm"> <span class="fa fa-rss-square"></span> Formation pour  votre enfant</a> -->
                        
-                        <h5 class="text-center py-4"></h5>
+                       
                         <!-- Tags -->
 
                          <script>

@@ -1,0 +1,61 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} Tout les annonces !{% endblock %}
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+
+<section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
+    <div class="container">
+        <div class="row">
+            <center>
+                <h3>Liste de tout les annonces <span class="fa fa-vcard"></span></h3>
+            </center>
+<table style="background-color: white;" class="table table-bordered table-striped table-condensed">
+    <caption>
+     
+    </caption>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Cours </th>
+            <th>Lien </th>
+            <th>Photo</th>
+            <th>status</th>
+            
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for anonce in annonces %}
+             <tr>
+               <td>{{anonce.titre}}</td>
+               <td>{{anonce.cours}}</td>
+               <td><a href="#">voir l'annonce</a></td>
+               <td><img src="{{asset('img/pdp_annonce/' ~ anonce.photoProfil )}}" style="width: 200px; height:100px" alt=""></td>
+               <td>
+                 {# <a href="{{path('confirme_annonce',{'id':anonce.id})}}" class="btn btn-primary btn-sm">confirmer <span class="fa fa-check"></span> </a> #}
+                 <br> <br />
+                 <a href="{{path('suprime_annonce',{'id':anonce.id})}}" id="sup{{anonce.id}}" class="btn btn-warning btn-sm">supprimer <span class="fa fa-warning"></span> </a>
+                </td>
+             </tr>
+             <script>
+               $(function(){
+                 $('#sup{{anonce.id}}').click(function(){
+                   let x = confirm('apres cette action, le retour est impossible \n\n voulez-vous vraiment supprimer cette annonce?');
+                   if(x!=false) return true;
+                   else return false;
+                 });
+               });
+             </script>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+    
+  </section>
+
+
+  
+{% endblock %}

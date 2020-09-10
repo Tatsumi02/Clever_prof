@@ -7,8 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Entity\Anonce;
+use App\Entity\Notion;
 use App\Entity\Commande;
 use App\Repository\UserRepository;
+use App\Repository\NotionRepository;
 use App\Repository\CommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,22 +34,39 @@ class HomeController extends AbstractController
     public function index()
     {
     
+      //on va verifier si l'utillisateur a une session en cours.
       if($this->getUser()!=null){
-        
-        if($this->getUser()->getRoles() == 'ROLE_PROF'){
-          return new Response('vous etes prof ici');
+        //si il en a, on verifie le role de la session en cours
+        if($this->getUser()->getRoles()[0] == 'ROLE_PROF'){
+          //si le role est 'professeurs'
+          return $this->redirectToRoute('professeurs'); //on le redirige vers la sessions des professeurs
         }
 
-        return $this->redirectToRoute('acount');
+        if($this->getUser()->getRoles()[0] == 'ROLE_ETUD'){
+          //si le role est etudiant
+          return $this->redirectToRoute('etudiants'); //on redirige vers la session des etudiants
+        }
+
+       //si il n'a pas de session en cours,on le renvoir en accueil
       }else{
 
         //on recupere la liste des annonces disponibles
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
         $repository2 = $this -> getDoctrine() -> getRepository(User::class);
         $anonce = $repository -> annon();
-        $profil = $repository2 -> findAll() /*profi()*/;
-         
-      
+
+        $profil = $repository2 -> findAll();
+        $r = '';
+
+        /*foreach($profs as $prof){
+          if($prof->getRoles() =='ROLE_PROF'){
+             $r = $prof->getRoles();
+
+          }
+           $profil = $repository2 -> findBy(['roles'=>$r]);
+
+        }*/
+
         return $this->render('home/index.html.twig', [
             'anonces' => $anonce,
             'profil' => $profil,
@@ -257,6 +276,15 @@ class HomeController extends AbstractController
      *
      */
     public function choix(Request $request,$id){
+      //faisons une lecture dans la bd pour savoir si l'annonce demander a des notions ou non
+      $repository = $this -> getDoctrine() -> getRepository(Notion::class);
+      $notion = $repository -> findBy(['annonce_id'=>$id]);
+      $isNotion = false;
+      foreach($notion as $notio){
+        $isNotion = true;
+      }
+
+
       $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
       $info = $repository -> findBy(['id'=>$id]);
       $certifier = false;
@@ -276,6 +304,7 @@ class HomeController extends AbstractController
         'infos' => $info,
         'certifier' => $certifier,
         'pdp' => $pdpp->getPdp(),
+        'notion' => $isNotion,
       ]);
     }
 
@@ -293,7 +322,7 @@ class HomeController extends AbstractController
       return $this->render('home/ma_formation.html.twig',[
        'cours' => $anonce->getCours(),
        'id_a' => $anonce->getAnonceurId(),
-       'annonce_id' => $anonce->getAnonceurId(),
+       'annonce_id' => $anonce->getId(),
       ]);
     }
 
@@ -302,6 +331,16 @@ class HomeController extends AbstractController
      *
      */
     public function commande(Request $request,$annonce_id){
+      //essyons d'abord de recuperer l'id de l'utilisateur cours 
+
+      $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+      $anonces = $repository -> findBy(['id'=>$annonce_id]);
+      $annoncur_id = 0;
+      foreach($anonces as $anonce){
+        $annoncur_id = $anonce->getAnonceurId();
+      }
+
+
       $nom = $request->get('nom');
       $prenom = $request->get('prenom');
       $email = $request->get('email');
@@ -319,6 +358,8 @@ class HomeController extends AbstractController
       $commande->setDateCommande(new \DateTime());
       $commande->setStatus('true');
       $commande->setMessage($message);
+      $commande->setAnnonceurId($annoncur_id);
+      $commande->setStatut(1);
 
       $em->persist($commande);
       $em->flush();

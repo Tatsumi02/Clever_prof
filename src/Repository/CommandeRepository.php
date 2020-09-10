@@ -35,7 +35,23 @@ class CommandeRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    public function  liaison($id): void
+    {
+        $conn = $this -> getEntityManager()->getConnection();
+        $sql = '
+        UPDATE commande a SET
+           a.statut = :mat,
+           a.status = :mat2
+        
+         WHERE a.annonce_id =:id
+        ';
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute(['id'=>$id,'mat'=>0,'mat2'=>'false']);
+    
+        //
+    
+     }
+    
     /*
     public function findOneBySomeField($value): ?Commande
     {

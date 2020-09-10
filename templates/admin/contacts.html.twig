@@ -1,0 +1,93 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} Les contacts en attentes !{% endblock %}
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+
+<section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
+    <div class="container">
+
+        <div class="row">
+            <center>
+                
+                <h3>Liste des contacts en attente  <span class="fa fa-phone"></span></h3>
+            </center>
+
+<table style="background-color: white;" class="table table-bordered table-striped table-condensed">
+    <caption>
+     
+    </caption>
+        <thead>
+          <tr>
+            <th>Phone Etud</th>
+            <th>Nom </th>
+            <th> Prenom </th>
+            <th>Email</th>
+            <th>&lt;===&gt;</th>
+            <th>Phone Prof</th>
+            <th>Nom prof</th>
+            <th>Annonce</th>
+            <th>Date</th>
+            <th>Rapport</th>
+            
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for anonce in contacts %}
+                
+             <tr>
+               
+               <td>{{anonce.phone}}</td>
+               <td>{{anonce.nom}}</a></td>
+               <td>{{anonce.prenom}}</td>
+               <td>{{anonce.email}}</td>
+               <td>=====&gt;</td>
+               <td><p id="num{{anonce.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
+               </td>
+              
+               <td><p id="nom{{anonce.id}}"><img src="{{asset('img/fancybox_loading.Gif')}}"></p>
+               </td>
+               
+               <td> <a href="{{path('a_commande_view',{'id':anonce.annonceId})}}">voir l'annonce <span class="fa fa-eye"></span> </a> </td>
+               <td>{{anonce.dateCommande| date("m/d/Y H:i:s")}}</td>
+               <td> <a href="{{path('liaison_fait',{'id':anonce.annonceId})}}" class="btn btn-success btn-sm">liaison fait <span class="fa fa-check"></span></a> </td>
+               
+             </tr>
+             <script>
+              $(function(){
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    url: '/data_prof?id={{anonce.annonceurId}}',
+                    timeout: 30000,
+                 success: function(data) {
+                    for(i=0; i<=data.length; i++){
+                        user = data[i];
+                        
+                        $('#nom{{anonce.id}}').html(user['nom']);
+                        $('#num{{anonce.id}}').html(user['phone_portable']);
+                       
+                    }
+
+                 },
+                 error: function() {
+          
+                    $('#nom{{anonce.id}} #num{{anonce.id}}').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                  }
+               }); 
+            });
+             </script>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+    
+  </section>
+
+
+  
+{% endblock %}

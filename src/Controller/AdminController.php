@@ -7,8 +7,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Matiere;
 use App\Entity\CvAnonceur;
+use App\Entity\Commande;
+use App\Repository\CommandeRepository;
+use App\Entity\AnnonceValidation;
 use App\Entity\Anonce;
 use App\Repository\MatiereRepository;
+use App\Repository\AnnonceValidationRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +46,7 @@ class AdminController extends AbstractController
         $user = new User();
 
        $user -> setNom('Admin');
-       $user -> setPrenom('(Loic Vadess Tiffa)');
+       $user -> setPrenom('(Tatsumi Oga)');
        $user -> setEmail('admin@admin');
        
        $user->setPassword($this->passwordEncoder->encodePassword(
@@ -74,8 +78,58 @@ class AdminController extends AbstractController
      * @Route("/", name="admin")
      */
     public function homeAdmin(){
-       
-        return $this -> render('admin/index.html.twig');
+        //pour connaitre le nombre d'annonce non certifier
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $actifs = $repository -> findBy(['actif'=>'false']);
+        $compteur = 0;
+        foreach($actifs as $actif){
+        $compteur++;
+        }
+
+        //pour connaitre le nombre total des annonces
+        $repository2 = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $allAnnonces = $repository2 -> findAll();
+        $compteur2=0;
+        foreach($allAnnonces as $all){
+            $compteur2++;
+        }
+
+        //nombre total des etudiants
+        $repository3 = $this -> getDoctrine() -> getRepository(User::class);
+        $etuds = $repository3 -> findAll();
+        $compteur3=0;
+        foreach($etuds as $all){
+         if($all->getRoles()[0]=='ROLE_ETUD'){
+            $compteur3++;
+         }
+        }
+
+        //nombre total des professeurs
+        $repository3 = $this -> getDoctrine() -> getRepository(User::class);
+        $profs = $repository3 -> findAll();
+        $compteur4=0;
+        foreach($profs as $all){
+         if($all->getRoles()[0]=='ROLE_PROF'){
+            $compteur4++;
+         }
+        }
+
+        //nombre de demande de certification
+        $repository3 = $this -> getDoctrine() -> getRepository(Commande::class);
+        $coms = $repository3 -> findBy(['statut' => 1]);
+        $compteur5=0;
+        foreach($coms as $com){
+            $compteur5++;
+        }
+
+        
+        return $this -> render('admin/index.html.twig',[
+            'nombre' => $compteur,
+            'nombreAnnonce' => $compteur2,
+            'etud' => $compteur3,
+            'prof' => $compteur4,
+            'coms' => $compteur5,
+        ]);
     }
 
 
@@ -468,6 +522,142 @@ class AdminController extends AbstractController
         ]);
 
     }
+    
+    /**
+    * * Require ROLE_ADMIN for only this controller method.
+    *
+    * @IsGranted("ROLE_ADMIN")
+     * @Route("/annonce-a-valider", name="annonce_validation")
+     */
+    public function annonceValide(Request $request){
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $T_anonces = $repository -> findBy(['actif' => 'false']);
+        
+       /* foreach($T_anonces as $anonce){
+            $repository2 = $this -> getDoctrine() -> getRepository(Anonce::class);
+            $anonces = $repository2 -> findBy(['id' => $anonce->getAnnonceId()]);
+            
+        }*/
+
+        return $this->render('admin/annonce_validation.html.twig',[
+         'anonces' => $T_anonces,
+        ]);
+    }
+
+    
+    /**
+    * * Require ROLE_ADMIN for only this controller method.
+    *
+    * @IsGranted("ROLE_ADMIN")
+     * @Route("/{id}/suprimer-annonce", name="suprime_annonce")
+     */
+    public function Sannonce($id){
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $T_anonces = $repository -> delAnonce($id);
+        
+        return $this->redirectToRoute('annonce_validation');
+    }
+
+    
+    /**
+    * * Require ROLE_ADMIN for only this controller method.
+    *
+    * @IsGranted("ROLE_ADMIN")
+     * @Route("/tout-les-annonces", name="tout_annonce")
+     */
+    public function Tannonces(){
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $annonces = $repository -> findAll();
+
+        return $this -> render('admin/tout_anonce.html.twig ',[
+        'annonces' => $annonces,
+        ]);
+        
+    }
+
+    
+    /**
+    * Require ROLE_ADMIN for only this controller method.
+    * @IsGranted("ROLE_ADMIN")
+    * @Route("/tout-les-etudiant", name="tou_etudiants")
+    */
+    public function Tetudiant(){
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $etudiants = $repository -> findAll();
+        
+        return $this -> render('admin/tou_etudiants.html.twig',[
+            'etudiants' => $etudiants,
+        ]);
+    }
+
+    /**
+    * Require ROLE_ADMIN for only this controller method.
+    * @IsGranted("ROLE_ADMIN")
+    * @Route("/tout-les-professeurs", name="tou_professeurs")
+    */
+    public function toutProf(){
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+            $etudiants = $repository -> findAll();
+            $profs = $repository->findAll();
+        
+        return $this -> render('admin/tout_professeurs.html.twig',[
+          'professeurs' => $profs,
+        ]);
+    }
+
+    
+    /**
+    * Require ROLE_ADMIN for only this controller method.
+    * @IsGranted("ROLE_ADMIN")
+    * @Route("/les-contacts", name="demande_contacts")
+    */
+    public function demande_contact(){
+        $repository = $this -> getDoctrine() -> getRepository(Commande::class);
+        $contacts = $repository->findBy(['statut' => 1,'status'=>'true']);
+        foreach($contacts as $contact){
+            $repository = $this -> getDoctrine() -> getRepository(User::class);
+            $profs = $repository->findBy(['id' => $contact -> getAnnonceurId()]);
+        }
+
+        return $this->render('admin/contacts.html.twig',[
+            'contacts' => $contacts,
+        ]);
+    
+    }
+    
+      /** 
+       * @IsGranted("ROLE_ADMIN")
+       * @Route("/{id}/a_annonce-commande", name="a_commande_view")
+      */
+    public function commande_view($id){
+      $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+      $anonces = $repository -> findBy(['id'=>$id]);
+     
+
+
+      return $this->render('admin/a_commande_view.html.twig',[
+        'infos'=>$anonces,
+      ]);
+    }
+
+    
+     /** 
+       * @IsGranted("ROLE_ADMIN")
+       * @Route("/{id}/liaison_fait", name="liaison_fait")
+      */
+      public function liaison_fait($id){
+        $repository = $this -> getDoctrine() -> getRepository(Commande::class);
+        $contacts = $repository->liaison($id);
+
+        return $this->redirectToRoute('demande_contacts');
+      }
+
+
+   /*
+    1-partage de flayers
+    2-collage des flayer au barbilla
+    3-communication a l'eglyse
+   */
 
 
 

@@ -16,21 +16,24 @@ class PdpType extends AbstractType
     {
         $builder
         ->add('brochure', FileType::class, [
-            'label' => 'Selectionnez votre plus belle photo de profil pour cette annonce',
+            'label' => 'Selectionnez votre plus belle photo de couverture pour cette annonce',
 
             // unmapped means that this field is not associated to any entity property
             'mapped' => false,
 
             // make it optional so you don't have to re-upload the PDF file
             // every time you edit the Product details
-            'required' => true,
+            'required' => false,
 
             // unmapped fields can't define their validation using annotations
             // in the associated entity, so you can use the PHP constraint classes
             'constraints' => [
                 new File([
-                    'maxSize' => '1024k',
-                    
+                    'maxSize' => '4024k',
+                    'mimeTypes' => [
+                        'image/jpg',
+                        'image/JPG',
+                    ],
                     'mimeTypesMessage' => 'choisissez une photo valide',
                 ])
             ],

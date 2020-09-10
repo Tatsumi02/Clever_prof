@@ -1,0 +1,91 @@
+{% extends 'baseProf.html.twig' %}
+
+{% block title %} Nouveau contact {% endblock %}
+
+{% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+    <style>
+      .link{
+        width:200px;
+        height:37px;
+      }
+      .link:hover{
+        font-size:1.7em;
+        width:200px;
+        height:37px;
+      }
+    </style>
+                <!-- Blog Details Text -->
+                
+                <div class="blog-details-text">
+                    <section class="col-sm-12 table-responsive">
+                        <center>
+                          <h5>Liste de vos contact</h5>
+                          <p>
+                            Vous avez ici la liste des personnes qui ont pris contact sous vos differentes annonces fait
+                          </p>
+                        </center>
+                      <br>
+                    <table class="table table-bordered table-striped table-condensed">
+                        <caption>
+                         
+                        </caption>
+                            <thead>
+                              <tr>
+                                <th>Nom <br><span class="fa fa-user"></span> </th>
+                                <th>Prenom <br><span class="fa fa-user"></span> </th>
+                                <th>Message <span class="fa fa-envelope"></span> </th>
+                                <th>Date <span class="fa fa-calendar"></span></th>
+                                <th>Annonce <span class="fa fa-vcard"></span></th>
+                                <th>Contact <span class="fa fa-phone"></span> </th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for commande in commandes %}
+                                  <tr>
+                                      <td>{{commande.nom}}</td>
+                                      <td>{{commande.prenom}}</td>
+                                      <td>{{commande.message}}</td>
+                                      <td>{{commande.dateCommande|date('d/m/Y H:i:s')}}</td>
+                                      <td> <a href="{{path('commande_view',{'id':commande.annonceId})}}" class="">voir l'annonce <span class="fa fa-eye"></span></a> </td>
+                                      <td> <a href="#"  data-toggle="modal" data-target="#oMessagerie{{commande.id}}" class="n btn btn-primary btn-sm">debloque le contact <span class="fa fa-key"></span></a> </td>  
+                                  </tr>
+                                 
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        </section>
+                    
+                </div>
+
+                {% for commande in commandes %}
+                <div class="modal fade" id="oMessagerie{{commande.id}}" tabindex="-1" role="dialog" aria-labelledby="oMessagerieLabel" aria-hidden="true">
+                  <div class="modal-dialog   modal-lg" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h3 class="modal-title" id="oMessagerieLabel"> Liaison en cours <span class="fa fa-star"></span> </h3>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span class="fa fa-times"></span></button>
+                             
+                          </div>
+                          <div class="modal-body">
+                           <b>{{app.user.nom}} {{app.user.prenom}}</b>, Nous venons de trouver <b> {{commande.nom}} {{commande.prenom}} </b> qui veux suivre votre formation. nous allons vous contacter pour plus de details. <br>
+                           <br>
+                           <a href="#" class="link btn btn-primary close" data-dismiss="modal" aria-label="Fermer" >Compris <span class="fa fa-check"></span></a>
+                          </div>
+                          <div class="">
+                            <br>
+                            <hr>
+                            <br>
+                            <center>  <a href="#"> signaler un probleme <span class="fa fa-warning"></span></a> </center>
+                          </div>
+                        <br>
+                      </div>
+           <!-- livre nation negre et culture -->
+                  </div>
+           
+              </div>
+                
+              {% endfor %}
+{% endblock %}

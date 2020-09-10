@@ -22,11 +22,11 @@
                                 <thead>
                                   <tr>
                                     <th>Les fonctionnalites</th>
-                                    <th>Les annonces <span class="fa fa-edit"></span> <span class="fa fa-badge badge-pill badge-success">0</span></th>
-                                    <th>Les étudiants <span class="fa fa-group"></span> <span class="fa fa-badge badge-pill badge-warning">0</span></th>
+                                    <th>Les annonces </th>
+                                    <th>Les étudiants <span class="fa fa-group"></span> </th>
                                     <th>Les Professeurs</th>
                                     <th>Discipline</th>
-                                    <th>Suivie des cours <span class="fa fa-book"></span> <span class="fa fa-badge badge-pill badge-primary">0</span></th>
+                                    <th>Suivie des cours <span class="fa fa-book"></span> </th>
                                     <th>Légal</th>
     
                                   </tr>
@@ -34,16 +34,16 @@
                                 <tbody>
                                    <tr>
                                        <td> <a href="{{ path('ajout_matiere') }}">Ajoute les matieres <span class="fa fa-book"></span></a></td>
-                                       <td> <a href="#"> Tous les annonces </a> </td>
-                                       <td> <a href="{{path('tout_etudiants')}}"> Tous les etudiants </a> </td>
-                                       <td> <a href="#"> Tous les professeurs </a> </td>
+                                       <td> <a href="{{path('tout_annonce')}}"> Tous les annonces <span class="fa fa-badge badge-pill badge-primary">{{nombreAnnonce}}</span>  </a> </td>
+                                       <td> <a href="{{path('tou_etudiants')}}"> Tous les etudiants <span class="fa fa-badge badge-pill badge-primary">{{etud}}</span>  </a> </td>
+                                       <td> <a href="{{path('tou_professeurs')}}"> Tous les professeurs <span class="fa fa-badge badge-pill badge-primary">{{prof}}</span>  </a> </td>
                                        <td> <a href=""> Reglements pour prof </a> </td>
                                        <td> <a href="#"> Evolution des cours  </a> </td>
                                        <td> <a href="#"> Les demande de certification <span class="fa fa-badge badge-pill badge-warning">0</span> </a> </td>
                                     </tr>
                                     <tr>
                                         <td><a href="{{ path('modifier_matiere') }}">Modifer les matieres</a></td>
-                                        <td></td>
+                                        <td> <a href="{{path('annonce_validation')}}"> nouvelles annonces <span class="fa fa-badge badge-pill badge-primary">{{nombre}}</span> </a> </td>
                                         <td></td>
                                         <td></td>
                                         <td> <a href="#">Reglements pour etudiants</a> </td>
@@ -52,12 +52,12 @@
                                     </tr>
                                     <tr>
                                         <td></td>
+                                        <td><a href="{{path('demande_contacts')}}">Les demandes de contact <span class="fa fa-badge badge-pill badge-danger">{{coms}}</span> </a></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
-                                        <td> <a href="#"> Etudiants signaler <span class="fa fa-badge badge-pill badge-warning">0</span> </a> </td>
+                                        <td> <a href="#"> Etudiants signaler <span class="fa fa-badge badge-pill badge-primary">0</span> </a> </td>
                                     </tr>
                                 </tbody>
                         </table>

@@ -21,9 +21,9 @@
                         </div>
                     </center>
                     <div class="blog-details-text">
-                      <h5>Contacter "<div style="display: inline;" class="nom"> <img src="{{asset('img/fancybox_loading.Gif')}}" /> </div>" pour votre formation en {{cours}} <span class="fa fa-vcard"></span> </h5>
+                      <h5>Contacter moi pour votre formation en {{cours}} <span class="fa fa-vcard"></span> </h5>
                       <p>
-                          Il est conseillé d'avoir un compte étudiant. De cette manière,<span style="display:inline;" class="nom"> <img src="{{asset('img/fancybox_loading.Gif')}}" /> </span> poura mieu vous suivre et au cas contraire vous devez compléter ce formulaire et nous soumètre !
+                          Il est conseillé d'avoir un compte étudiant. De cette manière,je pourais mieux vous suivre en attendant, vous devez compléter ce formulaire pour m'envoyer votre contact et je vous appelle le plus tot possible !
                         <br>
                           <form action="{{ path('commande',{'annonce_id':annonce_id}) }}">
                               <input type="text" required name="nom" id="nom" class="form-control" placeholder="Nom" />
@@ -34,15 +34,51 @@
                               <br>
                               <input type="email" required name="email" id="email" class="form-control" placeholder="Email" />
                               <br>
-                              <textarea name="message" required id="message" cols="30" rows="10" class="form-control" placeholder="Ecrivez un petit message pour accompagner votre contact" ></textarea>
+                              <i id="notif"></i>
+                              <textarea name="message" id="message" required id="message" cols="30" rows="7" class="form-control" placeholder="Ecrivez un petit message pour accompagner votre contact" ></textarea>
+                              <br>
+                              <span id="ex">Vous ne devez pas saisir plus de 150 caracteres</span>
                               <br>
                               <br>
-                              <button type="submit" class="btn btn-primary btn-sm">Envoyer <span class="fa fa-send"></span></button>
+                              <button type="submit" id="but" class="btn btn-primary btn-sm">Envoyer <span class="fa fa-send"></span></button>
                               &nbsp; &nbsp; &nbsp;&nbsp;
 
                               <a href="#" class="btn btn-success btn-sm">Espace Etudiants <span class="fa fa-users"></span></a>
 
                             </form>
+                            <script>
+                               $(function(){
+                                
+                                   var msg = document.getElementById('message');
+                                   var but = document.getElementById('but');
+                                   var ex = document.getElementById('ex');
+                                   var notif = document.getElementById('notif');
+                                   var caractere_max = 150;
+                                   var caractere_en_cours = 0
+
+                                
+                                   msg.onkeypress = function(){
+                                       caractere_en_cours++;
+                                       ex.innerHTML=caractere_en_cours+'/150';
+                                        if(caractere_en_cours >= caractere_max){
+                                           but.style.display = 'none';
+                                           caractere_en_cours = caractere_en_cours;
+                                           
+                                           ex.innerHTML='<span style="color:red;">Vous avez entre plus de caractere que prevu</span>';
+                                        }
+                                    
+                                            var compteur = setInterval(function(){
+                                              if(msg.value.length < caractere_max){
+                                                but.style.display='inline'; 
+                                              }      
+                                            },100);
+                                           
+                                        
+                                       
+                                   }
+
+                               });
+                            </script>
                       </p>
                     </div>
                     <br />
@@ -59,10 +95,10 @@
                              success: function(data) {
                                 for(i=0; i<=data.length; i++){
                                     user = data[i];
-                                    
+                                    let lien = "{{asset('img/pdp/')}}";
                                     $('.nom').html(user['nom']);
                                     $('#prenom').html(user['prenom']);
-                                    $('.pdp').html('<img src="../img/pdp/'+ user['pdp'] +'"  style="border-radius:100%; height:80px; width:80px;" />')
+                                    $('.pdp').html('<img src="' + lien + user['pdp'] + '"  style="border-radius:100%; height:80px; width:80px;" />')
                                    
                                 }
  

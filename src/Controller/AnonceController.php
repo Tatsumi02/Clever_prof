@@ -10,8 +10,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Anonce;
+use App\Entity\AnnonceValidation;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\AnnonValidationRepository;
 use App\Entity\Notification;
 use App\Repository\AnonceRepository;
 use App\Repository\NotificationRepository;
@@ -25,7 +27,7 @@ use App\Form\PdpType;
 class AnonceController extends AbstractController
 {
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
     * @IsGranted("ROLE_USER")
      * @Route("/cree-une-anonce.html", name="cree_anonce")
@@ -38,15 +40,17 @@ class AnonceController extends AbstractController
     }
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/votre-cours.html",name="a_cours")
      */
     public function s_cours(Request $request){
-
+        $repository = $this -> getDoctrine() -> getRepository(Matiere::class);
+        $cours = $repository -> findAll();
+        
         return $this->render('anonce/cours.html.twig', [
-            'controller_name' => 'AnonceController',
+            'cours' => $cours,
         ]);
     
     }
@@ -81,9 +85,9 @@ class AnonceController extends AbstractController
     }
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
     * @Route("/traitement-cours/{branche}/{cours}",name="traitement_cours")
     */
     public function traitementCours($branche,$cours,Request $request){
@@ -113,9 +117,9 @@ class AnonceController extends AbstractController
 
 //---------------------------------------------- CONTROLLERS POURS LES UPDATES DES CHAMPS ANNONCES -------------------
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
     * @Route("/update-cours/{id}/{branche}/{cours}",name="update_cours")
     */
     public function update_cours($id,$branche,$cours,Request $request){
@@ -130,9 +134,9 @@ class AnonceController extends AbstractController
     //methode pour update le type de cours
     //formulaire de choix
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
     * @Route("/update-type-cours/{id}/",name="update_type_cours")
     */
     public function update_type_cours(Request $request,$id){
@@ -147,9 +151,9 @@ class AnonceController extends AbstractController
     //methode pour update l type de cours
     //traitement du formulaire 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
     * @Route("/update-type-cours-traitement/{id}/",name="update_type_cours_traitement")
     */
     public function type_cours(Request $request,$id){
@@ -182,9 +186,9 @@ class AnonceController extends AbstractController
     }
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update_traitement_titre-de-votre-annonce.html",name="update_titre_traitement")
      */
     public function update_titre_traitement(Request $request,$id){
@@ -199,9 +203,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-parcours-annonce.html",name="update_parcours")
      */
     public function update_parcours(Request $request,$id){
@@ -217,9 +221,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-parcours-traitement.html",name="update_parcours_traitement")
      */
     public function update_parcours_traitement(Request $request,$id){
@@ -234,9 +238,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-methodologie-annonce.html",name="update_methodologie")
      */
     public function update_methodologie(Request $request,$id){
@@ -252,9 +256,9 @@ class AnonceController extends AbstractController
     }
     
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-methodologie-traitement.html",name="update_methodologie_traitement")
      */
     public function update_methodologie_traitement(Request $request,$id){
@@ -268,9 +272,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-lieux_cours-annonce.html",name="update_lieux_cours")
      */
     public function update_lieux_cours(Request $request,$id){
@@ -286,9 +290,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-lieux_cours-traitement.html",name="update_lieu_cours_traitement")
      */
     public function update_lieu_cours_traitement(Request $request,$id){
@@ -302,9 +306,9 @@ class AnonceController extends AbstractController
     }
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-tarif_heure-annonce.html",name="update_tarif_heure")
      */
     public function update_tarif_heure(Request $request,$id){
@@ -321,9 +325,9 @@ class AnonceController extends AbstractController
 
     
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/{id}/update-tarif_heure-traitement.html",name="update_tarif_heure_traitement")
      */
     public function update_tarif_heure_traitement(Request $request,$id){
@@ -337,9 +341,9 @@ class AnonceController extends AbstractController
     }
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/fin-mise-a-jour.html",name="end_update")
      */
     public function end_update(Request $request){
@@ -358,9 +362,9 @@ class AnonceController extends AbstractController
 //--------------------------------------------- FIN DES CONTROLLERS POUR L'UPDATE DES CHAMPS ANNONCES----------------------
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/votre-type-de-cours.html",name="type_cours")
      */
     public function typeCours(Request $request){
@@ -371,9 +375,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/traitement-type-de-cours.html",name="type_cours_traitement")
      */
     public function tCoursTraitement(Request $request){
@@ -392,9 +396,9 @@ class AnonceController extends AbstractController
     }    
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/titre-de-votre-annonce.html",name="titre")
      */
     public function titre(Request $request){
@@ -405,9 +409,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/traitement-titre-annoce.html",name="titre_traitement")
      */
     public function titreTraitement(Request $request){
@@ -427,9 +431,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/votre-parcours.html",name="parcours")
      */
     public function parcours(Request $request){
@@ -440,9 +444,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/traitement-parcours.html",name="parcours_traitement")
      */
     public function parcoursTraitement(Request $request){
@@ -462,9 +466,9 @@ class AnonceController extends AbstractController
       }
 
    /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/votre-methododologie.html",name="methodologie")
      */
     public function methodologie(Request $request){
@@ -475,9 +479,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/traitement-methodologie.html",name="methodologie_traitement")
      */
     public function methodologieTraitement(Request $request){
@@ -497,9 +501,9 @@ class AnonceController extends AbstractController
       }
   
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/votre-lieu_cours.html",name="lieu_cours")
      */
     public function lieu_cours(Request $request){
@@ -510,9 +514,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/traitement-lieu_cours.html",name="lieu_cours_traitement")
      */
     public function lieu_traitementTraitement(Request $request){
@@ -533,9 +537,9 @@ class AnonceController extends AbstractController
       }
 
     /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     * 
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/votre-tarif-par-heure.html",name="tarif_heure")
      */
     public function tarif_heure(Request $request){
@@ -546,9 +550,9 @@ class AnonceController extends AbstractController
     }
 
      /**
-    * * Require ROLE_USER for only this controller method.
+    * * Require ROLE_PROF for only this controller method.
     *
-    * @IsGranted("ROLE_USER")
+    * @IsGranted("ROLE_PROF")
      * @Route("/traitement-tirif-heure.html",name="tarif_heure_traitement")
      */
     public function tarifTraitement(Request $request){
@@ -570,9 +574,9 @@ class AnonceController extends AbstractController
       }
 
       /**
-     * * Require ROLE_USER for only this controller method.
+     * * Require ROLE_PROF for only this controller method.
      *
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_PROF")
      * @Route("/photo-profile.html", name="photo_profil")
      */
     public function changePdp(Request $request, SluggerInterface $slugger){
@@ -635,23 +639,45 @@ class AnonceController extends AbstractController
             //$repository = $this -> getDoctrine() -> getRepository(Anonce::class);
             $mod = $repository -> updatePdp($newFilename,$this->getUser()->getId(),$b);
             
-            $upRole = $repository2 -> updateRole($this->getUser()->getId());
+            // $upRole = $repository2 -> updateRole($this->getUser()->getId());
              //notifions l'admin de la nouvelle anonce fait
             return $this->redirect($this->generateUrl('Etape_suivant'));
           }
         }
+        
+
+        /*$repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+       
+        $branches = $repository -> findOneBy(['anonceur_id'=>$this->getUser()->getId()]);
+        //foreach($branches as $branche){
+            //$repository = $this -> getDoctrine() -> getRepository(AnnonceValidation::class);
+           // $validations = $repository -> findBy(['annonceur_id'=>$this->getUser()->getId(),'public'=>'false']);
+       // foreach($validations as $validation){h
+            $em = $this -> getDoctrine() -> getManager();
+            $anonceV = new AnnonceValidation();
+            $anonceV ->setAnnonceurId($branches -> getAnonceurId());
+            $anonceV->setAnnonceId($branches -> getId());
+            $anonceV->setPublic('false');
+
+            $em -> persist($anonceV);
+            $em->flush();
+        // }
+            
+       // } */
+        
 
         return $this->render('anonce/pdp.html.twig', [
             'form' => $form->createView(),
             'controller_name' => 'hum',
         ]);
     }
+         
 
     /**
      * 
-     * * Require ROLE_USER for only this controller method.
+     * * Require ROLE_PROF for only this controller method.
      *
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_PROF")
      * @Route("/presentantation-complet.html",name="Etape_suivant")
      */
     public function suivant(Request $request){
@@ -665,8 +691,8 @@ class AnonceController extends AbstractController
                 
             }
 
-            $data = $repository -> findOneBy(['anonceur_id'=>$this->getUser()->getId(),'matiere'=>$b,'actif'=>'true']);
-            $currentAnnonce = $repository->findBy(['anonceur_id'=>$this->getUser()->getId(),'matiere'=>$b,'actif'=>'true']);
+            $data = $repository -> findOneBy(['anonceur_id'=>$this->getUser()->getId(),'matiere'=>$b]);
+            $currentAnnonce = $repository->findBy(['anonceur_id'=>$this->getUser()->getId(),'matiere'=>$b]);
             $cours = explode('-',$b);
 
         return $this->render('anonce/visualisation.html.twig', [
@@ -682,9 +708,9 @@ class AnonceController extends AbstractController
 
    /**
      * 
-     * * Require ROLE_USER for only this controller method.
+     * * Require ROLE_PROF for only this controller method.
      *
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_PROF")
      * @Route("/{id_anonce}/update-anonce.html",name="update")
      */
     public function update(Request $request,$id_anonce){
@@ -698,6 +724,20 @@ class AnonceController extends AbstractController
         ]);
            
     }
+
+    
+    /**
+     * 
+     * @Route("/{id}/confirmation-annonce.html",name="confirme_annonce")
+     */
+    public function CAnnonce($id){
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $up = $repository -> updatActif($id);
+
+        return $this->redirectToRoute('annonce_validation');
+    }
+
+    
 
 
 

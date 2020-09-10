@@ -48,39 +48,28 @@
                     <br />
                     <br />
                     <div class="blog-details-text" style="background: rgb(48, 173, 223); color:white;">
-                       <h3 style="color:whitesmoke;">Bravo <span class="fa fa-star"></span> ! votre annonce est cree et accessible</h3>
-                          
-                       nous alons vous donner 3 conseils pour toucher beaucoup d'étudiants avec cette annonce
-                       <br><br>
-                       <h4 style="color: white;">1 - Booster l'annonce <span class="fa fa-euro"></span></h4>
-                         En boostant votre annonce, nous allons toucher précisement les étudiants dans la ville de {{app.user.ville}} 
-                         qui sont inscrits dans notre plate-forme et qui seront a la recherche d'un cours en  {{cours}}
-                          <br><br>
-                         <h4 style="color: white;">2 - Utiliser une bonne photo de couverture <span class="fa fa-pic"></span></h4>
-                         La photo de couverture est un élément non négligeable car cest cela qui marque la prémière impression
-                         qu'aura l'étudiant qui véra l'annonce. vous devez choisir une photo qui vous montre soit entraint de faire {{cours}}, soit une photo qui montre un truc du genre
-                         
-                         <br><br>
-                         <h4 style="color: white;">3 - Certifié l'annonce  <span class="fa fa-check"></span></h4>
-                          Une annonce certifié, est une annonce fond et cela permet a vos étudiants d'être rassurer sur vos expériances et vos compétences 
-                            
+                       Votre annonce est enregistrer et sera diponnible apres l'approbation des administrateurs
                     </div>
-                    
+                    <br>
+                     <center>
+                         <a href="{{path('dashboad')}}" class="btn btn-primary">Acceuil <span class="fa fa-home"></span></a>
+                     </center>
                 </div>
             </div>
         </div>
         
+        <!---
         <div class="related-posts section-padding-100-0">
             <div class="container-fluid">
                 <h3>vos annonces précedent</h3>
                 <div class="row">
-                    <!-- Single Blog Area -->
+        
                     {% for annonce in autreAnonce %}
                     
                     <div class="col-12 col-lg-6">
                         <div class="single-blog-area mb-100">
                             <img src="{{asset('img/pdp_annonce/' ~ annonce.photoProfil)}}" style="height:300px;" alt="">
-                            <!-- Blog Content -->
+                        
                             <div class="blog-content">
                                 <a href="#" class="blog-headline">
                                     <h4 id="mat{{annonce.id}}"></h4>
@@ -110,11 +99,11 @@
                     </script>
                     {% endfor %}
 
-                    <!-- Single Blog Area -->
+        
                     
                 </div>
             </div>
-        </div>
+        </div> -->
     
     </div>
     

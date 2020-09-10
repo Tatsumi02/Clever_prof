@@ -11,9 +11,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Les annonces pour '{{cours}}' ({{nombre_resultat}}) </h3>
-                    Ici sont lister tout les {{nombre_resultat}} annonces en {{cours}} vous devez bien choisir votre formateur avant de commander ses services <br>
-                    Par contre, nous pouvons vous montrer les annonces fiables. <a href="#" class="btn btn-primary btn-sm">Cliquez ici</a> 
+                    <h3>Les annonces pour '{{cours}}' </h3>
+                   <h5> {{nombre_resultat}} résultats trouvé </h5>
                 </div>
             </div>
         </div>
@@ -25,7 +24,7 @@
             <a href="{{path('choix',{'id':anonce.id})}}">
             <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
             <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
-                <img src="img/pdp_annonce/{{anonce.photoProfil}}" alt="" style="height: 200px;">
+                <img src="{{asset('img/pdp_annonce/' ~ anonce.photoProfil)}}" alt="" style="height: 200px;">
                 <!-- Course Content -->
                 <div class="course-content">
                     <h4><div id="titre{{anonce.id}}"></div></h4>
@@ -49,11 +48,11 @@
                     </div>
   
                     <div class="course-fee h-100">
-                      <a href="{{path('view_anonce',{'id':anonce.id})}}" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
+                      <a href="#" title="voir les details" class="free"> <span class="fa fa-eye"></span> </a>
                   </div>
   
                     <div class="course-fee h-100">
-                        <a href="#" title="Par Mois" class="free">{{anonce.tarifHeure}}F/Mois</a>
+                        <a href="#" style="padding:5%; font-size:0.7em;" title="Par Mois" class="free">{{anonce.tarifHeure}} Fcfa/H</a>
                     </div>
                 </div>
             </div>

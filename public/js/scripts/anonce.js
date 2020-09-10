@@ -9,12 +9,14 @@ if(!cours.value){
   $('#detail').html('<span style="color:red;">Vous devez entrer un cours </span>');
   return false;
 }else{
-  $('#detail').html('<center> <img src="../img/fancybox_loading.Gif"> </center>');
+  let b = "../img/fancybox_loading.Gif";
+  $('#detail').html('<center> <img src="'+ b +'"> </center>');
+  let link = "prendre-branche?cours=";
   $.ajax({
     type: 'POST',
     dataType: 'json',
     async: true,
-    url: '/prendre-branche?cours='+cours.value,
+    url: link+cours.value,
     timeout: 100000,
  success: function(data) {
    var branche;

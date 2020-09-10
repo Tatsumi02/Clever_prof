@@ -59,7 +59,7 @@ class ProfilController extends AbstractController
                 // creons un tableau d'extension disponible pour le fichier.
                 $extensions_autorisees = array('jpg','gif','GIF', 'jpeg','JPG','JPEG','png','PNG');
                   $nameErrorFile = $slugger->slug(pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME)); //cette variable doit retenir le nom du fichier avant la verification sur l'extension
-                 if (in_array($extension,$extensions_autorisees)){
+                // if (in_array($extension,$extensions_autorisees)){
             
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -81,15 +81,7 @@ class ProfilController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                
-            }else{
-                /*si l'utilisateur a essayer d'envoyer un fichier different d'une image
-                return $this->render('elysionne/ErrorFileExtension.html.twig', [
-                    'nomFichier' =>  $nameErrorFile,
-                    'extension' => $extension,
-                ]);*/
-                return new Response('une erreur est produit: La cause est du au fichier que vous avez essayer d\'envoyer');
-            }
-
+            //}
              
         
             $repository = $this -> getDoctrine() -> getRepository(User::class);

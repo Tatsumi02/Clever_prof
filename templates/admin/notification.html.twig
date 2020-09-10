@@ -3,25 +3,46 @@
 {% block title %}Demande de certification !{% endblock %}
 
 {% block body %}
-<script src="../js/jquery/jquery-2.2.4.min.js"></script>
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 
  <div class="container">
      
     <div class="blog-details-content section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-13">
                     <div class="blog-details-text">
                       <h3>Les Demandes de certification</h3>
+                      <table style="background-color: white;" class="table table-bordered table-striped table-condensed">
+                        <caption>
+                         
+                        </caption>
+                            <thead>
+                              <tr>
+                                <th>Photo cv</th>
+                                <th>Date</th>
+                                <th>Options</th>
+                              </tr>
+                            </thead>
+                    
+                            <tbody> 
                       {% for notif in notification %}
-                          <img src="../img/cv_annonce/{{notif.diplome}}" alt="" style="height: 400px;">
-                          <br><br>
-                           <a href="{{path('anonce_a_certifier',{'id':notif.anonceId})}}" class="btn btn-primary">voir l'annonce <span class="fa fa-eye"></span></a>
-                           &nbsp;&nbsp;&nbsp;
-                           <a href="#" class="btn btn-success">confirme la certification <span class="fa fa-check"></span></a>
-                          <br>
-                          <br>
+                        <tr>
+                          <td>
+                          <img src="{{asset('img/cv_annonce/' ~ notif.diplome)}}" alt="" style="height: 400px;">
+                          </td>
+                          <td>
+                            {{notif.dateEnregistrement|date("m/d/Y h:i:s")}}
+                          </td>
+                          <td>
+                           <a href="{{path('anonce_a_certifier',{'id':notif.anonceId})}}" class="btn btn-primary col-md-10">voir  <span class="fa fa-eye"></span></a>
+                           <br><br>
+                           <a href="{{path('been_certified',{'id':notif.id})}}" class="btn btn-success  col-md-10"> Certifier  <span class="fa fa-check"></span></a>
+                          </td>
+                        </tr>
                       {% endfor %}
+                        </tbody>
+                        </table>
                      </div>
                 </div>
             </div>

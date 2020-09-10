@@ -50,7 +50,7 @@
             <a href="{{path('choix',{'id':anonce.id})}}">
             <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
             <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
-                <img src="img/pdp_annonce/{{anonce.photo_profil}}" alt="" style="height: 200px;">
+                <img src="{{asset('img/pdp_annonce/' ~ anonce.photo_profil)}}" alt="" style="height: 200px;">
                 <!-- Course Content -->
                 <div class="course-content">
                     <h4><div id="titre{{anonce.id}}"></div></h4>
@@ -109,7 +109,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Les Profils qui peuvent vous interesser <span class="fa fa-group"></span> </h3>
+                    <h3>Les Profils des professeurs <span class="fa fa-group"></span> </h3>
                 </div>
             </div>
         </div>
@@ -118,12 +118,13 @@
             <div class="col-12">
                 <div class="tutors-slide owl-carousel wow fadeInUp" data-wow-delay="250ms">
                   {% for prof in profil %}
+                    {% if prof.roles[1] == 'ROLE_PROF' %}
                     <!-- Single Tutors Slide -->
                     <div class="single-tutors-slides">
                         <!-- Tutor Thumbnail -->
                         <div class="tutor-thumbnail">
                             <img src="{{asset('img/pdp/' ~ prof.pdp)}}" style="height: 200px;" alt="">
-                        </div>
+                        </div> 
                         <!-- Tutor Information -->
                         <div class="tutor-information text-center">
                             <h5>{{prof.prenom}} {{prof.nom}}</h5>
@@ -136,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-
+                      {% endif %}
                     {% endfor %}
 
                 </div>
