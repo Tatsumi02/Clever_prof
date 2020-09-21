@@ -48,7 +48,8 @@ class HomeController extends AbstractController
         }
 
        //si il n'a pas de session en cours,on le renvoir en accueil
-      }else{
+      }
+      // else{
 
         //on recupere la liste des annonces disponibles
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
@@ -72,7 +73,7 @@ class HomeController extends AbstractController
             'profil' => $profil,
         ]);
 
-      }
+      // }
     }
 
     /**
@@ -83,6 +84,7 @@ class HomeController extends AbstractController
       return $this->render('home/enregistrement.html.twig');
     }
 
+   
     /**
      * @Route("/inscriptions ", name="inscription")
      */
@@ -174,7 +176,7 @@ class HomeController extends AbstractController
         
         $cours = $request->request->get('search');
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
-        $alls = $repository -> findAll();
+        $alls = $repository -> findBy(['actif'=>'true']);
         $matiere = '';
         $anonce = false;
         $certifier = false;

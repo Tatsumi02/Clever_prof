@@ -35,18 +35,17 @@ class CommandeRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function  liaison($id): void
+    public function  liaison($id,$id_annonceur): void
     {
         $conn = $this -> getEntityManager()->getConnection();
         $sql = '
         UPDATE commande a SET
            a.statut = :mat,
            a.status = :mat2
-        
-         WHERE a.annonce_id =:id
+         WHERE a.annonce_id =:id AND a.id =:ann
         ';
         $stmt = $conn ->prepare($sql);
-        $stmt->execute(['id'=>$id,'mat'=>0,'mat2'=>'false']);
+        $stmt->execute(['id'=>$id,'mat'=>0,'mat2'=>'false', 'ann'=>$id_annonceur]);
     
         //
     

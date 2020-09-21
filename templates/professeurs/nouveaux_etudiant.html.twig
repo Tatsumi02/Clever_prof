@@ -49,7 +49,7 @@
                                       <td>{{commande.message}}</td>
                                       <td>{{commande.dateCommande|date('d/m/Y H:i:s')}}</td>
                                       <td> <a href="{{path('commande_view',{'id':commande.annonceId})}}" class="">voir l'annonce <span class="fa fa-eye"></span></a> </td>
-                                      <td> <a href="#"  data-toggle="modal" data-target="#oMessagerie{{commande.id}}" class="n btn btn-primary btn-sm">debloque le contact <span class="fa fa-key"></span></a> </td>  
+                                      <td> <a href="#"  data-toggle="modal" data-target="#oMessagerie{{commande.id}}" class="n btn btn-primary btn-sm">Détails <span class="fa fa-file"></span></a> </td>  
                                   </tr>
                                  
                                 {% endfor %}

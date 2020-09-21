@@ -3,21 +3,61 @@
 {% block title %}Créez votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 
-<section class="hero-area">
+<style>
+  body{
+      background: url('{{asset("img/c5.JPG")}}');
+      background-size: cover;
+
+  }
+  #zone{
+      background: white;
+      opacity: 0.9;
+  }
+</style>
+<br><br><br>
+
+<section class="">
    <div class="col-md-12 container" style="margin:auto;" >
-          <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
-          <h3>Etape Final: Votre photo de profil</h3> <br>
+     
+   
+          <div class="col-md-10 single-blog-area mb-100 wow fadeInUp " style="text-align: left; padding:5%; border:1px solid #c8d4f7;margin:auto;" id="zone">
+            <div id="view" class="col-md-6 pull-right" style="float: right;">
+              <img src="{{asset('img/school.PNG')}}" id="img" alt="" style="height:200px; width:700px; box-shadow:0px 0px 8px gray;">
+              <div id="tmp"></div>
+               <code style="font-size:0.9em;">Pour des raisons de clarté, veilliez choisir une image en grand format de largeur</code>
+           </div>
+          <div class="col-md-6">
+           
+         <h3>Etape Final: photo de couverture</h3> <br>
           {{form_start(form)}}
 
              {{form_row(form.brochure)}}
 
          {{form_end(form)}}
+         </div>
+         <script>
+          $(function(){
+              let v = document.getElementById('pdp_brochure');
+              let but = document.getElementById('pdp_submit');
+              v.style.width='50px';
+                 function readURL(input){
+                   if(input.files && input.files[0]){
+                      var reader = new FileReader();
+                      reader.onload = function(e){
+                         $('#img').attr('src',e.target.result)
+                      }
+                      reader.readAsDataURL(input.files[0]);
+                   }
+                 }
+              $('#pdp_brochure').change(function(){
+                 readURL(v);
+              });
+          });
+       </script>
         </div>
       </div>
     </section>   
      
-    <script src="../js/scripts/anonce.js"></script>
-    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
- 
 {% endblock %}

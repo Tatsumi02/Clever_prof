@@ -5,9 +5,24 @@
 {% block body %}
 <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 <script src="{{asset('js/scripts/anonce.js')}}"></script>
-<section>
-    <div class="col-md-12 container" style="margin:auto;" >
-           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " id="zone">
+<style>
+    body{
+        background: url('{{asset("img/c5.JPG")}}');
+        background-size: cover;
+
+    }
+    #zone{
+        background: white;
+        opacity: 0.9;
+    }
+</style>
+
+<br><br><br>
+<div class="container">
+<section style="text-align: center;">
+   
+    <div class="col-md-12 " style="" >
+           <div class="col-md-8 single-blog-area wow mb-100 fadeInUp"  id="zone">
             <h3>Etape 2: Type de  cours</h3> <br>
    
                <form action="{{path('type_cours_traitement')}}" method="get" enctype="multipart/form-data" name="form" style="margin:auto;padding:10%;">
@@ -23,11 +38,14 @@
    
                     </div>
                     <br>
-                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+                <!-- <a href="{{path('type_cours')}}" class="btn btn-dark" style="float: left;">Précédent</a> -->
+                <button type="submit" class="btn btn-primary" style="float: right;"> suivant: <span class="badge badge-dark"> titre de l'annonce</span>  <span class="fa fa-send"></span></button>
                  
               </form>
    </div>
    </div>
+   </div>
+   
    </section>    
     
 

@@ -21,9 +21,9 @@
                         </div>
                     </center>
                     <div class="blog-details-text">
-                      <h5>Contacter moi pour votre formation en {{cours}} <span class="fa fa-vcard"></span> </h5>
+                      <h4>Laissez nous votre contact pour votre formation en {{cours}} <span class="fa fa-vcard"></span> </h4>
                       <p>
-                          Il est conseillé d'avoir un compte étudiant. De cette manière,je pourais mieux vous suivre en attendant, vous devez compléter ce formulaire pour m'envoyer votre contact et je vous appelle le plus tot possible !
+                          Il est conseillé d'avoir un compte étudiant. De cette manière,nous pourons mieux vous suivre. En attendant, vous devez compléter ce formulaire pour nous envoyer votre contact et nous vous appellerons le plus tôt possible !
                         <br>
                           <form action="{{ path('commande',{'annonce_id':annonce_id}) }}">
                               <input type="text" required name="nom" id="nom" class="form-control" placeholder="Nom" />
@@ -43,7 +43,7 @@
                               <button type="submit" id="but" class="btn btn-primary btn-sm">Envoyer <span class="fa fa-send"></span></button>
                               &nbsp; &nbsp; &nbsp;&nbsp;
 
-                              <a href="#" class="btn btn-success btn-sm">Espace Etudiants <span class="fa fa-users"></span></a>
+                              <a href="{{path('etudiants')}}" class="btn btn-success btn-sm">Espace Etudiants <span class="fa fa-users"></span></a>
 
                             </form>
                             <script>

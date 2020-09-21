@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\Anonce;
+use App\Entity\Pourcentages;
+use App\Repository\PourcentagesRepository;
 use App\Entity\AnnonceValidation;
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -106,6 +108,7 @@ class AnonceController extends AbstractController
         $anonce->setPhotoProfil('school.PNG');
         $anonce->setActif('false');
         $anonce->setCertifier('false');
+        $anonce->setPourcentage(10);
         
         $anonce->setDateAnonce(new \DateTime());
         $anonce->setAnonceurId($this->getUser()->getId());
@@ -556,16 +559,34 @@ class AnonceController extends AbstractController
      * @Route("/traitement-tirif-heure.html",name="tarif_heure_traitement")
      */
     public function tarifTraitement(Request $request){
-        $titre = $request->get('tarif');
+        $tarif_init = (int) $request->get('tarif'); //recuperons le tarif, du professeur
+        
+          //nous allons faire une lecture dans la table pourcentage pour reccuperer le % actuelles
+          $repository2 = $this -> getDoctrine() -> getRepository(Pourcentages::class);
+          $pourcentages = $repository2 -> findAll();
+
+          //nous allons maintenant boucler sur le resultat de requette pour recuperer le pourcentage
+          $pourcentage_val = 10; //cette variable contiendra la valeur du % lu. c'est initialement egale a 10
+        
+          foreach($pourcentages as $pourcent){
+               $pourcentage_val = $pourcent->getPourcentage();
+          }
+       
+        //maintenant, retirons notre pourcentage dans ce tarif
+        $pourcentage = ($tarif_init * $pourcentage_val)/100; //on a notre %
+        //maintenant on va ajouter se % sur le tarif initiale du professeur
+        $tarif_final = $tarif_init + $pourcentage;
+        
+        $tarif = (int) $tarif_final; //le tarif a enregistrer
         
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
-          $branche = $repository -> findBy(['anonceur_id' => $this->getUser()->getId()]);
+        $branche = $repository -> findBy(['anonceur_id' => $this->getUser()->getId()]);
   
           foreach($branche as $br){
               $b = $br->getMatiere();
           }
   
-          $upTypeCours = $repository -> updateTarifHeure($request->get('tarif'),$this->getUser()->getId(),$b);
+          $upTypeCours = $repository -> updateTarifHeure($tarif,$this->getUser()->getId(),$b,$pourcentage);
        
            return $this->redirectToRoute('photo_profil');
        // return new Response('photo_profil');

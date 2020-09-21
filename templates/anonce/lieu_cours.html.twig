@@ -4,9 +4,21 @@
 
 {% block body %}
 
+<style>
+    body{
+        background: url('{{asset("img/c5.JPG")}}');
+        background-size: cover;
+
+    }
+    #zone{
+        background: white;
+        opacity: 0.9;
+    }
+</style>
+<br><br><br>
 <section class="hero-area">
     <div class="col-md-12 container" style="margin:auto;" >
-           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;" id="zone">
           <h3>Etape 6: Lieux du cours</h3> <br>
             <form action="{{path('lieu_cours_traitement')}}" method="get" style="margin:auto;padding:10%;">
                 <h3>ou seront dispo vos cours?</h3>
@@ -14,16 +26,15 @@
                     <option value="a domicile">A domicile</option>
                     <option value="chez l'etudiant">Chez l'étudiant</option>
                     <option value="Cours en ligne">Cours en ligne</option>
+                    <option value="dans nos locaux">Dans nos locaux</option>
+                    <option value="Ailleur">Ailleur</option>
                 </select>
                 <br>
-                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+                <a href="{{path('methodologie')}}" class="btn btn-dark">Precedent</a>
+                <button type="submit" class="btn btn-primary" style="float: right;">Suivant: <span class="badge badge-dark">tarif</span> <span class="fa fa-send"></span></button>
             </form>
         </div>
     </div>
     </section>
      
-    
-     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
-    <script src="../js/scripts/anonce.js"></script>
- 
 {% endblock %}

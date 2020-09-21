@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profil {% endblock %}
+
+{% block body %}
+
+<style>
+  #couv{
+    background: url("{{asset('img/c5.JPG')}}");
+    padding: 2%;
+    background-size: cover;
+  }
+  #pdp{
+    height: 150px; width:150px; border-radius:100%;
+    box-shadow: 0px 0px 8px black;
+  }
+  #baner{
+    text-align: left;
+    background: rgb(55, 155,255);
+    padding: 1%;
+;
+  }
+  #infos{
+    background: lightgrey;
+    text-align: left;
+    padding: 2%;
+  }
+</style>
+{% for user in users %}
+
+<div class="example-wrapper">
+    <center>
+     <div class="col-md-11" id="couv">
+        <img src="{{asset('img/pdp/' ~ user.pdp)}}" alt="" id="pdp"/>
+       
+        <br>
+       <h2 style="color:floralwhite"> {{user.nom}} {{user.prenom}} </h2>
+     </div>
+    
+     <div class="col-md-11 container" id="baner">
+        <h4 style="color: gray;">inscript le {{ user.dateInscrit | date("d/m/Y H:i:s")}}</span> </h4>
+     </div>
+     
+     <br><br>
+     <div class="col-md-11 container" id="infos">
+      <p> <h5>Les annonces de {{user.prenom}} {{user.nom}}</h5> <span class="fa fa-code"></span></p>
+      dkfkdl
+    </div>
+
+
+     </center>
+     
+     
+     <br><br><br>
+</div>
+
+{% endfor %}
+{% endblock %}

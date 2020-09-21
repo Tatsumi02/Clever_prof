@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Security\UserAuthenticator;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Repository\UserRepository;        
@@ -51,7 +53,7 @@ class EtudiantsController extends AbstractController
     /**
      * @Route("/new-etudiant-traitement", name="inscription_etudiant_traitement")
      */
-    public function I_E_Traitement(Request $request){
+    public function I_E_Traitement(Request $request, UserAuthenticator $authenticator, GuardAuthenticatorHandler $guardHandler){
         $repository = $this -> getDoctrine() -> getRepository(User::class);
         $emailExist = false;
               $userData = $repository -> findOneBy(['email'=>$request->request->get('email')]);
@@ -104,7 +106,13 @@ class EtudiantsController extends AbstractController
          return new Response('deso votre email est deja utiliser');
        }
           
-  
+       $guardHandler->authenticateUserAndHandleSuccess(
+        $user,
+        $request,
+        $authenticator,
+        'main'
+        );
+
         return $this->redirectToRoute('student_home');
           
      }

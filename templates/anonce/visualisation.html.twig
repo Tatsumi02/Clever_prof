@@ -5,9 +5,9 @@
 {% block body %}
 <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
     <!-- ##### Catagory Area Start ##### -->
-    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url(../img/pdp_annonce/{{pdp}});">
+    <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400" style="background-image: url({{('/img/pdp_annonce/' ~ pdp)}});">
         <div class="blog-details-headline">
-          <center>  <img src="{{asset('img/pdp_annonce/' ~ pdp)}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
+          <center>  <img src="{{asset('img/pdp/' ~ app.user.pdp)}}" alt="" style="height:80px; width:80px; border-radius: 100%;" /></center>
             <h3>{{titre}}</h3>
             <div class="meta d-flex align-items-center justify-content-center">
                 <a href="#">{{cours}}</a>
@@ -19,7 +19,15 @@
     <!-- ##### Catagory Area End ##### -->
 
     <!-- ##### Blog Details Content ##### -->
-   
+    <div class="blog-details-text" style="background: rgb(48, 173, 223); color:white;">
+        Votre annonce est enregistré et sera disponible après l'approbation des administrateurs.
+        <br>
+        Vous serez notifier lors qu'un étudiant aura demandé a vous contacter   
+        <center>
+            <a href="{{path('dashboad')}}" class="btn btn-primary">Acceuil <span class="fa fa-home"></span></a>
+            
+        </center>
+    </div>
     <div class="blog-details-content section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
@@ -47,13 +55,9 @@
                     </div>
                     <br />
                     <br />
-                    <div class="blog-details-text" style="background: rgb(48, 173, 223); color:white;">
-                       Votre annonce est enregistrer et sera diponnible apres l'approbation des administrateurs
-                    </div>
+                    
                     <br>
-                     <center>
-                         <a href="{{path('dashboad')}}" class="btn btn-primary">Acceuil <span class="fa fa-home"></span></a>
-                     </center>
+                    
                 </div>
             </div>
         </div>

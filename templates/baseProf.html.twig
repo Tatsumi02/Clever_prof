@@ -55,7 +55,7 @@
                 <nav class="classy-navbar justify-content-between" id="cleverNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="{{path('dashboad')}}"><img src="{{asset('img/IMG-20200826-WA0002-5f481a5681bc3.JPEG')}}" style="height: 50px; width:80px;" alt=""></a>
+                    <a class="nav-brand" href="{{path('dashboad')}}"><img src="{{asset('img/IMG-20200826-WA0002-5f481a5681bc3.JPEG')}}" style="height: 80px;" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -73,15 +73,14 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a style="color:red;" href="{{path('app_logout')}}"> <span class="fa fa-sign-out"></span> </a></li>
-                                <li><a href="{{path('dashboad')}}"><span class="fa fa-home"></span></a></li>
-                                <li><a href="#" id="tableau" data-toggle="tooltip" title="Tableau de bord" data-placement="top"><span class="fa fa-dashboard"></span></a></li>
+                               
+                                <li><a href="{{path('dashboad')}}"><span class="fa fa-home fa-2x"></span></a></li>
+                                <li><a href="#" id="tableau" data-toggle="tooltip" title="Tableau de bord" data-placement="top"><span class="fa fa-dashboard fa-2x"></span></a></li>
                                 <!-- <li><a href="{{path('cree_anonce') }}" id="annonce" data-toggle="tooltip" title="Créer une annonce" data-placement="top"><span class="fa fa-edit"></span></a></li> -->
                                 
                                 <!-- <li><a href="#" id="msg" data-toggle="tooltip" title="Vous avez 3 nouveaux messages" data-placement="left"><span class="fa fa-envelope"></span>&nbsp;<span class="badge badge-pill badge-info">1</span></a></li> -->
                                 
-                                <li><a href="#"><span class="fa fa-bell"></span>&nbsp;<span class="badge badge-pill badge-warning">3</span></a></li>
-                                
+                              
                             </ul>
 
                             <!-- Search Button -->
@@ -109,7 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="userthumb">
-                                    <img src="{{asset('img/pdp/' ~ app.user.pdp)}}" alt="">
+                                    <a href="{{path('profil')}}"><img src="{{asset('img/pdp/' ~ app.user.pdp)}}" alt=""></a>
                                 </div>
                             </div>
 
@@ -624,7 +623,7 @@
                     <div class="col-12">
                         <!-- Footer Logo -->
                         <div class="footer-logo">
-                            <a href="{{path('dashboad')}}"><img src="{{asset('img/IMG-20200826-WA0002-5f481a5681bc3.JPEG')}}" style=" border-radius:9px; box-shadow:0px 0px 9px white; height: 100px; width:200px;" alt=""></a>
+                            <a href="{{path('dashboad')}}"><img src="{{asset('img/IMG-20200826-WA0002-5f481a5681bc3.JPEG')}}" style=" border-radius:9px; box-shadow:0px 0px 9px white; height: 100px;" alt=""></a>
                         </div>
                         <!-- Copywrite -->
                         <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

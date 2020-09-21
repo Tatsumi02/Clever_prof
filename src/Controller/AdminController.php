@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Matiere;
 use App\Entity\CvAnonceur;
+use App\Entity\Pourcentages;
 use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use App\Entity\AnnonceValidation;
@@ -62,8 +63,16 @@ class AdminController extends AbstractController
        $user -> setGenre('indef');
        $user -> setRoles(['ROLE_ADMIN']);
        $user -> setActif('true');
+       $user -> setPdp('...');
        $user -> setDateInscrit(new \DateTime());
+
+       $pourcentage = new Pourcentages();
+
+       $pourcentage->setPourcentage(10);
+       $pourcentage->setDatePourcentage(new \DateTime());
+
        $em -> persist($user);
+       $em -> persist($pourcentage);
        $em -> flush();
 
 
@@ -643,14 +652,85 @@ class AdminController extends AbstractController
     
      /** 
        * @IsGranted("ROLE_ADMIN")
-       * @Route("/{id}/liaison_fait", name="liaison_fait")
+       * @Route("/{id}/{id_annonceur}/liaison_fait.html", name="liaison_fait")
       */
-      public function liaison_fait($id){
+      public function liaison_fait($id,$id_annonceur){
         $repository = $this -> getDoctrine() -> getRepository(Commande::class);
-        $contacts = $repository->liaison($id);
+        $contacts = $repository->liaison($id,$id_annonceur);
 
         return $this->redirectToRoute('demande_contacts');
       }
+
+       /** 
+       * @IsGranted("ROLE_ADMIN")
+       * @Route("/data_commande/{annonce_id}", name="more")
+      */
+      public function ajaxCours(Request $request,$annonce_id){
+        // $annonc_id = $request->get('annonce_id');
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$annonce_id,]);
+         
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson')==1) {
+            $jsonData = array();
+            $idx=0; $boost = 0;
+            if($branches){  
+            foreach($branches as $bran){
+               // $lesBranche = explode(',',$bran->getBranche());
+               $prix_prof = ($bran->getTarifHeure() - $bran->getPourcentage()); //ici nous souscrevons le pourcentage de l'entreprise a celui du prof
+                $temp = array(
+                  'tarif_heure' => $bran->getTarifHeure(),
+                  'pourcentage' => $bran -> getPourcentage(),
+                  'prix_prof' => $prix_prof,
+                );
+                $jsonData[$idx++] = $temp;
+            }
+          }
+        
+            return new JsonResponse($jsonData);
+           
+        }else{
+            return new Response('erreur ajax');
+        }
+    }
+
+     /** 
+       * @IsGranted("ROLE_ADMIN")
+       * @Route("/data_annonce/{annonce_id}", name="more2")
+     */
+    public function data_annonce(Request $request,$annonce_id){
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $branches = $repository -> findBy(['id'=>$annonce_id,]);
+         
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson')==1) {
+            $jsonData = array();
+            $idx=0; $boost = 0;
+            if($branches){  
+            foreach($branches as $bran){
+               // $lesBranche = explode(',',$bran->getBranche());
+               $prix_prof = ($bran->getTarifHeure() - $bran->getPourcentage()); //ici nous souscrevons le pourcentage de l'entreprise a celui du prof
+                $temp = array(
+                  'tarif_heure' => $bran->getTarifHeure(),
+                  'pourcentage' => $bran -> getPourcentage(),
+                  'prix_prof' => $prix_prof,
+                  'cours' => $bran-> getCours(),
+                  'type_cours' => $bran -> getTypeCours(),
+                  'titre' => $bran -> getTitre(),
+                  'parcours' => $bran -> getParcours(),
+                  'methodologie' => $bran -> getMethodologie(),
+                  'lieux_cours' => $bran -> getLieuCours(),
+                  'pdp' => $bran -> getPhotoProfil(),
+                  'cours' => $bran -> getCours(),
+                );
+                $jsonData[$idx++] = $temp;
+            }
+          }
+        
+            return new JsonResponse($jsonData);
+           
+        }else{
+            return new Response('erreur ajax');
+        }
+    }
 
 
    /*

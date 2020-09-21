@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur Clever-Prof !{% endblock %}
+{% block title %} Clever-Prof {% endblock %}
 
 {% block body %}
 <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+
 
 <section class="hero-area bg-img bg-overlay-2by5" style="background-image: url({{asset('img/bg-img/bg1.jpg')}});">
     <div class="container h-100">
@@ -17,7 +18,7 @@
                     <div class="search-area">
                         <form action="{{path('find_anonce')}}" method="post">
                             <input type="search" class="form-control col-md-5" style="height:65px; display: inline;" name="search" id="search" placeholder="Maths,Anglais,Physique,Musique.... et plus">
-                            <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
                         </form>
                     </div>
 
@@ -37,8 +38,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Les six derniers annonces <span class="fa fa-vcard"></span> </h3>
-                    Nous pouvons vous aider a trouver des professeurs plus qualifiers <br> <a href="#" class="btn btn-primary btn-sm">Clique ici</a>
+                    <h3>Les derniers annonces <span class="fa fa-vcard"></span> </h3>
+                    
                 </div>
             </div>
         </div>
@@ -47,6 +48,7 @@
             <!-- Single Popular Course -->
             
             {% for anonce in anonces %}
+            <!-- <div id="opt" class=""> -->
             <a href="{{path('choix',{'id':anonce.id})}}">
             <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
             <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
@@ -74,13 +76,16 @@
                     </div>
   
                     <div class="course-fee h-100">
-                      <a href="{{path('view_anonce',{'id':anonce.id})}}" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
+                      <a href="#" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
                   </div>
   
-                    <div class="course-fee h-100">
-                        <a href="#" title="Par Mois" class="free">{{anonce.tarif_heure}}F/Mois</a>
-                    </div>
+                  <div class="course-fee h-100">
+                    <a href="#" style="padding:5%; font-size:0.7em;" title="Par Mois" class="free">{{anonce.tarif_heure}} Fcfa</a>
                 </div>
+                </div>
+                
+                
+
             </div>
             </div>
 
@@ -118,12 +123,12 @@
             <div class="col-12">
                 <div class="tutors-slide owl-carousel wow fadeInUp" data-wow-delay="250ms">
                   {% for prof in profil %}
-                    {% if prof.roles[1] == 'ROLE_PROF' %}
+                    {% if prof.roles[0] == 'ROLE_PROF' %}
                     <!-- Single Tutors Slide -->
                     <div class="single-tutors-slides">
                         <!-- Tutor Thumbnail -->
                         <div class="tutor-thumbnail">
-                            <img src="{{asset('img/pdp/' ~ prof.pdp)}}" style="height: 200px;" alt="">
+                          <a href="{{path('user_profil',{'id':prof.id,'nom':prof.nom})}}" > <img src="{{asset('img/pdp/' ~ prof.pdp)}}" style="height: 200px;" alt=""> </a>
                         </div> 
                         <!-- Tutor Information -->
                         <div class="tutor-information text-center">

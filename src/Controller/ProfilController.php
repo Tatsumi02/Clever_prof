@@ -17,31 +17,50 @@ use App\Repository\AnonceRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-
-
+/** 
+* @Route("/profil")
+*/
 class ProfilController extends AbstractController
 {
     /**
      * * Require ROLE_USER for only this controller method.
      *
      * @IsGranted("ROLE_USER")
-     * @Route("/profil", name="profil")
+     * @Route("/", name="profil")
      */
     public function index()
     {
+        //recuperons tout les information de l'utilisateur en cours ! l'utilisateur actif en ce momment meme 
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $informations = $repository -> findBy(['id' => $this->getUser()->getId()]);
+        
         return $this->render('profil/index.html.twig', [
-          
+          'infos' => $informations,
         ]);
     }
+
+     /**
+     * @Route("/{id}/{nom}.html", name="user_profil")
+     */
+    public function userProfil($id,$nom){
+        //controlleur pour les profils
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $users = $repository -> findBy(['id' => $id]);
+  
+        return $this->render('home/user_profil.html.twig',[
+          'users' => $users,
+        ]);
+      }
+  
 
     /**
      * * Require ROLE_USER for only this controller method.
      *
      * @IsGranted("ROLE_USER")
-     * @Route("/form-change", name="form")
+     * @Route("/pdp-update.html", name="form")
      */
     public function form(Request $request, SluggerInterface $slugger){
-
+      //methode permetent de changer la pdp
       
         $user = new User();
         $form = $this->createForm(PdppType::class, $user);

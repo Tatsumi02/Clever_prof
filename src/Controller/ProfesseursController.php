@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Security\UserAuthenticator;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Guad\GuardAuthenticatorHandler;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\User;
 use App\Entity\Notion;
@@ -18,7 +19,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
 
 
 /**
@@ -67,7 +67,7 @@ class ProfesseursController extends AbstractController
     /**
      * @Route("/traitement-inscription", name="traitement-inscription")
      */
-    public function traitementInscription(Request $request){
+    public function traitementInscription(Request $request, UserAuthenticator $authenticator, GuardAuthenticatorHandler $guardHandler){
         $repository = $this -> getDoctrine() -> getRepository(User::class);
         $emailExist = false;
               $userData = $repository -> findOneBy(['email'=>$request->request->get('email')]);
@@ -84,7 +84,7 @@ class ProfesseursController extends AbstractController
          $email = $request->request->get('email');
          $pass1 = $request->request->get('pass1');
          $pass2 = $request->request->get('pass2');
-         $tel_fixe = $request->request->get('tel_fixe');
+        //  $tel_fixe = $request->request->get('tel_fixe');
          $tel_portable = $request->request->get('tel_portable');
          $ville = $request->request->get('ville');
          $adresse = $request->request->get('adresse');
@@ -102,7 +102,7 @@ class ProfesseursController extends AbstractController
           $pass2
          ));
   
-         $user -> setPhoneFixe($tel_fixe);
+         $user -> setPhoneFixe($tel_portable);
          $user -> setPhonePortable($tel_portable);
          $user -> setVille($ville);
          $user -> setAdresse($adresse);
@@ -120,13 +120,13 @@ class ProfesseursController extends AbstractController
          return new Response('deso votre email est deja utiliser');
        }
           
-        /*  return $this->guardHandler->authenticateUserAndHandleSuccess(
+           $guardHandler->authenticateUserAndHandleSuccess(
            $user,
            $request,
-           $this->authenticator,
+           $authenticator,
            'main'
-         ); */
-          return $this->redirectToRoute('dashboad');
+         ); 
+        return $this->redirectToRoute('dashboad');
     }
 
     //creons le controller pour l'espace de admin. ou nous allons rediriger un proffesseur apres son inscription

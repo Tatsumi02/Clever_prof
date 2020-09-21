@@ -82,6 +82,11 @@ class Anonce
      */
     private $cours;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $pourcentage;
+
    
 
     public function getId(): ?int
@@ -241,6 +246,18 @@ class Anonce
     public function setCours(string $cours): self
     {
         $this->cours = $cours;
+
+        return $this;
+    }
+
+    public function getPourcentage(): ?int
+    {
+        return $this->pourcentage;
+    }
+
+    public function setPourcentage(int $pourcentage): self
+    {
+        $this->pourcentage = $pourcentage;
 
         return $this;
     }

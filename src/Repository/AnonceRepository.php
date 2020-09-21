@@ -115,17 +115,18 @@ class AnonceRepository extends ServiceEntityRepository
     
     }
 
-    public function  updateTarifHeure($parcours,$id,$b): void
+    public function  updateTarifHeure($parcours,$id,$b,$pourcentage): void
     {
         $conn = $this -> getEntityManager()->getConnection();
         $sql = '
         UPDATE anonce a SET
-            a.tarif_heure =?
+            a.tarif_heure =?,
+            a.pourcentage =?
         
         WHERE a.anonceur_id =? AND a.matiere =?
         ';
         $stmt = $conn ->prepare($sql);
-        $stmt->execute([$parcours, $id, $b]);
+        $stmt->execute([$parcours,$pourcentage,$id,$b]);
 
         //updatePdp($newFilename,$id,$b)
     
@@ -166,7 +167,7 @@ class AnonceRepository extends ServiceEntityRepository
     public function  annon(): array
     {
         $conn = $this -> getEntityManager()->getConnection();
-        $sql = 'SELECT * FROM anonce a WHERE actif=:act ORDER BY id DESC LIMIT 0,6 ';
+        $sql = 'SELECT * FROM anonce a WHERE actif=:act ORDER BY id DESC LIMIT 0,20 ';
         $stmt = $conn ->prepare($sql);
         $stmt->execute(['act'=>'true']);
 

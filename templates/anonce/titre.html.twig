@@ -3,27 +3,51 @@
 {% block title %}Créez votre annonce en quelques mins!{% endblock %}
 
 {% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+<style>
+    body{
+        background: url('{{asset("img/c5.JPG")}}');
+        background-size: cover;
 
-
+    }
+    #zone{
+        background: white;
+        opacity: 0.9;
+    }
+</style>
+<br><br><br>
+<div class="container">
 <section class="hero-area">
     <div class="col-md-12 container" style="margin:auto;" >
-           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;" id="zone">
           <h3>Etape 3: Titre de l'annonce</h3> <br>
             <form action="{{path('titre_traitement')}}" method="get" style="margin:auto;padding:10%;">
                
-                <input type="text" required name="titre" class="form-control" placeholder="Entrez le titre de l'annonce ici" />
+                <input type="text" required name="titre" id="titre" class="form-control" placeholder="Entrez le titre de l'annonce ici" />
                 <br>
-                 <div>
+                 <div id="notice">
                      <b>Exemple:</b> <i>Je suis {{app.user.nom}} {{app.user.prenom}}, Jeune ingenieur et passionné(e) qui offre des cours dans ce dommaine</i>
                  </div>
                 <br>
-                <button type="submit" class="btn btn-primary">Suivant <span class="fa fa-send"></span></button>
+                <a href="{{path('type_cours')}}" class="btn btn-dark" style="float: left;">Pécédent</a>
+                <button type="submit" class="sup btn btn-primary" style="float: right;">Suivant <span class="badge badge-dark">Parcours</span> <span class="fa fa-send"></span></button>
                
             </form>
         </div>
-       
+       <script>
+           $(function(){
+               let lieu = document.getElementById('titre');
+             $('.sup').click(function(){
+                if(lieu.value.length > 95){
+                    $('#notice').html('<span style="color:red;">Désoler, vous ne pouvez pas entrer plus de 95 caractères. essayer de reduire le nombre de caractère ou utilisez le même exemple qui était donner</span>');
+                    $('#titre').css('border','1px solid red');
+                    return false;
+                }
+             });
+           });
+       </script>
      
-    <script src="../js/jquery/jquery-2.2.4.min.js"></script>
-    <script src="../js/scripts/anonce.js"></script>
+ </div>
+ </section>
  </div>
 {% endblock %}

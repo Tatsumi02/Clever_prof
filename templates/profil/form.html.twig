@@ -6,16 +6,45 @@
 <script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 <br><br>
  <div class="container">
-     <center class="col-md-10">
-        <div class="col-md-8" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
-          <h3>Selectionnez votre photo de profil</h3> <br>
+
+   <div id="view" class="col-md-6 pull-right" style="float: right;">
+      <img src="{{asset('img/pdp/' ~ app.user.pdp )}}" id="img" alt="" style="height:300px; width:300px; border-radius:100%; box-shadow:0px 0px 8px gray;">
+      <div id="tmp"></div>
+   </div>
+
+     <center class="col-md-6">
+        <div class="col-md-10" style="text-align: left; padding:2%; margin-bottom:19%; margin:5%;" id="zone">
+         
+          
+         
+          <script>
+            $(function(){
+                let v = document.getElementById('pdpp_brochure');
+                let but = document.getElementById('pdpp_submit');
+                v.style.width='50px';
+                   function readURL(input){
+                     if(input.files && input.files[0]){
+                        var reader = new FileReader();
+                        reader.onload = function(e){
+                           $('#img').attr('src',e.target.result)
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                     }
+                   }
+                $('#pdpp_brochure').change(function(){
+                   readURL(v);
+                });
+            });
+         </script>
+        <div>
+         <h3>Selectionnez votre photo de profil</h3> <br>
           {{form_start(form)}}
 
              {{form_row(form.brochure)}}
 
          {{form_end(form)}}
+         </div>
         </div>
-       
      </center>
     
     <br><br><br><br>

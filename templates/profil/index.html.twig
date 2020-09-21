@@ -4,14 +4,60 @@
 
 {% block body %}
 
+<style>
+  #couv{
+    background: url("{{asset('img/c5.JPG')}}");
+    padding: 2%;
+    background-size: cover;
+  }
+  #pdp{
+    height: 150px; width:150px; border-radius:100%;
+    box-shadow: 0px 0px 8px black;
+  }
+  #baner{
+    text-align: left;
+    background: rgb(55, 155,255);
+    padding: 1%;
+;
+  }
+  #infos{
+    background: lightgrey;
+    text-align: left;
+    padding: 2%;
+  }
+</style>
+
 <div class="example-wrapper">
     <center>
-     <div class="col-md-10">
-        <img src="img/pdp/{{app.user.pdp}}" alt="" style="height: 150px; width:150px; border-radius:100%;"/>
+     <div class="col-md-11" id="couv">
+        <img src="{{asset('img/pdp/' ~ app.user.pdp)}}" alt="" id="pdp"/>
         <a href="{{path('form')}}" title="modifier votre photo de profil"><div class="badge" style="top:-15em; background:rgb(238, 233, 233); font-size:1.8em; margin:2%;"> <div class="fa fa-pencil"></div> </div></a>
         <br>
-       <h3> {{app.user.nom}} {{app.user.prenom}} </h3>
+       <h2 style="color:floralwhite"> {{app.user.nom}} {{app.user.prenom}} </h2>
      </div>
+    
+     <div class="col-md-11 container" id="baner">
+        <h4 style="color: gray;">Vous êtes la seule personne à pouvoir voir les informations de contact <span class="fa fa-security"></span> </h4>
+     </div>
+     
+     <br><br>
+     <div class="col-md-11 container" id="infos">
+      <p> Vous pouvez modifier ou ajouter des informations <span class="fa fa-code"></span></p>
+      {% for info in infos %}
+        <h4>Nom: {{info.nom}} <a href="#" title="modifiez votre nom"> <span class="fa fa-pencil"></span> </a></h4><br>
+        <h4>Prénom: {{info.prenom}} <a href="#" title="modifiez le prenom"> <span class="fa fa-pencil"></span> </a> </h4><br>
+        <h4>Phone: {{info.phonePortable}} <a href="#" title="modifiez le phone"> <span class="fa fa-pencil"></span> </a> </h4><br>
+        <h4>Adresse: {{info.adresse}} <a href="#" title="modifiez votre adresse"> <span class="fa fa-pencil"></span> </a> </h4><br>
+        <br><br>
+        <a href="#" class="btn btn-primary">Vos informations de compte <span class="fa fa-user"></span> </a>
+        <a href="#" class="btn btn-secondary">Voir votre journal <span class="fa fa-tv"></span></a>
+      {% endfor %}
+    </div>
+
+
      </center>
+     
+     
+     <br><br><br>
 </div>
 {% endblock %}
