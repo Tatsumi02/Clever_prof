@@ -73,7 +73,7 @@
                         <h5 class="text-center py-4">Mon Lieux des cours</h5>
                         <p>{{info.lieuCours}}</p>
 
-                        <h5 class="text-center py-4">Mon Tarif par mois</h5>
+                        <h5 class="text-center py-4">Mon Tarif par heure</h5>
                         <p>{{info.tarifHeure}}Fcfa</p>
                         <br>
                         <center>
@@ -86,6 +86,30 @@
                                        $('#b').click(function(){
                                            let link = "{{asset('img/fancybox_loading.Gif')}}";
                                           $('#zone').html('<img src="'+ link +'">'); 
+
+                                          $(function(){
+                                            $.ajax({
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                async: true,
+                                                url: '/ajax_notion?id={{info.anonceurId}}',
+                                                timeout: 30000,
+                                             success: function(data) {
+                                                for(i=0; i<=data.length; i++){
+                                                    user = data[i];
+                                                    
+                                                    $('#zone').html(user['notion']);
+                                                    
+                                                }
+                 
+                                             },
+                                             error: function() {
+                                      
+                                                $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                                              }
+                                           }); 
+                                        });
+
                                           return false;
                                           
                                        });
@@ -104,30 +128,34 @@
                         <!-- Tags -->
 
                          <script>
-                         $(function(){
-                            $.ajax({
-                                type: 'POST',
-                                dataType: 'json',
-                                async: true,
-                                url: '/data_prof?id={{info.anonceurId}}',
-                                timeout: 30000,
-                             success: function(data) {
-                                for(i=0; i<=data.length; i++){
-                                    user = data[i];
-                                    
-                                    $('#nom{{info.id}}').html(user['nom']);
-                                    $('#prenom{{info.id}}').html(user['prenom']);
-                                    $('#pdp{{info.id}}').html('<img  src="../img/pdp/'+ user['pdp'] +'" alt="" style="height:80px; width:80px; border-radius: 100%;" />');
-                                    
-                                }
- 
-                             },
-                             error: function() {
-                      
-                                $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
-                              }
-                           }); 
-                        });
+                        
+//infos prof
+$(function(){
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        async: true,
+        url: '/data_prof?id={{info.anonceurId}}',
+        timeout: 30000,
+     success: function(data) {
+        for(i=0; i<=data.length; i++){
+            user = data[i];
+            let link = "{{asset('img/pdp/')}}";
+            $('#nom{{info.id}}').html(user['nom']);
+            $('#prenom{{info.id}}').html(user['prenom']);
+            $('#pdp{{info.id}}').html('<br /><br /><img src="' + link + user['pdp']+'" style="height:200px; width:200px; border-radius:100%; box-shadow:0px 0px 8px white;">');
+            
+            
+            
+        }
+
+     },
+     error: function() {
+
+        $('#zone').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+      }
+   }); 
+});
                          </script>
                         {% endfor %}
                     </div>

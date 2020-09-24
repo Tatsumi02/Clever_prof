@@ -5,11 +5,13 @@
 {% block body %}
 
 <section class="">
+    <br><br>
     <div class="col-md-12 container" style="margin:auto;" >
-           <div class="col-md-8 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
+           <div class="col-md-10 single-blog-area mb-100 wow fadeInUp " style="text-align: left;border:1px solid #c8d4f7;margin:auto;background-image:url(../img/bg1.jpg);" id="zone">
           
-            <form action="{{path('notion_form_traitement',{'id':id})}}" method="post" style="margin:auto;padding:10%;">
-                Vous devez detailler dans ce champ le parcour que vous aurez a faire avec l'etudiant en cours <br>
+            <form action="{{path('notion_form_traitement',{'id':id})}}" method="post" class="col-md-12" style="margin:auto;padding:10%;">
+                Vous devez détailler dans ce champ le parcours que vous aurez a faire avec l'etudiant dans tout les détails. <br>
+                vous dévez surtour énumérer tout les chapitres: de cette façon, l'étudiant qui verais votre annonce, poura avoir une vision global sur ce que vous aurez a faire enssamble
                 <textarea name="notions" id="notions" class="form-control" cols="30" rows="10"></textarea>
                 <br><br>
                 <button type="submit" class="btn btn-primary">Enregistrer <span class="fa fa-save"></span></button>

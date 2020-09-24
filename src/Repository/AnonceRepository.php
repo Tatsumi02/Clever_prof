@@ -322,17 +322,18 @@ public function  update_cours($id,$matiere): void
     //update_tarif_heure($id,$tarif_heure);
  }
 
- public function  update_tarif_heure($id,$tarif_heure): void
+ public function  update_tarif_heure($id,$tarif_heure,$notre): void
  {
      $conn = $this -> getEntityManager()->getConnection();
      $sql = '
      UPDATE anonce a SET
-         a.tarif_heure = :typ
+         a.tarif_heure = :typ,
+         a.pourcentage = :notre
      
      WHERE a.id =:id
      ';
      $stmt = $conn ->prepare($sql);
-     $stmt->execute(['id'=>$id,'typ'=>$tarif_heure]);
+     $stmt->execute(['id'=>$id,'typ'=>$tarif_heure,'notre'=>$notre]);
  
     //
  }

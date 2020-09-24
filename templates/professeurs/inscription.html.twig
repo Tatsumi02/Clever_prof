@@ -17,9 +17,10 @@
 
     <form action="{{path('traitement-inscription')}}" style="background: rgba(48, 43, 43, 0.3); padding:4%;" method="post">
         <div class="">
+            <i id="not_nom"></i>
             <div class="col-12 col-lg-11">
                 <div class="form-group">
-                    <input type="text" name="nom" required class="form-control"  placeholder=" Nom" >
+                    <input type="text" name="nom" id="nom" required class="form-control"  placeholder=" Nom" >
                 </div>
             </div>
             <div class="col-12 col-lg-11">
@@ -77,23 +78,26 @@
             </div>
             <div class="col-12 col-lg-11">
                 <div class="form-group">
-                    <input type="password" name="pass1" required class="form-control" id="mdp1" placeholder="Mot de passe">
+                    <input type="password" name="pass1" required class="form-control" id="p1" placeholder="Mot de passe">
                 </div>
             </div>
+            <div id="not"></div>
             <div class="col-12 col-lg-11">
                 <div class="form-group">
-                    <input type="password" name="pass2" required class="form-control" id="mdp2" placeholder="Mot de passe(confirmation)">
+                    <input type="password" name="pass2" required class="form-control" id="p2" placeholder="Mot de passe(confirmation)">
                 </div>
             </div>
             <br>
+            <center>
+                <code style="color:white">En vous inscrivant, vous acceptez nos conditions d'utilisation</code>
+            </center>
             <div class="col-md-6" style="margin:auto;">
-                <button class="btn clever-btn w-100">Envoyer <span class="fa fa-send"></span></button>
+                <button class="btn clever-btn w-100" id="but">Inscription <span class="fa fa-send"></span></button>
             </div>
         </div>
     </form>
  </div>
-</section>
-<script>
+ <script>
     $(function(){
         $('#but').click(function(){
             if($('#p1').val() != $('#p2').val()){
@@ -108,9 +112,16 @@
              
               return true;
           }
+
+          let nom = document.getElementById('nom');
+          if(!nom.value.trim('')){
+             $('#not_nom').html('<i style="color:red;">Vous ne devez pas laisser les espaces dans votre nom</i>');
+             $('#not_nom').css('border','1px solid red');
+          }
         });
     });
   </script>
 
+</section>
 
 {% endblock %}

@@ -174,7 +174,7 @@ class HomeController extends AbstractController
      */
     public function search(Request $request){
         
-        $cours = $request->request->get('search');
+        $cours = $request->get('search');
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
         $alls = $repository -> findBy(['actif'=>'true']);
         $matiere = '';
@@ -192,7 +192,7 @@ class HomeController extends AbstractController
         //recuperons les cours qui corespondent a la recherche entrer par l'utilisateur
           if($cour == $cours){
              $matiere = $all->getCours();
-             $anonce = $repository -> findBy(['cours'=>$matiere]);
+             $anonce = $repository -> findBy(['cours'=>$matiere,'actif'=>'true']);
 
                $nombre_resultat = 0;
               //comptons le  nombre de resultat optenue sur chaque recherches trouver
@@ -272,6 +272,36 @@ class HomeController extends AbstractController
       }
 
     }
+
+    
+     /**
+     * @Route("/ajax_notion", name="ajax_notion_")
+     */
+    public function ajaxNotion(Request $request){
+      $id = $request->get('id');
+      if ($request->isXmlHttpRequest() || $request->query->get('showJson')==1) {
+        $jsonData = array();
+        $idx=0;
+        $repository = $this -> getDoctrine() -> getRepository(Notion::class);
+            $notion = $repository -> findBy(['annonceur_id'=>$id]);
+            
+            foreach($notion as $anon){
+
+              $temp = array(
+                'notion' => nl2br($anon->getNotion()),
+                'date_notion' => $anon->getDateNotion(),
+              );
+
+              $jsonData[$idx++] = $temp;
+          }
+          return new JsonResponse($jsonData);
+           
+      }else{ 
+        return new Response('ce n\'est pas une requette ajax');
+      }
+
+    }
+
 
     /**
      * * @Route("/{id}/annonce", name="choix")

@@ -36,6 +36,21 @@ class PourcentagesRepository extends ServiceEntityRepository
     }
     */
 
+    //upPrc
+    public function  upPrc($prc): void
+ {
+     $conn = $this -> getEntityManager()->getConnection();
+     $sql = '
+     UPDATE pourcentages a SET
+         a.pourcentage = :typ
+     ';
+     $stmt = $conn ->prepare($sql);
+     $stmt->execute(['typ'=>$prc]);
+ 
+    //
+ }
+
+
     /*
     public function findOneBySomeField($value): ?Pourcentages
     {

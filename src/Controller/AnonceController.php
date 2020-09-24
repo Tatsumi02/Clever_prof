@@ -315,13 +315,33 @@ class AnonceController extends AbstractController
      * @Route("/{id}/update-tarif_heure-annonce.html",name="update_tarif_heure")
      */
     public function update_tarif_heure(Request $request,$id){
-
+        //lecture dans  la table annonce
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
         $branches = $repository -> findBy(['id'=>$id]);
+        
+        //lecture dans la table pourcentages
+        $repository = $this -> getDoctrine() -> getRepository(Pourcentages::class);
+        $prc = $repository -> findBy(['id'=>$id]);
+        $pouc = 10; //variable d'initialisation du %
+
+        foreach($prc as $pr){
+            $pouc = $pr -> getPourcentage(); //ici nous recuperons le pourcentage 
+        }
+        
+        $tarif = 0; 
+        foreach($branches as $b){
+          $pou = $b -> getPourcentage(); //ici nous recuperons la valeur du % ajouter
+          $tarif = $b -> getTarifHeure(); //ici nous rcuperons la valeur du tarif en plus de la valeur ajoute
+        }
+
+        //super maintenant nous avons le % et le tarif. on va maintenant reduire le % en plus que nous avions ajouter lors de la creation d'annonce
+        
+        $prc_final = $tarif - $pou; //ici, nous enlevons la valeur ajouter pour afficher le tarif initial du professeur
 
         return $this->render('anonce/update/update_tarif_heure.html.twig', [
             'id' => $id,
             'infos' => $branches,
+            'valt' => $prc_final,
         ]);
 
     }
@@ -335,8 +355,20 @@ class AnonceController extends AbstractController
      */
     public function update_tarif_heure_traitement(Request $request,$id){
         $tarif_heure = $request->get('tarif');
+        $repository = $this -> getDoctrine() -> getRepository(Pourcentages::class);
+        $pourcentages = $repository -> findAll(); //lecture des donnees dans la table
+        $pourcentag = 10; //variable initiale qui contiendra le %
+        foreach($pourcentages as $pourcentage){
+            $pourcentag = $pourcentage -> getPourcentage(); //nouvelle valeur a cette variable
+        }
+        //maintenant, calculons pour extraire notre %
+        $notre_prc = ($tarif_heure * $pourcentag)/100; //voila notre %
+        //maintenant, on va ajoute notre % sur le tarif de initiale
+        $tarif_ajouter = $tarif_heure + $notre_prc; //on a ici le nouveau tarif
+
+        //maintenant, nous allons faire la mise a jour dans la bdd
         $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
-        $branches = $repository -> update_tarif_heure($id,$tarif_heure);
+        $branches = $repository -> update_tarif_heure($id,$tarif_ajouter,$notre_prc);
         
         
         return $this->redirectToRoute('end_update');

@@ -22,7 +22,7 @@
                         <center>
                           <h5>Liste de vos contact</h5>
                           <p>
-                            Vous avez ici la liste des personnes qui ont pris contact sous vos differentes annonces fait
+                            Vous avez ici la liste des personnes que nous avons trouver pour vous. nous allons vous mettre en liaisons dans les minutes qui suivent
                           </p>
                         </center>
                       <br>
@@ -48,7 +48,7 @@
                                       <td>{{commande.prenom}}</td>
                                       <td>{{commande.message}}</td>
                                       <td>{{commande.dateCommande|date('d/m/Y H:i:s')}}</td>
-                                      <td> <a href="{{path('commande_view',{'id':commande.annonceId})}}" class="">voir l'annonce <span class="fa fa-eye"></span></a> </td>
+                                      <td> <a href="{{path('commande_view',{'id':commande.annonceId})}}"  data-toggle="modal" data-target="#oMessagerie2{{commande.id}}" id="declancheur2{{commande.id}}" class="">voir l'annonce <span class="fa fa-eye"></span></a> </td>
                                       <td> <a href="#"  data-toggle="modal" data-target="#oMessagerie{{commande.id}}" class="n btn btn-primary btn-sm">Détails <span class="fa fa-file"></span></a> </td>  
                                   </tr>
                                  
@@ -88,4 +88,94 @@
               </div>
                 
               {% endfor %}
+
+
+
+          
+              {% for commande in commandes %}
+              <div class="modal fade" id="oMessagerie2{{commande.id}}" tabindex="-1" role="dialog" aria-labelledby="oMessagerieLabel" aria-hidden="true">
+                <div class="modal-dialog   modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="oMessagerieLabel"> annonce visualisation </h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span class="fa fa-times"></span></button>
+                           
+                        </div>
+                        <div class="modal-body">
+                         
+                            <div id="zone2{{commande.id}}">
+                              <br><br><br>
+                              <center>
+                                <img src="{{asset('img/fancybox_loading.Gif')}}">
+                                <br> 
+                                <code>Chargement...</code>
+                              </center>
+                              <br><br><br>
+                            </div>
+                         
+                        </div>
+                        <div class="">
+                          <br>
+                          <hr>
+                          <br>
+                          <center>  <a href="#"> signaler un probleme <span class="fa fa-warning"></span></a> </center>
+                        </div>
+                      <br>
+                    </div>
+          <!-- livre nation negre et culture -->
+                </div>
+          
+            </div>
+            <script>
+              $(function(){
+                $('#declancheur2{{commande.id}}').click(function(){
+          
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    async: true,
+                    url: '/admin/data_annonce/{{commande.annonceId}}',
+                    timeout: 30000,
+                 success: function(data) {
+                    for(i=0; i<=data.length; i++){
+                        user = data[i];
+                        let link = "{{asset('img/pdp_annonce/')}}";
+                        $('#zone2{{commande.id}}').html(
+                        
+                        '<center style="text-align:left; border-radius:20px; border:15px solid rgb(55,155,255); padding:2%; margin-left:2%;">'+
+                          '<h4> Cours </h4>'+
+                           '<span> '+ user['cours'] +' </span>'+
+                          '<h4> Titre </h4>'+
+                          '<span> '+ user['titre'] +' </span>'+
+                          '<h4> Parcours </h4>'+
+                          '<span> '+ user['parcours'] +' </span>'+
+                          '<h4> Methodologie </h4>'+
+                          '<span> '+ user['methodologie'] +' </span>'+
+                          '<h4> Lieux de cours </h4>'+
+                          '<span> '+ user['lieux_cours'] +' </span>'+
+                          '<h4> Type de cours </h4>'+
+                          '<span> '+ user['type_cours'] +' </span>'+
+                          '<h4> Photo de couverture </h4>'+
+                          '<img src="'+link+user['pdp']+'" />'+
+                          
+                          
+                        '</center>'
+                        );
+                    
+                }
+          
+                 },
+                 error: function() {
+          
+                    $('#zone2{{commande.id}}').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+                  }
+               }); 
+               
+              });
+            });
+            </script>
+              
+            {% endfor %}
+
+
 {% endblock %}

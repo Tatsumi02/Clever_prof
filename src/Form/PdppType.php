@@ -30,7 +30,7 @@ class PdppType extends AbstractType
             // in the associated entity, so you can use the PHP constraint classes
             'constraints' => [
                 new File([
-                    'maxSize' => '8024k',
+                    'maxSize' => '10024k',
                     'mimeTypes' => [
                         'image/jpg',
                         'image/JPG',

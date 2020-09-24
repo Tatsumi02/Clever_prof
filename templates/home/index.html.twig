@@ -12,11 +12,11 @@
             <div class="col-12">
                 <!-- Hero Content -->
                 <div class="hero-content text-center">
-                    <h2> Trouve un mentor</h2>
+                    <h2> Trouve un mentor <span class="fa fa-graduation-cap"></span> </h2>
                     <!-- <a href="#" class="btn clever-btn">Get Started <span class="fa fa-user"></span> </a> -->
                     
                     <div class="search-area">
-                        <form action="{{path('find_anonce')}}" method="post">
+                        <form action="{{path('find_anonce')}}" method="get">
                             <input type="search" class="form-control col-md-5" style="height:65px; display: inline;" name="search" id="search" placeholder="Maths,Anglais,Physique,Musique.... et plus">
                             <button type="submit" class="btn clever-btn" style="height:65px"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
                         </form>
@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Les derniers annonces <span class="fa fa-vcard"></span> </h3>
+                    <h3>Les dernières annonces <span class="fa fa-vcard"></span> </h3>
                     
                 </div>
             </div>

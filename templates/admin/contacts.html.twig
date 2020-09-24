@@ -9,15 +9,46 @@
     <div class="container">
 
         <div class="row">
+
+          <!-- zone du form pour changer le %  --> <br>
+
+          <div class="pull-right" id="l" style="margin: 2%;">
+            <button class="clever-btn" id="prc">prc ({{prc}}%) </button>
+          </div>
+          <!-- script de update prc -->
+               <script>
+                 $(function(){
+                   $('#prc').click(function(){
+                     let chemin = "{{path('update_prc')}}";
+                     $('#l').html(
+                       '<form method="post" action="'+chemin+'">'+
+                        '<input type="text" name="prc" id="new_prc" value="{{prc}}"  class="col-md-3 form-control" style="display:inline;">'+
+                        '<button type="submit" id="con" class="btn btn-success"> <span class="fa fa-send"></span> </button>'+
+                        '</form>'
+                     )
+                     //demandons une confirmation sur le %
+                     $('#con').click(function(){
+                       let x = confirm('ATTENTION: vous changez le pourcentage sur les tarifs\n\n vous voulez quitter de {{prc}}% a '+
+                        $('#new_prc').val()+
+                        '%.\n cette action vas impacter sur les tarifs de tout les prochaines annonces et ne pourait impacter les annonces deja bublic que si l\'annonceur modifie son tarif.\n\nVoulez-vous vraiment modifier le pourcentage ajouter? '
+                       )
+                       if(x!=false) return true
+                       else return false;
+                     })
+
+                   })
+                 })
+               </script>
+          <!-- fin script de update prc -->
+
+          <!-- fin zone de modification % -->
             <center>
                 
                 <h3>Liste des contacts en attente de liaison  <span class="fa fa-phone"></span></h3>
             </center>
 
 <table style="background-color: white;" class="table table-bordered table-striped table-condensed">
-    <caption>
-     
-    </caption>
+  
         <thead>
           <tr>
             <th>Phone Etud</th>

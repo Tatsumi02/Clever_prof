@@ -40,15 +40,30 @@ class ProfilController extends AbstractController
     }
 
      /**
-     * @Route("/{id}/{nom}.html", name="user_profil")
+     * @Route("/{id}/{nom}", name="user_profil")
      */
     public function userProfil($id,$nom){
-        //controlleur pour les profils
+        //------------------controlleur pour les profils
+
+        //recuperons les profils
         $repository = $this -> getDoctrine() -> getRepository(User::class);
         $users = $repository -> findBy(['id' => $id]);
+
+        //recuperons les annonces de se profil
+        $repository = $this -> getDoctrine() -> getRepository(Anonce::class);
+        $annonces = $repository -> findBy(['anonceur_id' => $id,'actif' => 'true']);
+
+        //compeur pour vrifier si les annonce sera trouver ou non
+        $compt = 0;
+        foreach($annonces as $is){
+           $compt++;
+        }
+
   
         return $this->render('home/user_profil.html.twig',[
           'users' => $users,
+          'annonces' => $annonces,
+          'compt' => $compt,
         ]);
       }
   
@@ -114,6 +129,72 @@ class ProfilController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+//------------------------------------ update des informations personnels ------------------------
+
+   
+   /**
+     * * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
+     * @Route("/update_nom", name="update_nom")
+     */
+    public function update_nom(Request $request){
+        
+        $new_nom = $request->request->get('new_nom');
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $mod = $repository -> updateNom($new_nom,$this->getUser()->getId());
+            
+        return $this -> redirectToRoute('profil');
+    }
+
+     /**
+     * * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
+     * @Route("/update_prenom", name="update_prenom")
+     */
+    public function update_prenom(Request $request){
+
+        $new_prenom = $request->request->get('new_prenom');
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $mod = $repository -> updatePrenom($new_prenom,$this->getUser()->getId());
+            
+        return $this -> redirectToRoute('profil');
+    }
+
+    /**
+     * * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
+     * @Route("/update_phone", name="update_phone")
+     */
+    public function update_phone(Request $request){
+        
+        $new_phone = $request->request->get('new_phone');
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $mod = $repository -> updatePhone($new_phone,$this->getUser()->getId());
+            
+        return $this -> redirectToRoute('profil');
+    }
+
+    /**
+     * * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
+     * @Route("/update_adresse", name="update_adresse")
+     */
+    public function update_adresse(Request $request){
+        
+        $new_adresse = $request->request->get('new_adresse');
+        $repository = $this -> getDoctrine() -> getRepository(User::class);
+        $mod = $repository -> updateAdresse($new_adresse,$this->getUser()->getId());
+            
+        return $this -> redirectToRoute('profil');
+    }
+
+
+
+//----------------------------------- fin update des informations personnels-----------------------
 
     
 

@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion !{% endblock %}
 
 {% block body %}
-<section style="background-image:url(../img/library.jpg);padding-top:5%;" class="hero-area bg-img bg-overlay-2by5">
+
+<style>
+    .n{
+        background-image: url("{{asset('img/library.jpg')}}");
+        padding-top:7%;
+        background-attachment: fixed;
+    }
+</style>
+
+<section class="n bg-img bg-overlay-2by5">
     <!--<h2 class="text-center text-warning">Connectez vous</h2>-->
 <div class="col-md-8 container"  id="form" style="margin:auto;margin-block-end:10%;background-color:#444444b3;">
     
@@ -16,7 +25,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-           <span style="color:white;"> You are logged in as</span> <b class="text-warning">{{ app.user.username }}</b> <a href="{{ path('app_logout') }}" style="color:blue;" class="pull-right">Logout</a>
+           <span style="color:white;"> vous êtes connecter sous</span> <b class="text-warning">{{ app.user.username }}</b> <a href="{{ path('app_logout') }}" style="color:blue;" class="pull-right">Déconnexion</a>
         </div>
     {% endif %}
     
@@ -24,14 +33,14 @@
     
     <div class="col-12 col-lg-6">    
     <div class="form-group">
-        <label for="inputEmail">Email</label>
+        <label for="inputEmail">Email <span class="fa fa-envelope"></span> </label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
     </div>
     </div>
     
     <div class="col-12 col-lg-6">
     <div class="form-group">
-        <label for="inputPassword">Mot de passe</label>
+        <label for="inputPassword">Mot de passe <span class="fa fa-key"></span></label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
     </div>
     </div>
@@ -40,12 +49,18 @@
     >
     <div class="col-md-4" style="margin: auto;">
     <button class="btn clever-btn w-100" type="submit">
-        Se connecter &nbsp&#8680;
+        Se connecter <span class="fa fa-sign-in"></span>
     </button>
     </div>
 </div>
 </form>
+
 </div>
+<center>
+    <a href="{{path('inscription_prof')}}" class="clever-btn">Inscription <span class="fa fa-user-plus"></span></a>
+</center>
+<br><br><br><br>
+
 </section>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -76,6 +91,5 @@
         75%{background-color: #696969b3;}
     }
 </style>
-
 
 {% endblock %}

@@ -628,10 +628,34 @@ class AdminController extends AbstractController
             $profs = $repository->findBy(['id' => $contact -> getAnnonceurId()]);
         }
 
+        //nous allons recuperer la valeur du % actuelle
+        $repository = $this -> getDoctrine() -> getRepository(Pourcentages::class);
+        $prcs = $repository->findAll();
+        $prc = 10; //valeur initiale
+        foreach($prcs as $pr){
+            $prc = $pr -> getPourcentage(); //nous avons recuperer le % que nous allons envoyer a la vue
+        } 
+
         return $this->render('admin/contacts.html.twig',[
             'contacts' => $contacts,
+            'prc' => $prc,
         ]);
     
+    }
+
+    
+     /**
+    * Require ROLE_ADMIN for only this controller method.
+    * @IsGranted("ROLE_ADMIN")
+    * @Route("/update_prc", name="update_prc")
+    */
+    public function update_prc(Request $request){
+        $new_prc = $request->request->get('prc');
+        $repository = $this -> getDoctrine() -> getRepository(Pourcentages::class);
+        $contacts = $repository->upPrc($new_prc);
+
+
+        return $this->redirectToRoute('demande_contacts');
     }
     
       /** 
@@ -694,7 +718,6 @@ class AdminController extends AbstractController
     }
 
      /** 
-       * @IsGranted("ROLE_ADMIN")
        * @Route("/data_annonce/{annonce_id}", name="more2")
      */
     public function data_annonce(Request $request,$annonce_id){

@@ -23,7 +23,7 @@
                     <div class="blog-details-text">
                       <h4>Laissez nous votre contact pour votre formation en {{cours}} <span class="fa fa-vcard"></span> </h4>
                       <p>
-                          Il est conseillé d'avoir un compte étudiant. De cette manière,nous pourons mieux vous suivre. En attendant, vous devez compléter ce formulaire pour nous envoyer votre contact et nous vous appellerons le plus tôt possible !
+                          Nous pourons mieux vous faire progresser. Pour cela, vous devez compléter ce formulaire pour nous envoyer votre contact et nous vous appellerons le plus tôt possible pour vous présenter votre professeur !
                         <br>
                           <form action="{{ path('commande',{'annonce_id':annonce_id}) }}">
                               <input type="text" required name="nom" id="nom" class="form-control" placeholder="Nom" />
@@ -37,13 +37,13 @@
                               <i id="notif"></i>
                               <textarea name="message" id="message" required id="message" cols="30" rows="7" class="form-control" placeholder="Ecrivez un petit message pour accompagner votre contact" ></textarea>
                               <br>
-                              <span id="ex">Vous ne devez pas saisir plus de 150 caracteres</span>
+                              <span id="ex">Vous ne devez pas saisir plus de 250 caractères</span>
                               <br>
                               <br>
-                              <button type="submit" id="but" class="btn btn-primary btn-sm">Envoyer <span class="fa fa-send"></span></button>
+                              <button type="submit" id="but" class="clever-btn btn btn-primary btn-sm">Envoyer <span class="fa fa-send"></span></button>
                               &nbsp; &nbsp; &nbsp;&nbsp;
 
-                              <a href="{{path('etudiants')}}" class="btn btn-success btn-sm">Espace Etudiants <span class="fa fa-users"></span></a>
+                              <!-- <a href="{{path('etudiants')}}" class="btn btn-success btn-sm">Espace Etudiants <span class="fa fa-users"></span></a> -->
 
                             </form>
                             <script>
@@ -53,18 +53,18 @@
                                    var but = document.getElementById('but');
                                    var ex = document.getElementById('ex');
                                    var notif = document.getElementById('notif');
-                                   var caractere_max = 150;
+                                   var caractere_max = 250;
                                    var caractere_en_cours = 0
 
                                 
                                    msg.onkeypress = function(){
                                        caractere_en_cours++;
-                                       ex.innerHTML=caractere_en_cours+'/150';
+                                       ex.innerHTML=caractere_en_cours+'/250';
                                         if(caractere_en_cours >= caractere_max){
                                            but.style.display = 'none';
                                            caractere_en_cours = caractere_en_cours;
                                            
-                                           ex.innerHTML='<span style="color:red;">Vous avez entre plus de caractere que prevu</span>';
+                                           ex.innerHTML='<span style="color:red;">Vous avez entrer plus de caractères que prevu</span>';
                                         }
                                     
                                             var compteur = setInterval(function(){

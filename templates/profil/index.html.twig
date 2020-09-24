@@ -3,7 +3,7 @@
 {% block title %}votre profil!{% endblock %}
 
 {% block body %}
-
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
 <style>
   #couv{
     background: url("{{asset('img/c5.JPG')}}");
@@ -44,13 +44,112 @@
      <div class="col-md-11 container" id="infos">
       <p> Vous pouvez modifier ou ajouter des informations <span class="fa fa-code"></span></p>
       {% for info in infos %}
-        <h4>Nom: {{info.nom}} <a href="#" title="modifiez votre nom"> <span class="fa fa-pencil"></span> </a></h4><br>
-        <h4>Prénom: {{info.prenom}} <a href="#" title="modifiez le prenom"> <span class="fa fa-pencil"></span> </a> </h4><br>
-        <h4>Phone: {{info.phonePortable}} <a href="#" title="modifiez le phone"> <span class="fa fa-pencil"></span> </a> </h4><br>
-        <h4>Adresse: {{info.adresse}} <a href="#" title="modifiez votre adresse"> <span class="fa fa-pencil"></span> </a> </h4><br>
+       <div id="l">
+          <h4>Nom: {{info.nom}} <a href="#" id="p" title="modifiez votre nom"> <span class="fa fa-pencil"></span> </a></h4>
+       </div>
+          <br>
+       <div id="l2">
+        <h4>Prénom: {{info.prenom}} <a href="#" id="p2" title="modifiez le prenom"> <span class="fa fa-pencil"></span> </a> </h4>
+       </div>
+        <br>
+       <div id="l3">
+        <h4>Phone: {{info.phonePortable}} <a href="#" id="p3" title="modifiez le phone"> <span class="fa fa-pencil"></span> </a> </h4>
+       </div>
+        <br>
+       <div id="l4">
+        <h4>Adresse: {{info.adresse}} <a href="#" id="p4" title="modifiez votre adresse"> <span class="fa fa-pencil"></span> </a> </h4>
+       </div>
+        <br>
+
+      <script>
+        //etape un: zone de modification du nom
+        $('#p').click(function(){
+
+          let action = "{{path('update_nom')}}";
+          let value = " {{info.nom}} ";
+
+           $('#l').html(
+            
+             '<form method="post" action="'+ action +'">'+
+             '<input type="text" name="new_nom" class="form-control col-md-3" value="'+ value +'" style="display:inline;">'+
+             '<button type="submit" class="btn btn-primary btn-sm"> <span class="fa fa-send"></span> </button>'+
+             '</form>'
+           );
+          return false;
+        });
+
+        //etape 2: modification prenom
+        $('#p2').click(function(){
+
+          let action = "{{path('update_prenom')}}";
+          let value = " {{info.prenom}} ";
+
+           $('#l2').html(
+            
+             '<form method="post" action="'+ action +'">'+
+             '<input type="text" name="new_prenom" class="form-control col-md-3" value="'+ value +'" style="display:inline;">'+
+             '<button type="submit" class="btn btn-primary btn-sm"> <span class="fa fa-send"></span> </button>'+
+             '</form>'
+           );
+          return false;
+        });
+
+        //etape 3: modification numero de phone
+        $('#p3').click(function(){
+
+          let action = "{{path('update_phone')}}";
+          let value = " {{info.phonePortable}} ";
+
+           $('#l3').html(
+            
+             '<form method="post" action="'+ action +'">'+
+             '<input type="text" name="new_phone" class="form-control col-md-3" value="'+ value +'" style="display:inline;">'+
+             '<button type="submit" class="btn btn-primary btn-sm"> <span class="fa fa-send"></span> </button>'+
+             '</form>'
+           );
+          return false;
+        });
+
+        //etape 4: modification de l'adresse
+        $('#p4').click(function(){
+
+          let action = "{{path('update_adresse')}}";
+          let value = " {{info.adresse}} ";
+
+           $('#l4').html(
+            
+             '<form method="post" action="'+ action +'">'+
+             '<input type="text" name="new_adresse" class="form-control col-md-3" value="'+ value +'" style="display:inline;">'+
+             '<button type="submit" class="btn btn-primary btn-sm"> <span class="fa fa-send"></span> </button>'+
+             '</form>'
+           );
+          return false;
+        });
+
+
+
+      </script>
+
+
         <br><br>
-        <a href="#" class="btn btn-primary">Vos informations de compte <span class="fa fa-user"></span> </a>
-        <a href="#" class="btn btn-secondary">Voir votre journal <span class="fa fa-tv"></span></a>
+        <a href="#" class="btn btn-primary" id="ip">Mes informations de compte <span class="fa fa-user"></span> </a>
+        <a href="#" class="btn btn-secondary">Mon journal <span class="fa fa-tv"></span></a>
+        <div class="coll-right" id="notif">
+            
+        </div>
+
+        <script>
+          $(function(){
+            let mail = "{{info.email}}";
+             $('#ip').click(function(){
+               $('#notif').html(
+                 '<br><br />'+
+                 '<h4>Email: '+mail+' <a href="#" title="Option indisponible"><span class="fa fa-pencil"></span></a></h4>'+
+                 '<h4>Password: ******** <a href="#" title="Option indisponible"><span class="fa fa-pencil"></span></a>'
+               );
+             })
+          });
+        </script>
       {% endfor %}
     </div>
 

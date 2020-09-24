@@ -3,6 +3,8 @@
 {% block title %} Profil {% endblock %}
 
 {% block body %}
+<script src="{{asset('js/jquery/jquery-2.2.4.min.js')}}"></script>
+
 
 <style>
   #couv{
@@ -12,7 +14,7 @@
   }
   #pdp{
     height: 150px; width:150px; border-radius:100%;
-    box-shadow: 0px 0px 8px black;
+    box-shadow: 0px 0px 10px white;
   }
   #baner{
     text-align: left;
@@ -34,7 +36,7 @@
         <img src="{{asset('img/pdp/' ~ user.pdp)}}" alt="" id="pdp"/>
        
         <br>
-       <h2 style="color:floralwhite"> {{user.nom}} {{user.prenom}} </h2>
+       <h2 style="color:floralwhite"> {{user.nom}} {{user.prenom}} <span class="fa fa-graduation-cap"></span></h2>
      </div>
     
      <div class="col-md-11 container" id="baner">
@@ -43,8 +45,63 @@
      
      <br><br>
      <div class="col-md-11 container" id="infos">
-      <p> <h5>Les annonces de {{user.prenom}} {{user.nom}}</h5> <span class="fa fa-code"></span></p>
-      dkfkdl
+      <p> <h5>Les annonces de {{user.prenom}} {{user.nom}}</h5></p>
+         <hr>
+         <div class="row">
+            <!-- Single Popular Course -->
+            {% for anonce in annonces %}
+            <div class="col-12 col-md-6 col-lg-4" style="display: inline;">
+            <div class="single-popular-course mb-100 wow fadeInUp" data-wow-delay="250ms">
+                <img src="{{asset('img/pdp_annonce/' ~ anonce.photoProfil)}}" alt="" style="height: 200px;">
+                <!-- Course Content -->
+                <div class="course-content">
+                    <h4><div id="titre{{anonce.id}}"></div></h4>
+                    <div class="meta d-flex align-items-center">
+                        
+                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                        <div id="op{{anonce.id}}" style="color: tomato;"></div>
+                    </div>
+                    <p>{{anonce.titre}}</p>
+                </div>
+                <!-- Seat Rating Fee -->
+                <div class="seat-rating-fee d-flex justify-content-between">
+                    <!-- <div class="seat-rating h-100 d-flex align-items-center"> 
+                        <div class="seat">
+                            <i class="fa fa-users" aria-hidden="true"></i> 10
+                        </div>
+                        <div class="rating">
+                            <i class="fa fa-star" aria-hidden="true"></i> 4.5
+                        </div>
+                    </div>-->
+  
+                    <!-- <div class="course-fee h-100">
+                      <a href="{{path('view_anonce',{'id':anonce.id})}}" title="voir l'annonce" class="free"> <span class="fa fa-eye"></span> </a>
+                  </div>-->
+  
+                    <div class="course-fee h-100">
+                        <a href="{{path('choix',{'id':anonce.id})}}" title="Voir l'annonces" class="free"><span class="fa fa-eye"></span></a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <script>
+              //{{anonce.matiere}}
+              $(function(){
+                var option = '{{anonce.matiere}}'.split('-'); //recuperons le titre brut donner par le serveur
+                var titre = option[0]; //on prend le titre seul
+                var branche = option[1]; //on prend les options de ce titre(tout en sachant sa sera aussi un tableau)
+                $('#titre{{anonce.id}}').html(option[0]);
+                $('#op{{anonce.id}}').text(option[1]);
+                
+          
+              });
+            </script>
+            
+           {% endfor %}
+           {% if compt == 0 %}
+                <h4 style="color: gray;"> <center> Pas encore d'annonce <span class="fa fa-vcard"></span> </center> </h4> 
+           {% endif %}
+        </div>
     </div>
 
 
