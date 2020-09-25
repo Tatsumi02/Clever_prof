@@ -8,6 +8,10 @@
 <section class="popular-courses-area section-padding-100-0" style="background-image: url(img/core-img/texture.png);">
     <div class="container">
         <div class="row">
+          <h2>Liste des annonce en attente de publication</h2>
+          <p>
+            vous pouvez choisir de suprimer ou non une annonce. si vous trouver les mots comme 'indef' sur une annonce, veillier supprimer cette annonce parce que cela signifie que l'annonceur n'a pa terminer de cree cette annonce et a abandoner   
+          </p>
 <table style="background-color: white;" class="table table-bordered table-striped table-condensed">
     <caption>
      
@@ -28,7 +32,7 @@
              <tr>
                <td>{{anonce.titre}}</td>
                <td>{{anonce.cours}}</td>
-               <td><a href="#">voir l'annonce</a></td>
+               <td><a href="#"  data-toggle="modal" data-target="#oMessagerie2{{anonce.id}}" id="declancheur2{{anonce.id}}">voir l'annonce</a></td>
                <td><img src="{{asset('img/pdp_annonce/' ~ anonce.photoProfil )}}" style="width: 200px; height:100px" alt=""></td>
                <td>
                  <a href="{{path('confirme_annonce',{'id':anonce.id})}}" class="btn btn-primary btn-sm">confirmer <span class="fa fa-check"></span> </a>
@@ -43,15 +47,103 @@
                    if(x!=false) return true;
                    else return false;
                  });
+
                });
              </script>
-            {% endfor %}
-        </tbody>
-    </table>
+             
+             {% endfor %}
+</tbody>
+</table>
+  
+            
     </div>
     </div>
   </section>
+  {% for anonce in anonces %}
 
+  <div class="modal fade" id="oMessagerie2{{anonce.id}}" tabindex="-1" role="dialog" aria-labelledby="oMessagerieLabel" aria-hidden="true">
+    <div class="modal-dialog   modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="oMessagerieLabel"> annonce visualisation </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fermer"><span class="fa fa-times"></span></button>
+               
+            </div>
+            <div class="modal-body">
+             
+                <div id="zone2{{anonce.id}}">
+                  <br><br><br>
+                  <center>
+                    <img src="{{asset('img/fancybox_loading.Gif')}}">
+                    <br> 
+                    <code>Chargement...</code>
+                  </center>
+                  <br><br><br>
+                </div>
+             
+            </div>
+            <div class="">
+              <br>
+              <hr>
+              <br>
+              <center>  <a href="#"> signaler un probleme <span class="fa fa-warning"></span></a> </center>
+            </div>
+          <br>
+        </div>
+<!-- livre nation negre et culture -->
+    </div>
 
+</div>
+
+    <script>
+      $(function(){
+        $('#declancheur2{{anonce.id}}').click(function(){
+          
+          $.ajax({
+              type: 'POST',
+              dataType: 'json',
+              async: true,
+              url: '/admin/data_annonce/{{anonce.id}}',
+              timeout: 30000,
+           success: function(data) {
+              for(i=0; i<=data.length; i++){
+                  user = data[i];
+                  let link = "{{asset('img/pdp_annonce/')}}";
+                  $('#zone2{{anonce.id}}').html(
+                  
+                  '<center style="text-align:left; border-radius:20px; border:15px solid rgb(55,155,255); padding:2%; margin-left:2%;">'+
+                    '<h4> Cours </h4>'+
+                     '<span> '+ user['cours'] +' </span>'+
+                    '<h4> Titre </h4>'+
+                    '<span> '+ user['titre'] +' </span>'+
+                    '<h4> Parcours </h4>'+
+                    '<span> '+ user['parcours'] +' </span>'+
+                    '<h4> Methodologie </h4>'+
+                    '<span> '+ user['methodologie'] +' </span>'+
+                    '<h4> Lieux de cours </h4>'+
+                    '<span> '+ user['lieux_cours'] +' </span>'+
+                    '<h4> Type de cours </h4>'+
+                    '<span> '+ user['type_cours'] +' </span>'+
+                    '<h4> Photo de couverture </h4>'+
+                    '<img src="'+link+user['pdp']+'" />'+
+                    
+                    
+                  '</center>'
+                  );
+              
+          }
+    
+           },
+           error: function() {
+    
+              $('#zone2{{anonce.id}}').html('<center> <p style="color:red;"> La requette n\'a pas aboutir <span class="fa fa-book"></span></p> </center>');
+            }
+         }); 
+         
+        });
+      })
+    </script>
+  {% endfor %}
   
+ 
 {% endblock %}

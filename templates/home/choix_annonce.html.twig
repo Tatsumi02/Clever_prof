@@ -98,7 +98,7 @@
                                                 for(i=0; i<=data.length; i++){
                                                     user = data[i];
                                                     
-                                                    $('#zone').html(user['notion']);
+                                                    $('#zone').html('<div style="text-align: left;">'+user['notion']+'</div>');
                                                     
                                                 }
                  
@@ -138,12 +138,17 @@ $(function(){
         url: '/data_prof?id={{info.anonceurId}}',
         timeout: 30000,
      success: function(data) {
+         
         for(i=0; i<=data.length; i++){
             user = data[i];
             let link = "{{asset('img/pdp/')}}";
             $('#nom{{info.id}}').html(user['nom']);
             $('#prenom{{info.id}}').html(user['prenom']);
-            $('#pdp{{info.id}}').html('<br /><br /><img src="' + link + user['pdp']+'" style="height:200px; width:200px; border-radius:100%; box-shadow:0px 0px 8px white;">');
+
+            let lien = "{{path('user_profil',{'id':info.anonceurId,'nom':'annonceur'})}}";
+            let lien2 = "/"+user['id']+"/"+user['nom'];
+
+            $('#pdp{{info.id}}').html('<br /><br /><a href="'+lien+'"><img src="' + link + user['pdp']+'" style="height:200px; width:200px; border-radius:100%; box-shadow:0px 0px 8px white;"></a>');
             
             
             
